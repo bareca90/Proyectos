@@ -1,0 +1,7 @@
+
+type_SdtLinkList_LinkItem.cs
+type_SdtSdWsAdjuntosMail_SdWsAdjuntosMailItem.cs
+type_SdtSdWsCopiaOcultaMail_SdWsCopiaOcultaMailItem.cs
+type_SdtSdWsCopiasMail_SdWsCopiasMailItem.cs
+type_SdtSdWsDireccionesMail_SdWsDireccionesMailItem.cs
+type_SdtSdWsEnviarMail_SdWsEnviarMailItem.cs

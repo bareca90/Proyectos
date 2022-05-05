@@ -1,0 +1,138 @@
+swagger: '2.0'
+info:
+  title: "Kb Apps Web"
+  version: "20220421152642"
+host: localhost
+schemes:
+  - http
+basePath: /AppsWeb/rest
+produces:
+  - application/json
+paths:
+  /PrWsEnviarMail:
+    post:
+      tags:
+        - PrWsEnviarMail
+      operationId: "PrWsEnviarMail"
+      summary: "Ws que permitira enviar los correos"
+      parameters:
+        - name: "PrWsEnviarMailInput"
+          in: "body"
+          required: false
+          schema:
+            $ref: "#/definitions/PrWsEnviarMailInput"
+
+
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/PrWsEnviarMailOutput"
+        404:
+          description: "Not found"
+  /gxobject:
+    post:
+      tags:
+        - gxobject
+      operationId: "gxobject"
+      summary: "GeneXus Upload Services"
+
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+definitions:
+  PrWsEnviarMailOutput:
+    properties:
+      SdWsEnviarMail:
+        description: Sd Ws Enviar Mail
+        type: array
+        items:
+          $ref: "#/definitions/SdWsEnviarMail_SdWsEnviarMailItem"
+
+
+
+  PrWsEnviarMailInput:
+    properties:
+      Subject:
+        type: "string"
+      Html:
+        type: "string"
+      SdWsDireccionesMail:
+        description: Sd Ws Direcciones Mail
+        type: array
+        items:
+          $ref: "#/definitions/SdWsDireccionesMail_SdWsDireccionesMailItem"
+      SdWsCopiasMail:
+        description: Sd Ws Copias Mail
+        type: array
+        items:
+          $ref: "#/definitions/SdWsCopiasMail_SdWsCopiasMailItem"
+      SdWsCopiaOcultaMail:
+        description: Sd Ws Copia Oculta Mail
+        type: array
+        items:
+          $ref: "#/definitions/SdWsCopiaOcultaMail_SdWsCopiaOcultaMailItem"
+      SdWsAdjuntosMail:
+        description: Sd Ws Adjuntos Mail
+        type: array
+        items:
+          $ref: "#/definitions/SdWsAdjuntosMail_SdWsAdjuntosMailItem"
+
+
+
+  SdWsAdjuntosMail_SdWsAdjuntosMailItem:
+    properties:
+      Attachments:
+        description: Attachments
+        type: "string"
+
+
+
+
+
+  SdWsCopiaOcultaMail_SdWsCopiaOcultaMailItem:
+    properties:
+      BCC:
+        description: BCC
+        type: "string"
+
+
+
+
+
+  SdWsCopiasMail_SdWsCopiasMailItem:
+    properties:
+      CC:
+        description: CC
+        type: "string"
+
+
+
+
+
+  SdWsDireccionesMail_SdWsDireccionesMailItem:
+    properties:
+      Address:
+        description: Address
+        type: "string"
+
+
+
+
+
+  SdWsEnviarMail_SdWsEnviarMailItem:
+    properties:
+      Msj:
+        description: Msj
+        type: "string"
+
+      Respuesta:
+        description: Respuesta
+        type: "string"
+
+
+
+
+
