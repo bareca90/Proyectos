@@ -1,0 +1,20 @@
+{
+  "name": "clima-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "inquirer": "^8.2.4",
+    "msnodesqlv8": "^2.4.8",
+    "mssql": "^8.1.2"
+  },
+  "description": ""
+}
