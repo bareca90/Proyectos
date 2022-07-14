@@ -1,7 +1,7 @@
 const config={
-    user: 'sa',
-    password: '84+-blaster32',
-    server: '10.100.120.8',
+    user: 'user',
+    password: 'xxxxxxxxxxx',
+    server: 'servidor o ip',
     database: 'sipeDes',
     driver: 'msnodesqlv8',
     
