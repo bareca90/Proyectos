@@ -15,11 +15,12 @@ app.use(require('./rutas/consultar_sp'));
 sql.connect(config).then(pool => {
 
 }).then(result => {
-    console.log('Se conecto a la Base Correctamente');
+    console.log('Se conecto a la Base Sipedes Correctamente ');
 }).catch(err => {
     console.log(err);
 
 });
+
 
 let port = process.env.PORT || 8075;
 app.listen(port);

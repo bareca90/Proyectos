@@ -21,6 +21,7 @@ let datosCliente = async(query, cliente) => {
 
 }
 
+
 /*Ruta para Obtener Datos Cliente */
 app.get('/datoscliente', function(req, respuesta) {
     let cliente = req.query.cliente ;
@@ -30,4 +31,5 @@ app.get('/datoscliente', function(req, respuesta) {
     })
 
 })
+
 module.exports = app;
