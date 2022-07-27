@@ -1,0 +1,42 @@
+[
+    {
+        "situation" 		:"A"	        ,
+        "codworkday" 	    :"WRKeCU00005"  ,
+        "emplcod"           :"40223",		
+        "CnctFecReg"		:"2018-04-01",		
+        "mobjcod"           :"00123",		
+        "CnctCodSta"		:"00001",		
+        "Emplliqpen"		:"S",		
+        "CnctFecLiq"		:"2022-01-01",		
+        "Cnctusrlog"		:"00001",		
+        "Cnctfeclog"		:"2022-01-01",		
+        "Cncthralog"		:"08:50"
+    },
+    {
+        "situation" 		:"A"	        ,
+        "codworkday" 	    :"WRKeCU00006"  ,
+        "emplcod"           :"40243",		
+        "CnctFecReg"	    :"2017-04-01",		
+        "mobjcod"           :"00123",		
+        "CnctCodSta"	    :"00001",		
+        "Emplliqpen"	    :"S",		
+        "CnctFecLiq"	    :"2022-01-01",		
+        "Cnctusrlog"	    :"00001",		
+        "Cnctfeclog"	    :"2022-01-01",		
+        "Cncthralog"	    :"08:50"
+    },
+    {
+        "situation" 		:"A"	        ,
+        "codworkday" 	    :"WRKeCU00006"  ,
+        "emplcod"           :"40243",		
+        "CnctFecReg"	    :"2017-04-01",		
+        "mobjcod"           :"00123",		
+        "CnctCodSta"	    :"00001",		
+        "Emplliqpen"	    :"S",		
+        "CnctFecLiq"	    :"2022-01-01",		
+        "Cnctusrlog"	    :"00001",		
+        "Cnctfeclog"	    :"2022-01-01",		
+        "Cncthralog"	    :"08:50"
+    }
+
+]

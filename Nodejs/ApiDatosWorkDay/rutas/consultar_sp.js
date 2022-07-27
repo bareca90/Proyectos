@@ -85,15 +85,6 @@ let datosCliente = async(query, pJson) => {
 }
 
 
-/*Ruta para Obtener Datos Cliente */
-/* app.get('/datoscliente', function(req, respuesta) {
-    let cliente = req.query.cliente ;
-    let query = 'Sp_Datos_Cliente';
-    datosCliente(query, cliente).then(datoscliente => {
-        respuesta.json(datoscliente[0]);
-    })
-
-}) */
 /*Ruta para Post de los empleados que se reciben */
 app.post('/dataemployees', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
@@ -150,6 +141,17 @@ app.post('/dataemployees', function(req, respuesta) {
     /* datosCliente(query, cliente).then(datoscliente => {
         respuesta.json(datoscliente[0]);
     }) */
+
+})
+/*Ruta para Post de los datos que vienen por termination */
+app.post('/datatermination', function(req, respuesta) {
+    let datos = JSON.stringify(req.body);
+    let query = 'SP_Insert_Termination';
+    //console.log(JSON.stringify(datos));
+    datosCliente(query, datos).then(datoscliente => {
+        respuesta.json(datoscliente[0]);
+    })
+    
 
 })
 module.exports = app;
