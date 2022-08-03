@@ -6,6 +6,8 @@ class LoginFormaProvider extends ChangeNotifier {
   String email = '';
   String password = '';
   bool _isLoading = false;
+  String cedula = '';
+  String nombres = '';
   bool get isLoading => _isLoading;
   set isLoading(bool value) {
     _isLoading = value;

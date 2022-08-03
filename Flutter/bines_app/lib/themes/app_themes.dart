@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primary = Colors.deepPurpleAccent;
+  static const Color primary = Color.fromARGB(255, 5, 48, 83);
+  static const Color second = Color.fromARGB(246, 131, 18, 18);
+  static const Color upload = Color.fromARGB(246, 30, 102, 15);
 
   static final ThemeData lighthTheme = ThemeData.light().copyWith(
     //COlor Primario
@@ -11,6 +13,7 @@ class AppTheme {
     //colores de Floating Action Button
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: primary),
+
     //Text Botton Theme
     textButtonTheme:
         TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),

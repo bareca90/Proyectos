@@ -26,11 +26,52 @@ class AppRoutes {
   static const initialRoute = 'HomeScreen';
   static final menuOptions = <MenuOptions>[
     // TODO: Borrar Home
-    MenuOptions(
-        route: 'HomeScreen',
+    /* MenuOptions(
+        route: 'home',
         name: 'Home Screen',
         screen: const HomeScreen(),
-        icon: Icons.home),
+        icon: Icons.home), */
+    MenuOptions(
+        route: 'registerbin',
+        name: 'Registrar Bin',
+        screen: const AssigmentScreen(),
+        icon: Icons.app_registration),
+    MenuOptions(
+        route: 'exitplant',
+        name: 'Registrar Salida Planta',
+        screen: const ExitPlantListScreen(),
+        icon: Icons.fire_truck_sharp),
+    MenuOptions(
+        route: 'arrivefarm',
+        name: 'Registrar Llegada a Granja',
+        screen: const ArriveFarmScreen(),
+        icon: Icons.fast_forward_rounded),
+    MenuOptions(
+        route: 'closebin',
+        name: 'Registrar Cierre de Bin',
+        screen: const CloseBinScreen(),
+        icon: Icons.close_fullscreen),
+    MenuOptions(
+        route: 'exitfarm',
+        name: 'Registrar Salida Granja',
+        screen: const ExitFarmScreen(),
+        icon: Icons.emoji_transportation_outlined),
+    MenuOptions(
+        route: 'arriveplant',
+        name: 'Registrar Llegada a Planta',
+        screen: const ArrivePlantScreen(),
+        icon: Icons.mobile_friendly),
+    MenuOptions(
+        route: 'receptionbin',
+        name: 'Registrar Llegada Recepciòn',
+        screen: const ReceptionScreen(),
+        icon: Icons.check_box),
+    MenuOptions(
+        route: 'receivebin',
+        name: 'Registrar Recibido Recepciòn',
+        screen: const SupllyHopperScreen(),
+        icon: Icons.share_arrival_time),
+
     /* MenuOptions(
         route: 'ListView1',
         name: 'List View 1',
