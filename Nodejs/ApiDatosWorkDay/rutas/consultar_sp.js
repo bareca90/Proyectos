@@ -83,6 +83,21 @@ let datosCliente = async(query, pJson) => {
 
 
 }
+/*Conexion a Sp que devulve datos para get*/
+let datosGetWordDay = async(query) => {
+    try {
+        let pool = await sql.connect(config);
+        let clientes = await pool.request()
+            .execute(query);
+        /* console.log(clientes); */
+        return clientes.recordsets;
+        /* return clientes; */
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
 
 
 /*Ruta para Post de los empleados que se reciben */
@@ -150,6 +165,16 @@ app.post('/datatermination', function(req, respuesta) {
     //console.log(JSON.stringify(datos));
     datosCliente(query, datos).then(datoscliente => {
         respuesta.json(datoscliente[0]);
+    })
+    
+
+})
+/*Ruta para Get para devolver los errores */
+app.get('/errorviewer', function(req, respuesta) {
+    let query = 'SP_Devolver_Errores';
+    //console.log(JSON.stringify(datos));
+    datosGetWordDay(query).then(datosgetworkday => {
+        respuesta.json(datosgetworkday[0]);
     })
     
 

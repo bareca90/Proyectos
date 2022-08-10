@@ -1,12 +1,15 @@
+/* import 'package:bines_app/providers/providers.dart'; */
 import 'package:bines_app/routes/app_routes.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
+/* import 'package:provider/provider.dart'; */
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    /* final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context); */
     final menuOptions = AppRoutes.menuOptions;
     return Scaffold(
       appBar: AppBar(

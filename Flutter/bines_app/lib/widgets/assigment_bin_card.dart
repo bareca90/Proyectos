@@ -1,14 +1,17 @@
 //import 'dart:ffi';
 
+import 'package:bines_app/models/models.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 //import 'package:productos_app/models/models.dart';
 
 class AssigmentBinCard extends StatelessWidget {
-  //const ProductCard({Key? key, required this.product}) : super(key: key);
-  const AssigmentBinCard({Key? key}) : super(key: key);
+  const AssigmentBinCard({Key? key, required this.asignados}) : super(key: key);
+  final AssiggrModel asignados;
+
+  //const AssigmentBinCard({Key? key}) : super(key: key);
   //final Product product;
-  final bool sincronizado = true;
+  //final bool sincronizado = true;
   final double tamanio = 12;
   @override
   Widget build(BuildContext context) {
@@ -23,9 +26,9 @@ class AssigmentBinCard extends StatelessWidget {
           children: [
             const Padding(padding: EdgeInsets.only(left: 10)),
             const Icon(Icons.app_registration,
-                size: 25, color: AppTheme.primary),
+                size: 30, color: AppTheme.primary),
             Expanded(
-              flex: 0,
+              //flex: 0,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -73,7 +76,7 @@ class AssigmentBinCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 0,
+              //flex: 0,
               child: Container(
                 //color: Colors.red,
                 padding:
@@ -82,7 +85,7 @@ class AssigmentBinCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'H14526',
+                      asignados.nroguia,
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -100,7 +103,7 @@ class AssigmentBinCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                     Text(
-                      '1256.32',
+                      asignados.kg.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -111,7 +114,7 @@ class AssigmentBinCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                     Text(
-                      '10',
+                      asignados.cant.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -122,7 +125,7 @@ class AssigmentBinCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 0,
+              //flex: 0,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -152,7 +155,7 @@ class AssigmentBinCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              //flex: 2,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -160,7 +163,7 @@ class AssigmentBinCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '2022-08-02',
+                      asignados.fecha.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -171,7 +174,7 @@ class AssigmentBinCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                     Text(
-                      'C119',
+                      asignados.piscina,
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -181,10 +184,10 @@ class AssigmentBinCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (sincronizado)
-              const Icon(Icons.cloud_done, size: 25, color: AppTheme.upload),
-            if (sincronizado == false)
-              const Icon(Icons.cloud_upload, size: 40, color: AppTheme.second),
+            if (asignados.sincronizado == 1)
+              const Icon(Icons.cloud_done, size: 30, color: AppTheme.upload),
+            if (asignados.sincronizado == 0)
+              const Icon(Icons.cloud_upload, size: 30, color: AppTheme.second),
             const Padding(padding: EdgeInsets.only(right: 10)),
             /* _ProductsDetails(
                 tittle: 'tittle', subtittle: 'subtittle', price: 12.0) */

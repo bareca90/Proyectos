@@ -1,8 +1,23 @@
+import 'package:bines_app/providers/assiggr_list_provider.dart';
 import 'package:bines_app/screens/screens.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const AppsState());
+
+//Con este mantendremos actualizados siempre los datos
+class AppsState extends StatelessWidget {
+  const AppsState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AssiggrListProvider())],
+      child: const MyApp(),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

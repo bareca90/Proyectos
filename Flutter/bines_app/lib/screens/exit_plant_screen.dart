@@ -9,7 +9,7 @@ class ExitPlantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Registro Bin en Guìa'),
+          title: const Text('Registro Salida Planta'),
           //agregar boton para logout
           actions: [
             IconButton(
@@ -65,7 +65,7 @@ class ExitPlantScreen extends StatelessWidget {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: const ScanButtonQR()
+        floatingActionButton: const SaveButton()
         /* FloatingActionButton(
         onPressed: () async {
           //TODO :  Guardar Producto

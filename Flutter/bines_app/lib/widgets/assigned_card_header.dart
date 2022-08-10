@@ -77,7 +77,7 @@ class AssignedCardHeader extends StatelessWidget {
                   /* Text(
                       'NIRSA DEL ECU',
                       style: TextStyle(
-                          fontSize: tamanio,
+                          fontSize: tamanio, 
                           color: AppTheme.primary,
                           fontWeight: FontWeight.bold),
                     ), */
