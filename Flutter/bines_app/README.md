@@ -1,6 +1,6 @@
-# bines_app
+# Bines App
 
-A new Flutter project.
+Un Proyecto en Flutter que permite realizar escaneo de cada uno de los bines que se registran
 
 ## Getting Started
 
