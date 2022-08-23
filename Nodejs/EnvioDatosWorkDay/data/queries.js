@@ -5,7 +5,7 @@ const sql = require('mssql/msnodesqlv8');
 //-------------------------------------
 //Insertamos los datos en la bd mediante un sp
 //-------------------------------------
-const insertarRegBiolan = async(BioValResidual,BioNoBin,BioLote,NroOrden,BioNoGuia,BioCodSKU,BioSecGuia)=> {
+/* const insertarRegBiolan = async(BioValResidual,BioNoBin,BioLote,NroOrden,BioNoGuia,BioCodSKU,BioSecGuia)=> {
     try{
         let query = 'SP_Llenar_Tmp_Biolan';
         let pool = await sql.connect(config);
@@ -28,7 +28,7 @@ const insertarRegBiolan = async(BioValResidual,BioNoBin,BioLote,NroOrden,BioNoGu
     }catch(error){
         console.log(error);
     }
-}
+} */
 //-------------------------------------
 //Invocamos el Store Procedure para Cabecera
 //-------------------------------------
@@ -47,6 +47,6 @@ const consultarCabecera = async(tipo,apertura)=> {
             
 }
 module.exports={
-    insertarRegBiolan,
+    /* insertarRegBiolan, */
     consultarCabecera
 }

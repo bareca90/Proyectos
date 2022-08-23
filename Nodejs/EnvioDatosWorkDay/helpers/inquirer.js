@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
-const { insertarRegBiolan,consultarCabecera} = require('../data/queries');
+/* const { insertarRegBiolan,consultarCabecera} = require('../data/queries'); */
+const { consultarCabecera} = require('../data/queries');
 const fs = require('fs');
 const path = require("path");
 
 
-const readMapBiolan = async( datos_biolan = [] ) => {
+/* const readMapBiolan = async( datos_biolan = [] ) => {
     // Leemos el mapa para iterar y enviar a guardar a la bd los datos de la iteraciòn 
     const datos_limpios = datos_biolan.map( (dato_bio, i) => {
         //const idx = `${i + 1}.`.green;
@@ -21,7 +22,7 @@ const readMapBiolan = async( datos_biolan = [] ) => {
         //Aqui se envia a guardar en SQL
     });
     //console.log(datos_limpios);
-}
+} */
 //------------------------------------------
 //Obtiene los Datos de la cabecera Payroll y PayLips
 //------------------------------------------
@@ -110,7 +111,7 @@ const fileBase64 = async(path)=>{
 
 
 module.exports = {
-   readMapBiolan,
+   /* readMapBiolan, */
    datosCabecera,
    mapaCabPayRoll,
    datosDetallePaLips,

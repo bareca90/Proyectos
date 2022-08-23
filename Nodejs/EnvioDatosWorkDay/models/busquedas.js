@@ -15,7 +15,7 @@ class Busquedas  {
     //-------------------------------------
     //Obtiene el Token para Loguearse
     //-------------------------------------
-    async loguearBiolan (correo,clave){
+    /* async loguearBiolan (correo,clave){
         try{
             
             let url = 'https://api-dev.biolanglobal.com/biolan/data/api/api-token/' //Prueba
@@ -57,7 +57,7 @@ class Busquedas  {
         }catch(error){
             console.log(error);
         }
-    }
+    } */
     /*
     =====================================
     ----------------WorkDay--------------

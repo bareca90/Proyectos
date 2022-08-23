@@ -1,10 +1,12 @@
 require('dotenv').config()
 const sql = require('mssql/msnodesqlv8');
-const { readMapBiolan,datosCabecera,mapaCabPayRoll,datosDetallePaLips,mapaDetPayLips} = require('./helpers/inquirer');
+/* const { readMapBiolan,datosCabecera,mapaCabPayRoll,datosDetallePaLips,mapaDetPayLips} = require('./helpers/inquirer'); */
+const { datosCabecera,mapaCabPayRoll,datosDetallePaLips,mapaDetPayLips} = require('./helpers/inquirer');
 const Busquedas = require('./models/busquedas');
 const config = require('./configuraciones/config')
 const fs = require('fs');
 const path = require("path");
+
 
 //--------------------------------------------
 //Validamos la conexion a la base de datos
@@ -75,29 +77,7 @@ const main = async()=>{
     console.log('Paso 8 - Consumir y Enviar los Paylips');
     const resppaylips = await busquedas.enviarDatosPayRoll(datosmapapaylips,'payslips')
     console.log(resppaylips);
-    /*
-    const token = await busquedas.loguearBiolan('kiniguez@promarisco.com','Pescanova123')
-    //--------------------------------------------
-    //Paso 2 : Obtener los datos de El Dìa 
-    //--------------------------------------------
-    //local_timestamp__date
-    let fecha_actual = new Date();
-    fecha_actual=fecha_actual.getFullYear()+"-"+(fecha_actual.getMonth()+1)+"-"+fecha_actual.getDate()
-    console.log(fecha_actual);
-    //--------------------------------------------
-    const analisisDia = await busquedas.obtenerDatos(token,fecha_actual)
-    //console.log(analisisDia);
-
-    const datosBiolan = await readMapBiolan(analisisDia) */
     
-    /* const base64 = Buffer.from('C:\CvBaironReyes.pdf').toString("base64");
-    console.log(base64); */
-    //const file = fs.readFileSync(path.resolve(__dirname, "C:\carpetas\guias.pdf"));
-    
-    
-    /* var base64str = base64_encode('C:/carpetas/FormatoSolicituddeEmpleo.xlsx');
-    //10.100.120.10/EnvioWD/Payrolls/PayrRollPrueba2022.csv
-    console.log(base64str); */
 }
 const val_conexion = mensaje();
 if (val_conexion){
