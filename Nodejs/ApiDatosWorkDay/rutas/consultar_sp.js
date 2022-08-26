@@ -99,8 +99,9 @@ let datosGetWordDay = async(query) => {
 
 }
 
-
+//---------------------------------------------------------
 /*Ruta para Post de los empleados que se reciben */
+//---------------------------------------------------------
 app.post('/dataemployees', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
     let query = 'SP_Insert_Hire';
@@ -158,7 +159,9 @@ app.post('/dataemployees', function(req, respuesta) {
     }) */
 
 })
+//---------------------------------------------------------
 /*Ruta para Post de los datos que vienen por termination */
+//---------------------------------------------------------
 app.post('/datatermination', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
     let query = 'SP_Insert_Termination';
@@ -169,7 +172,22 @@ app.post('/datatermination', function(req, respuesta) {
     
 
 })
+//---------------------------------------------------------
+/*Ruta para Post de los datos que vienen por Change */
+//---------------------------------------------------------
+app.post('/datoschanges', function(req, respuesta) {
+    let datos = JSON.stringify(req.body);
+    let query = 'SP_Insert_Changes';
+    //console.log(JSON.stringify(datos));
+    datosCliente(query, datos).then(datoscliente => {
+        respuesta.json(datoscliente[0]);
+    })
+    
+
+})
+//---------------------------------------------------------
 /*Ruta para Get para devolver los errores */
+//---------------------------------------------------------
 app.get('/errorviewer', function(req, respuesta) {
     let query = 'SP_Devolver_Errores';
     //console.log(JSON.stringify(datos));
