@@ -93,9 +93,9 @@ class Busquedas  {
             //let datos = mapacabpayroll;
             /* const resp = await instance.post(); */
             
-            console.log(mapacabpayroll);
+            /* console.log(mapacabpayroll); */
             /* return resp.data; */
-            return resp;
+            return resp.data;
         }catch(error){
             console.log(error);
         }
