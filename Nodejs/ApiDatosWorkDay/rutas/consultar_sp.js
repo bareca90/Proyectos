@@ -25,9 +25,6 @@ const app = express();
  *              tconcod:
  *                  type: string
  *                  description: Tipo de Contrato del empleado
- *              EmplPerPag:
- *                  type: string
- *                  description: Periodo de Pago QUincenal , etc
  *              CnctCodSta:
  *                  type: string
  *                  description: Estado del Contrato 
@@ -67,6 +64,12 @@ const app = express();
  *              EmplNumCed:
  *                  type: string
  *                  description: Numero IDentificacion del empleado
+ *              cncttltrsn:
+ *                  type: string
+ *                  description: Teletrabajo Si-S O No-N
+ *              cnctpagapt:
+ *                  type: string
+ *                  description: Paga Aporte Patronal Si-S O No-S
  *              MuleSoft_Id:
  *                  type: string
  *                  description: Id Enviado por Mulesoft
@@ -78,7 +81,6 @@ const app = express();
  *              -CnctFecReg
  *              -EmplValSue
  *              -tconcod
- *              -EmplPerPag
  *              -CnctCodSta
  *              -emplfecant
  *              -cnctclscnt
@@ -92,6 +94,8 @@ const app = express();
  *              -emplapemat
  *              -emplfecnac
  *              -EmplNumCed
+ *              -cncttltrsn
+ *              -cnctpagapt
  *              -MuleSoft_Id
  *              -Fecha_WD
  *          example:
@@ -99,7 +103,6 @@ const app = express();
  *              CnctFecReg:	2018-04-01
  *              EmplValSue:	800.50	 
  *              tconcod:	QUINCENAL
- *              EmplPerPag:	Q
  *              CnctCodSta:	ACTIVO
  *              emplfecant:	2022-07-01
  *              cnctclscnt:	I
@@ -113,6 +116,8 @@ const app = express();
  *              emplapemat:	Campuzano
  *              emplfecnac:	1990-08-06
  *              EmplNumCed:	120670217-5
+ *              cncttltrsn: S
+ *              cnctpagapt: S
  *              MuleSoft_Id: Wdfttt122633
  *              Fecha_WD:   2022-06-08
  */
@@ -244,9 +249,6 @@ app.post('/datatermination', function(req, respuesta) {
  *              tconcod:
  *                  type: string
  *                  description: Tipo de Contrato del empleado
- *              EmplPerPag:
- *                  type: string
- *                  description: Periodo de Pago QUincenal , etc
  *              CnctCodSta:
  *                  type: string
  *                  description: Estado del Contrato 
@@ -286,6 +288,12 @@ app.post('/datatermination', function(req, respuesta) {
  *              EmplNumCed:
  *                  type: string
  *                  description: Numero IDentificacion del empleado
+ *              cncttltrsn:
+ *                  type: string
+ *                  description: Teletrabajo Si-S O No-N
+ *              cnctpagapt:
+ *                  type: string
+ *                  description: Paga Aporte Patronal Si-S O No-S
  *              mobjcod:
  *                  type: string
  *                  description: Motivo de baja del empleado
@@ -387,7 +395,6 @@ app.post('/datatermination', function(req, respuesta) {
  *              -CnctFecReg
  *              -EmplValSue
  *              -tconcod
- *              -EmplPerPag
  *              -CnctCodSta
  *              -emplfecant
  *              -cnctclscnt
@@ -401,6 +408,8 @@ app.post('/datatermination', function(req, respuesta) {
  *              -emplapemat
  *              -emplfecnac
  *              -EmplNumCed
+ *              -cncttltrsn
+ *              -cnctpagapt
  *              -mobjcod
  *              -CnctFecLiq
  *              -cnctno
@@ -438,7 +447,6 @@ app.post('/datatermination', function(req, respuesta) {
  *              CnctFecReg:	2018-04-01
  *              EmplValSue:	800.50	 
  *              tconcod:	QUINCENAL
- *              EmplPerPag:	Q
  *              CnctCodSta:	ACTIVO
  *              emplfecant:	2022-07-01
  *              cnctclscnt:	I
@@ -452,6 +460,8 @@ app.post('/datatermination', function(req, respuesta) {
  *              emplapemat:	Campuzano
  *              emplfecnac:	1990-08-06
  *              EmplNumCed:	120670217-5
+ *              cncttltrsn: S
+ *              cnctpagapt: S
  *              mobjcod : D00123
  *              CnctFecLiq:  2022-01-01
  *              cnctno:     1
