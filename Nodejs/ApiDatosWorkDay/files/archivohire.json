@@ -17,8 +17,6 @@
         "emplapemat"		:	"Campuzano"	,
         "emplfecnac"		:	"1990-08-06"	,
         "EmplNumCed"		:	"1234567890"	,
-        "cncttltrsn"        :   "S"              ,
-        "cnctpagapt"        :   "S"              ,
         "MuleSoft_Id"		:	"Wdfttt122633",
         "Fecha_WD"			:   "2022-06-08" 
     },
@@ -40,8 +38,6 @@
         "emplapemat"		:	"Campuzano"	,
         "emplfecnac"		:	"1990-08-06"	,
         "EmplNumCed"		:	"1234567890"	,
-        "cncttltrsn"        :   "S"              ,
-        "cnctpagapt"        :   "S"              ,
         "MuleSoft_Id"		:	"Wdfttt122633"  ,
         "Fecha_WD"			:   "2022-06-08" 
     },
@@ -63,8 +59,6 @@
         "emplapemat"		:	"Campuzano"	,
         "emplfecnac"		:	"1990-08-06"	,
         "EmplNumCed"		:	"1234567890"	,
-        "cncttltrsn"        :   "S"              ,
-        "cnctpagapt"        :   "S"              ,
         "MuleSoft_Id"		:	"Wdfttt122633",
         "Fecha_WD"			:   "2022-06-08" 
     }

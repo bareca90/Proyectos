@@ -34,9 +34,9 @@ class ExitPlantScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               color: AppTheme.primary,
               height: 120,
-              child: const AssignedCardHeader(),
+              /* child: const AssignedCardHeader(), */
             ),
-            const AssignedListBin()
+            /* const AssignedListBin() */
             /* Expanded(
                 child: ListView.builder(
               itemCount: 30,

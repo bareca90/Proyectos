@@ -1,11 +1,18 @@
+import 'package:bines_app/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:provider/provider.dart';
 
 class ScanButtonQR extends StatelessWidget {
-  const ScanButtonQR({Key? key}) : super(key: key);
+  const ScanButtonQR({Key? key, required this.listaGuiasAsignadas})
+      : super(key: key);
+  final AssiggrListProvider listaGuiasAsignadas;
 
   @override
   Widget build(BuildContext context) {
+    final listaGuiasBinAsignadas = Provider.of<AssiggrListProvider>(context);
+
+    DateTime now = DateTime.now();
     return FloatingActionButton(
       elevation: 0,
       onPressed: () async {
@@ -26,7 +33,17 @@ class ScanButtonQR extends StatelessWidget {
         //lamamamos a la pantalla en base a lo escaneado
         // ignore: use_build_context_synchronously
         /* lanzarUrl(context, nuevoScan); */
+
         print('Se Escaneo lo Siguiente $barcodeScanRes');
+
+        final insertVariosGrBin = listaGuiasBinAsignadas.nuevaGuiaBinAsignado(
+            listaGuiasAsignadas.guiaSeleccionada.nroguia,
+            int.parse(barcodeScanRes),
+            now.toString(),
+            1,
+            0);
+        /*  print(
+            'Se Inserto el bin ${listaGuiasAsignadas.guiaSeleccionada.nroguia}, $insertVariosGrBin'); */
       },
       child: const Icon(Icons.filter_center_focus),
     );

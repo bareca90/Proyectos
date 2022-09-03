@@ -14,12 +14,16 @@ class DBProvider {
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
 
-      join(await getDatabasesPath(), 'BinesDB.db'),
+      join(await getDatabasesPath(), 'BinesAppDB1.db'),
       // When the database is first created, create a table to store dogs.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
+        db.execute(
+          'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT) ',
+          //'CREATE TABLE Scans(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo TEXT, valor TEXT)',
+        );
         return db.execute(
-          'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT)',
+          'CREATE TABLE BinesGrAsig(nroguia TEXT,nrobin INT,fechahora TEXT,sincronizado INT,activo INT,PRIMARY KEY (nroguia, nrobin) ) ',
           //'CREATE TABLE Scans(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo TEXT, valor TEXT)',
         );
       },
@@ -35,6 +39,7 @@ class DBProvider {
   //----------------------------------
   //Bloque de Registro de la tabla que registra las guias con sus binees Primer Paso(Datos Vienen del API)
   //----------------------------------
+
   //----------------------------------
   //Registro de Guias de Pesca que Vienen desde el API
   //----------------------------------
@@ -69,5 +74,63 @@ class DBProvider {
     return res.isNotEmpty
         ? res.map((e) => AssiggrModel.fromJson(e)).toList()
         : [];
+  }
+
+  //----------------------------------
+  //Bloque de Registro de la tabla que alamcena los registros de las guias
+  //----------------------------------
+  //----------------------------------
+  //Registro de Guias de Pesca con los Bines Asignados
+  //----------------------------------
+  Future insertBinGrAsiganadas(BinesGrAsigModel binasignadas) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    //
+    // In this case, replace any previous data.
+    final resp = await db.insert(
+      'BinesGrAsig',
+      binasignadas.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    //print('Respuesta de la Insercion $resp');
+
+    return binasignadas.nrobin;
+  }
+
+  //----------------------------------
+  //Consulta de Guias Asinadas con los bines
+  //----------------------------------
+  Future<List<BinesGrAsigModel>?> consultaBinAsignadas(String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    final res = await db
+        .query('BinesGrAsig', where: 'nroguia = ?', whereArgs: [nroguia]);
+    /* print('Respuesta $res'); */
+    return res.isNotEmpty
+        ? res.map((e) => BinesGrAsigModel.fromJson(e)).toList()
+        : [];
+  }
+
+  //----------------------------------
+  //Borra de la tabla los bines escaneados de manera equivocada
+  //----------------------------------
+  Future borrarBinEscanead(String nroguia, int nrobin) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinesGrAsig',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and nrobin = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia, nrobin],
+    );
+
+    return res;
   }
 }

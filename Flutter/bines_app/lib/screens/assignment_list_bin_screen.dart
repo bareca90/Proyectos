@@ -11,6 +11,7 @@ class AssigmentScreen extends StatelessWidget {
     /* final listaGuiasAsignadas =
         Provider.of<AssiggrListProvider>(context, listen: false); */
     final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
+    listaGuiasAsignadas.cargarGrAsignadas();
 
     return Scaffold(
       body: Scaffold(
@@ -26,8 +27,16 @@ class AssigmentScreen extends StatelessWidget {
                   final berlinWallFell = DateTime.utc(1989, 11, 9); */
                   /* final moonLanding = DateTime.utc(2022, 08, 09); */
                   final insertVarios = listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G59578', '2022-08-01', 20, 's145', 10, 1, 1);
-                  listaGuiasAsignadas.cargarGrAsignadas();
+                      'G59558', '2022-08-01', 20, 's145', 10, 1, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'G59578', '2022-08-01', 5, 'PIS14', 8, 0, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'G59528', '2022-08-01', 10, 'C120', 12, 0, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'G59598', '2022-08-01', 4, 'S45', 4, 1, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'S59558', '2022-08-01', 8, 'G5', 3, 1, 1);
+                  /* listaGuiasAsignadas.cargarGrAsignadas(); */
                 },
                 icon: const Icon(Icons.search))
           ],
@@ -41,6 +50,9 @@ class AssigmentScreen extends StatelessWidget {
                   /* productsServices.selectedProduct =
                       productsServices.productos[indice].copy();
                   Navigator.pushNamed(context, 'product'); */
+                  listaGuiasAsignadas.guiaSeleccionada =
+                      listaGuiasAsignadas.asignados[indice].copy();
+
                   Navigator.pushNamed(context, 'asigbin');
                 },
                 child: AssigmentBinCard(

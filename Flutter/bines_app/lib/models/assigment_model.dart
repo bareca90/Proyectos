@@ -50,4 +50,13 @@ class AssiggrModel {
   String toString() {
     return 'AssiggrModel{nroGuia :$nroguia,fecha:$fecha,kg:$kg,piscina:$piscina,cant:$cant,sincronizado:$sincronizado,activo:$activo}';
   }
+
+  AssiggrModel copy() => AssiggrModel(
+      nroguia: nroguia,
+      fecha: fecha,
+      kg: kg,
+      piscina: piscina,
+      cant: cant,
+      sincronizado: sincronizado,
+      activo: activo);
 }

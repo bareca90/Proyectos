@@ -1,8 +1,11 @@
+import 'package:bines_app/providers/assiggr_list_provider.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 
 class AssignedCardHeader extends StatelessWidget {
-  const AssignedCardHeader({Key? key}) : super(key: key);
+  const AssignedCardHeader({Key? key, required this.listaGuiasAsignadas})
+      : super(key: key);
+  final AssiggrListProvider listaGuiasAsignadas;
   final double tamanio = 12.5;
   @override
   Widget build(BuildContext context) {
@@ -68,7 +71,7 @@ class AssignedCardHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'H14526',
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia,
                     style: TextStyle(
                         fontSize: tamanio,
                         color: AppTheme.primary,
@@ -86,7 +89,7 @@ class AssignedCardHeader extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    '1256.32',
+                    listaGuiasAsignadas.guiaSeleccionada.kg.toString(),
                     style: TextStyle(
                         fontSize: tamanio,
                         color: AppTheme.primary,
@@ -96,9 +99,9 @@ class AssignedCardHeader extends StatelessWidget {
                     height: 5,
                     color: Colors.white,
                   ),
-                  const Text(
-                    '15',
-                    style: TextStyle(
+                  Text(
+                    listaGuiasAsignadas.guiaSeleccionada.cant.toString(),
+                    style: const TextStyle(
                         fontSize: 20,
                         color: AppTheme.upload,
                         fontWeight: FontWeight.bold),
@@ -153,7 +156,7 @@ class AssignedCardHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '2022-08-01',
+                    listaGuiasAsignadas.guiaSeleccionada.fecha,
                     style: TextStyle(
                         fontSize: tamanio,
                         color: AppTheme.primary,
@@ -171,7 +174,7 @@ class AssignedCardHeader extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    'C119',
+                    listaGuiasAsignadas.guiaSeleccionada.piscina,
                     style: TextStyle(
                         fontSize: tamanio,
                         color: AppTheme.primary,
