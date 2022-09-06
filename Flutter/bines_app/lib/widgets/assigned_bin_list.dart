@@ -8,7 +8,8 @@ class AssignedListBin extends StatelessWidget {
   final String nroguia;
   @override
   Widget build(BuildContext context) {
-    final listaGuiaBin = Provider.of<AssiggrListProvider>(context);
+    /* final listaGuiaBin = Provider.of<AssiggrListProvider>(context); */
+    final listaGuiaBin = Provider.of<BinGrAsignado>(context);
     listaGuiaBin.cargarBinAsignadas(nroguia);
     return Expanded(
         child: ListView.builder(
@@ -21,9 +22,8 @@ class AssignedListBin extends StatelessWidget {
           ),
           //Mediante este proceso eliminamos de la base  de datos por el id
           onDismissed: (DismissDirection direction) {
-            Provider.of<AssiggrListProvider>(context, listen: false)
-                .borrarBinGuia(
-                    nroguia, listaGuiaBin.binAsignados[indice].nrobin);
+            Provider.of<BinGrAsignado>(context, listen: false).borrarBinGuia(
+                nroguia, listaGuiaBin.binAsignados[indice].nrobin);
           },
           child: Container(
             //color: Colors.white,

@@ -1,4 +1,4 @@
-import 'package:bines_app/providers/assiggr_list_provider.dart';
+import 'package:bines_app/providers/providers.dart';
 import 'package:bines_app/screens/screens.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,10 @@ class AppsState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AssiggrListProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AssiggrListProvider()),
+        ChangeNotifierProvider(create: (_) => BinGrAsignado())
+      ],
       child: const MyApp(),
     );
   }

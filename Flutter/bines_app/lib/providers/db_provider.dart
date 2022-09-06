@@ -109,7 +109,7 @@ class DBProvider {
 
     final res = await db
         .query('BinesGrAsig', where: 'nroguia = ?', whereArgs: [nroguia]);
-    /* print('Respuesta $res'); */
+    print('Respuesta $res');
     return res.isNotEmpty
         ? res.map((e) => BinesGrAsigModel.fromJson(e)).toList()
         : [];
@@ -129,6 +129,25 @@ class DBProvider {
       where: 'nroguia = ? and nrobin = ?',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [nroguia, nrobin],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
+  //Borrar Todas las Guia  no sincronizadas
+  //----------------------------------
+  Future borrarBinesGuias(String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinesGrAsig',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and sincronizado = 0 ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia],
     );
 
     return res;

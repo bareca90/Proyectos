@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AssiggrListProvider extends ChangeNotifier {
   List<AssiggrModel> asignados = [];
-  List<BinesGrAsigModel> binAsignados = [];
+  /* List<BinesGrAsigModel> binAsignados = []; */
 
   late AssiggrModel guiaSeleccionada;
   Future<AssiggrModel> nuevaGuiaPesca(String nroguia, String fecha, double kg,
@@ -31,7 +31,7 @@ class AssiggrListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<BinesGrAsigModel> nuevaGuiaBinAsignado(String nroguia, int nrobin,
+  /*  Future<BinesGrAsigModel> nuevaGuiaBinAsignado(String nroguia, int nrobin,
       String fechahora, int sincronizado, int activo) async {
     final nuevoBinGuia = BinesGrAsigModel(
         nroguia: nroguia,
@@ -56,5 +56,5 @@ class AssiggrListProvider extends ChangeNotifier {
   borrarBinGuia(String nroguia, int nrobin) async {
     await DBProvider.db.borrarBinEscanead(nroguia, nrobin);
     cargarBinAsignadas(nroguia);
-  }
+  } */
 }

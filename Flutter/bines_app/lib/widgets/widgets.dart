@@ -1,3 +1,4 @@
+export 'package:bines_app/widgets/alert.dart';
 export 'package:bines_app/widgets/save_button.dart';
 export 'package:bines_app/widgets/exit_plant_list.dart';
 export 'package:bines_app/widgets/assigned_card_header.dart';

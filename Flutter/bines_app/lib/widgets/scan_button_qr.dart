@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class ScanButtonQR extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listaGuiasBinAsignadas = Provider.of<AssiggrListProvider>(context);
+    final listaGuiasBinAsignadas = Provider.of<BinGrAsignado>(context);
 
     DateTime now = DateTime.now();
     return FloatingActionButton(
@@ -33,15 +34,21 @@ class ScanButtonQR extends StatelessWidget {
         //lamamamos a la pantalla en base a lo escaneado
         // ignore: use_build_context_synchronously
         /* lanzarUrl(context, nuevoScan); */
-
-        print('Se Escaneo lo Siguiente $barcodeScanRes');
-
         final insertVariosGrBin = listaGuiasBinAsignadas.nuevaGuiaBinAsignado(
             listaGuiasAsignadas.guiaSeleccionada.nroguia,
             int.parse(barcodeScanRes),
             now.toString(),
-            1,
+            0,
             0);
+        listaGuiasBinAsignadas
+            .cargarBinAsignadas(listaGuiasAsignadas.guiaSeleccionada.nroguia);
+        if (listaGuiasAsignadas.guiaSeleccionada.activo == 0) {
+        } else {
+          const Alert(
+              titulo: 'Registo Bin - Guìa',
+              texto:
+                  'No se Puede Escanear Bines por que la guìa salio de Planta');
+        }
         /*  print(
             'Se Inserto el bin ${listaGuiasAsignadas.guiaSeleccionada.nroguia}, $insertVariosGrBin'); */
       },

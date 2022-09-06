@@ -36,6 +36,10 @@ class AssigmentScreen extends StatelessWidget {
                       'G59598', '2022-08-01', 4, 'S45', 4, 1, 1);
                   listaGuiasAsignadas.nuevaGuiaPesca(
                       'S59558', '2022-08-01', 8, 'G5', 3, 1, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'G58558', '2022-10-01', 8, 'G5', 3, 1, 1);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'Y59558', '2022-05-01', 8, 'G5', 3, 0, 1);
                   /* listaGuiasAsignadas.cargarGrAsignadas(); */
                 },
                 icon: const Icon(Icons.search))
@@ -53,6 +57,10 @@ class AssigmentScreen extends StatelessWidget {
                   listaGuiasAsignadas.guiaSeleccionada =
                       listaGuiasAsignadas.asignados[indice].copy();
 
+                  final nroguia = listaGuiasAsignadas.asignados[indice].nroguia;
+                  final listaBinGuiaAsignada =
+                      Provider.of<BinGrAsignado>(context, listen: false);
+                  listaBinGuiaAsignada.cargarBinAsignadas(nroguia);
                   Navigator.pushNamed(context, 'asigbin');
                 },
                 child: AssigmentBinCard(

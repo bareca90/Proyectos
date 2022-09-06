@@ -4,6 +4,7 @@ class AppTheme {
   static const Color primary = Color.fromARGB(255, 5, 48, 83);
   static const Color second = Color.fromARGB(246, 131, 18, 18);
   static const Color upload = Color.fromARGB(246, 30, 102, 15);
+  static const Color grisoscuro = Color.fromARGB(246, 127, 129, 127);
 
   static final ThemeData lighthTheme = ThemeData.light().copyWith(
     //COlor Primario
