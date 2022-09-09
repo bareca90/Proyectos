@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/services/services.dart';
 import 'package:bines_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,8 @@ class AssigmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     /* final listaGuiasAsignadas =
         Provider.of<AssiggrListProvider>(context, listen: false); */
+    final listaGuiasServices = Provider.of<DataGuiasDayServices>(context);
+
     final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
     listaGuiasAsignadas.cargarGrAsignadas();
 
@@ -40,7 +43,13 @@ class AssigmentScreen extends StatelessWidget {
                       'G58558', '2022-10-01', 8, 'G5', 3, 1, 1);
                   listaGuiasAsignadas.nuevaGuiaPesca(
                       'Y59558', '2022-05-01', 8, 'G5', 3, 0, 1);
-                  /* listaGuiasAsignadas.cargarGrAsignadas(); */
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'Z59574', '2022-05-01', 8, 'G5', 3, 1, 0);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'Z79574', '2022-05-01', 8, 'G5', 3, 1, 0);
+                  listaGuiasAsignadas.nuevaGuiaPesca(
+                      'Z4584', '2022-05-01', 8, 'G5', 3, 1, 0);
+                  listaGuiasAsignadas.cargarGrAsignadas();
                 },
                 icon: const Icon(Icons.search))
           ],

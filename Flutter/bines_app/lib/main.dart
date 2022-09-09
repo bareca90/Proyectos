@@ -1,5 +1,6 @@
 import 'package:bines_app/providers/providers.dart';
 import 'package:bines_app/screens/screens.dart';
+import 'package:bines_app/services/services.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class AppsState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AssiggrListProvider()),
-        ChangeNotifierProvider(create: (_) => BinGrAsignado())
+        ChangeNotifierProvider(create: (_) => BinGrAsignado()),
+        ChangeNotifierProvider(create: (_) => DataGuiasDayServices())
       ],
       child: const MyApp(),
     );

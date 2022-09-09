@@ -42,13 +42,14 @@ class ScanButtonQR extends StatelessWidget {
             0);
         listaGuiasBinAsignadas
             .cargarBinAsignadas(listaGuiasAsignadas.guiaSeleccionada.nroguia);
-        if (listaGuiasAsignadas.guiaSeleccionada.activo == 0) {
+        print('Guia estado : ${listaGuiasAsignadas.guiaSeleccionada.activo}');
+        /* if (listaGuiasAsignadas.guiaSeleccionada.activo == 1) {
         } else {
           const Alert(
               titulo: 'Registo Bin - Guìa',
               texto:
                   'No se Puede Escanear Bines por que la guìa salio de Planta');
-        }
+        } */
         /*  print(
             'Se Inserto el bin ${listaGuiasAsignadas.guiaSeleccionada.nroguia}, $insertVariosGrBin'); */
       },

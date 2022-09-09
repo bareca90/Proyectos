@@ -15,55 +15,52 @@ class AssigmentBinScreen extends StatelessWidget {
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Registro Bin en Guìa'),
-          //agregar boton para logout
-          actions: [
-            IconButton(
-                onPressed: () {
-                  _showDialogDeleteAllBines(
-                      context, listaGuiasAsignadas, listaBinGuiaAsignada);
-                },
-                icon: const Icon(Icons.delete)),
-            IconButton(
-                onPressed: () {
-                  //aqui se debe controlar quitar la
-                  //authServices.logout();
-                  //Navigator.pushReplacementNamed(context, 'login');
+      appBar: AppBar(
+        title: const Text('Registro Bin en Guìa'),
+        //agregar boton para logout
+        actions: [
+          IconButton(
+              onPressed: () {
+                _showDialogDeleteAllBines(
+                    context, listaGuiasAsignadas, listaBinGuiaAsignada);
+              },
+              icon: const Icon(Icons.delete)),
+          IconButton(
+              onPressed: () {
+                //aqui se debe controlar quitar la
+                //authServices.logout();
+                //Navigator.pushReplacementNamed(context, 'login');
 
-                  //Aqui va a ir el consumo de las apis de SIPE
-                },
-                icon: const Icon(Icons.cloud_upload_rounded))
-          ],
-        ),
-        body: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              color: AppTheme.primary,
-              height: 120,
-              child:
-                  AssignedCardHeader(listaGuiasAsignadas: listaGuiasAsignadas),
-            ),
-            /* AssignedListBin(
+                //Aqui va a ir el consumo de las apis de SIPE
+              },
+              icon: const Icon(Icons.cloud_upload_rounded))
+        ],
+      ),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            color: AppTheme.primary,
+            height: 120,
+            child: AssignedCardHeader(listaGuiasAsignadas: listaGuiasAsignadas),
+          ),
+          /* AssignedListBin(
                 nroguia: listaGuiasAsignadas.guiaSeleccionada.nroguia) */
-            _listaBinesGuiasAsignados(listaBinGuiaAsignada, context)
-          ],
-        ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniStartFloat,
-        floatingActionButton:
-            ScanButtonQR(listaGuiasAsignadas: listaGuiasAsignadas)
-
-        /* FloatingActionButton(
-        onPressed: () async {
-          //TODO :  Guardar Producto
-          /* if (!productForm.isValidaForm()) return;
-          await productService.updateProducts(productForm.product);  */
-        },
-        child: const Icon(Icons.qr_code_scanner_rounded),
-      ), */
-        );
+          _listaBinesGuiasAsignados(listaBinGuiaAsignada, context)
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      floatingActionButton: listaGuiasAsignadas.guiaSeleccionada.activo == 1
+          ? ScanButtonQR(listaGuiasAsignadas: listaGuiasAsignadas)
+          : /* Text(SnackBarNotifications.showSnackBar(
+              'Esta Guìa ya Salìo de Planta ')) */
+          Container()
+      /* const Alert(
+              titulo: 'Registo Bin - Guìa',
+              texto:
+                  'No se Puede Escanear Bines por que la guìa salio de Planta') */
+      ,
+    );
   }
 
   Future<dynamic> _showDialogDeleteAllBines(

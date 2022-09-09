@@ -10,8 +10,8 @@ class Alert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      elevation: 5,
-      backgroundColor: Colors.grey.shade200,
+      elevation: 0,
+      /* backgroundColor: Colors.grey.shade200, */
       title: Text(
         titulo,
         style: const TextStyle(
@@ -42,7 +42,7 @@ class Alert extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: AppTheme.primary),
             )),
-        TextButton(
+        /* TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -52,7 +52,7 @@ class Alert extends StatelessWidget {
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: AppTheme.second),
-            ))
+            )) */
       ],
     );
   }
