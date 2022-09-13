@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class BinGrAsignado extends ChangeNotifier {
   List<BinesGrAsigModel> binAsignados = [];
+  int cantescaneados = 0;
   Future<BinesGrAsigModel> nuevaGuiaBinAsignado(String nroguia, int nrobin,
       String fechahora, int sincronizado, int activo) async {
     final nuevoBinGuia = BinesGrAsigModel(
@@ -22,8 +23,13 @@ class BinGrAsignado extends ChangeNotifier {
   cargarBinAsignadas(String nroguia) async {
     final binAsignados = await DBProvider.db.consultaBinAsignadas(nroguia);
     this.binAsignados = [...?binAsignados];
-    print(binAsignados);
+    /* print(binAsignados); */
     notifyListeners();
+  }
+
+  borrarBinesGuia(String nroguia) async {
+    await DBProvider.db.borrarBinesGuias(nroguia);
+    cargarBinAsignadas(nroguia);
   }
 
   borrarBinGuia(String nroguia, int nrobin) async {
@@ -31,8 +37,9 @@ class BinGrAsignado extends ChangeNotifier {
     cargarBinAsignadas(nroguia);
   }
 
-  borrarBinesGuia(String nroguia) async {
-    await DBProvider.db.borrarBinesGuias(nroguia);
-    cargarBinAsignadas(nroguia);
+  catidadBinesEscaneados(String nroguia) async {
+    final cantescaneados = await DBProvider.db.cantidadBinesEscaneados(nroguia);
+    this.cantescaneados = cantescaneados;
+    notifyListeners();
   }
 }

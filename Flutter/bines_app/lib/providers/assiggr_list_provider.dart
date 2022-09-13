@@ -31,30 +31,8 @@ class AssiggrListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*  Future<BinesGrAsigModel> nuevaGuiaBinAsignado(String nroguia, int nrobin,
-      String fechahora, int sincronizado, int activo) async {
-    final nuevoBinGuia = BinesGrAsigModel(
-        nroguia: nroguia,
-        nrobin: nrobin,
-        fechahora: fechahora,
-        sincronizado: sincronizado,
-        activo: activo);
-    nuevoBinGuia.nrobin =
-        await DBProvider.db.insertBinGrAsiganadas(nuevoBinGuia);
-    binAsignados.add(nuevoBinGuia);
-    notifyListeners();
-    return nuevoBinGuia;
+  borrarGuiasPesca(String nroguia) async {
+    await DBProvider.db.borrarGuiasPesca(nroguia);
+    cargarGrAsignadas();
   }
-
-  cargarBinAsignadas(String nroguia) async {
-    final binAsignados = await DBProvider.db.consultaBinAsignadas(nroguia);
-    /*  print(binAsignados); */
-    this.binAsignados = [...?binAsignados];
-    notifyListeners();
-  }
-
-  borrarBinGuia(String nroguia, int nrobin) async {
-    await DBProvider.db.borrarBinEscanead(nroguia, nrobin);
-    cargarBinAsignadas(nroguia);
-  } */
 }

@@ -16,7 +16,7 @@ class AssigmentBinScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registro Bin en Guìa'),
+        title: const Text('Bines por Guìa'),
         //agregar boton para logout
         actions: [
           IconButton(
@@ -27,13 +27,26 @@ class AssigmentBinScreen extends StatelessWidget {
               icon: const Icon(Icons.delete)),
           IconButton(
               onPressed: () {
+                //TODO: Se procdera a ejecutar el WebServices para subir los escaneados
+
                 //aqui se debe controlar quitar la
                 //authServices.logout();
                 //Navigator.pushReplacementNamed(context, 'login');
 
                 //Aqui va a ir el consumo de las apis de SIPE
               },
-              icon: const Icon(Icons.cloud_upload_rounded))
+              icon: const Icon(Icons.cloud_upload_rounded)),
+          IconButton(
+              onPressed: () {
+                //TODO: Se procdera a Inactivar la guia
+
+                //aqui se debe controlar quitar la
+                //authServices.logout();
+                //Navigator.pushReplacementNamed(context, 'login');
+
+                //Aqui va a ir el consumo de las apis de SIPE
+              },
+              icon: const Icon(Icons.lock))
         ],
       ),
       body: Column(
@@ -52,9 +65,8 @@ class AssigmentBinScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       floatingActionButton: listaGuiasAsignadas.guiaSeleccionada.activo == 1
           ? ScanButtonQR(listaGuiasAsignadas: listaGuiasAsignadas)
-          : /* Text(SnackBarNotifications.showSnackBar(
+          : Container() /* Text(SnackBarNotifications.showSnackBar(
               'Esta Guìa ya Salìo de Planta ')) */
-          Container()
       /* const Alert(
               titulo: 'Registo Bin - Guìa',
               texto:

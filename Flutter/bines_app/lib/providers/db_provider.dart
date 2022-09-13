@@ -77,6 +77,25 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Eliminacion de las guias q no estan sincronizadas que vinieron desde el API
+  //----------------------------------
+  Future borrarGuiasPesca(String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    //TODO : APlicar COndicion para q borre las que no han sido sincronizadas
+    final res = await db.delete(
+      'Assiggr',
+      // Ensure that the Dog has a matching id.
+      /* where: 'nroguia = ? and sincronizado = 0 ', */
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      /* whereArgs: [nroguia], */
+    );
+
+    return res;
+  }
+
+  //----------------------------------
   //Bloque de Registro de la tabla que alamcena los registros de las guias
   //----------------------------------
   //----------------------------------
@@ -101,6 +120,24 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Cantidad de Bines Escaneados
+  //----------------------------------
+  Future cantidadBinesEscaneados(String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    final res = await db
+        .query('BinesGrAsig', where: 'nroguia = ?', whereArgs: [nroguia]);
+    int bines = res.length;
+    if (res.isEmpty) {
+      bines = 0;
+    }
+    final actualizado = await db.update('Assiggr', {'cant': bines},
+        where: 'nroguia = ?', whereArgs: [nroguia]);
+    return bines;
+  }
+
+  //----------------------------------
   //Consulta de Guias Asinadas con los bines
   //----------------------------------
   Future<List<BinesGrAsigModel>?> consultaBinAsignadas(String nroguia) async {
@@ -109,7 +146,7 @@ class DBProvider {
 
     final res = await db
         .query('BinesGrAsig', where: 'nroguia = ?', whereArgs: [nroguia]);
-    print('Respuesta $res');
+    /* print('Respuesta $res'); */
     return res.isNotEmpty
         ? res.map((e) => BinesGrAsigModel.fromJson(e)).toList()
         : [];

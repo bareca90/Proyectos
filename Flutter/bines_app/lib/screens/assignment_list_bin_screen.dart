@@ -29,7 +29,7 @@ class AssigmentScreen extends StatelessWidget {
                   /* final now = DateTime.now();
                   final berlinWallFell = DateTime.utc(1989, 11, 9); */
                   /* final moonLanding = DateTime.utc(2022, 08, 09); */
-                  final insertVarios = listaGuiasAsignadas.nuevaGuiaPesca(
+                  /* final insertVarios = listaGuiasAsignadas.nuevaGuiaPesca(
                       'G59558', '2022-08-01', 20, 's145', 10, 1, 1);
                   listaGuiasAsignadas.nuevaGuiaPesca(
                       'G59578', '2022-08-01', 5, 'PIS14', 8, 0, 1);
@@ -49,7 +49,7 @@ class AssigmentScreen extends StatelessWidget {
                       'Z79574', '2022-05-01', 8, 'G5', 3, 1, 0);
                   listaGuiasAsignadas.nuevaGuiaPesca(
                       'Z4584', '2022-05-01', 8, 'G5', 3, 1, 0);
-                  listaGuiasAsignadas.cargarGrAsignadas();
+                  listaGuiasAsignadas.cargarGrAsignadas(); */
                 },
                 icon: const Icon(Icons.search))
           ],
