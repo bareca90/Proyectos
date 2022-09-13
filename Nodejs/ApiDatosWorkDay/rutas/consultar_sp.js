@@ -11,7 +11,7 @@ const app = express();
  * components:
  *  schemas:
  *      Hire:
- *          type: array
+ *          type: object
  *          properties:
  *              emplcod_wd:
  *                  type: string
@@ -122,7 +122,7 @@ const app = express();
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: array
+ *                          type: object
  *                          $ref: '#/components/schemas/Hire'
  *          responses : 
  *              200:
@@ -145,7 +145,7 @@ app.post('/dataemployees', function(req, respuesta) {
  * components:
  *  schemas:
  *      Termination:
- *          type: array
+ *          type: object
  *          properties:
  *              emplcod_wd:
  *                  type: string
@@ -174,16 +174,14 @@ app.post('/dataemployees', function(req, respuesta) {
  *              -mobjcod
  *              -CnctCodSta
  *              -CnctFecLiq
- *              -Cnctusrlog
  *              -MuleSoft_Id
  *              -Fecha_WD
  *          example:
  *              emplcod_wd:	WRKeCU00004
  *              CnctFecReg:	2018-04-01
  *              mobjcod : WD00123
- *              CnctCodSta : 00001
+ *              CnctCodSta : inactivo
  *              CnctFecLiq : 2022-10-01
- *              Cnctusrlog : DFgg0001
  *              MuleSoft_Id: Wdfttt122633
  *              Fecha_WD:   2022-06-08
  */
@@ -198,7 +196,7 @@ app.post('/dataemployees', function(req, respuesta) {
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: array
+ *                          type: object
  *                          $ref: '#/components/schemas/Termination'
  *          responses : 
  *              200:
@@ -225,7 +223,7 @@ app.post('/datatermination', function(req, respuesta) {
  * components:
  *  schemas:
  *      Changes:
- *          type: array
+ *          type: object
  *          properties:
  *              emplcod_wd:
  *                  type: string
@@ -312,7 +310,7 @@ app.post('/datatermination', function(req, respuesta) {
  *                  type : string
  *                  description : Tipo de Bonificacion
  *              rhcnct1_cnctvbnwd:
- *                  type : string
+ *                  type : number
  *                  description : Tipo de Compensacion WD
  *              rhCnct7_onetcodwd:
  *                  type : string
@@ -453,7 +451,7 @@ app.post('/datatermination', function(req, respuesta) {
  *              emplTipLic:  ECU_CI
  *              rhcnct_grpgcod:  PG_ECU_1_QUI
  *              rhcnct1_bonocod: MENSUAL
- *              rhcnct1_cnctvbnwd:  ANUAL
+ *              rhcnct1_cnctvbnwd:  1200
  *              rhCnct7_onetcodwd: OTROS INCENTIVOS
  *              rhCnct7_onetdol:  1600.20
  *              rhcnct_tctacod:     CUENTA
@@ -486,7 +484,7 @@ app.post('/datatermination', function(req, respuesta) {
  *              content:
  *                  application/json:
  *                      schema:
- *                          type: array
+ *                          type: object
  *                          $ref: '#/components/schemas/Changes'
  *          responses : 
  *              200:
@@ -503,9 +501,7 @@ app.post('/datoschanges', function(req, respuesta) {
     
 
 })
-//---------------------------------------------------------
 /*Conexion a Sp que devuelve los datos de los clientes*/
-//---------------------------------------------------------
 let datosCliente = async(query, pJson) => {
     try {
         let pool = await sql.connect(config);
@@ -521,9 +517,7 @@ let datosCliente = async(query, pJson) => {
 
 
 }
-//---------------------------------------------------------
 /*Conexion a Sp que devulve datos para get*/
-//---------------------------------------------------------
 let datosGetWordDay = async(query) => {
     try {
         let pool = await sql.connect(config);
