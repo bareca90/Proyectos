@@ -1,0 +1,30 @@
+[
+    {
+        "emplcod_wd"		:	"WRKeCU00005",
+        "CnctFecReg"		:	"2018-04-01",			
+        "mobjcod"			:	"00123",        
+        "CnctCodSta"		:	"00001",			
+        "CnctFecLiq"		:	"2022-01-01",			
+        "MuleSoft_Id"		:	"Wdfttt122633",
+        "Fecha_WD"			:   "2022-06-08" 
+    },
+    {
+        "emplcod_wd"		:	"WRKeCU00006",
+        "CnctFecReg"		:	"2018-04-01",			
+        "mobjcod"			:	"00123",        
+        "CnctCodSta"		:	"00001",			
+        "CnctFecLiq"		:	"2022-01-01",			
+        "MuleSoft_Id"		:	"Wdfttt122633",
+        "Fecha_WD"			:   "2022-06-08" 
+    },
+    {
+        "emplcod_wd"		:	"WRKeCU00004",
+        "CnctFecReg"		:	"2018-04-01",			
+        "mobjcod"			:	"00123",        
+        "CnctCodSta"		:	"00001",			
+        "CnctFecLiq"		:	"2022-01-01",			
+        "MuleSoft_Id"		:	"Wdfttt122633",
+        "Fecha_WD"			:   "2022-06-08" 
+    }
+
+]
