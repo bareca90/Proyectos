@@ -1,28 +1,10 @@
 const inquirer = require('inquirer');
-/* const { insertarRegBiolan,consultarCabecera} = require('../data/queries'); */
 const { consultarCabecera} = require('../data/queries');
 const fs = require('fs');
 const path = require("path");
 
 
-/* const readMapBiolan = async( datos_biolan = [] ) => {
-    // Leemos el mapa para iterar y enviar a guardar a la bd los datos de la iteraciòn 
-    const datos_limpios = datos_biolan.map( (dato_bio, i) => {
-        //const idx = `${i + 1}.`.green;
-        //const ingresoDatos = insertarRegBiolan(dato_bio.resultado,dato_bio.bin,dato_bio.lote,dato_bio.orden,dato_bio.guia,dato_bio.sku,dato_bio.secuencia);
-        insertarRegBiolan(dato_bio.resultado,dato_bio.bin,dato_bio.lote,dato_bio.orden,dato_bio.guia,dato_bio.sku,dato_bio.secuencia)
-        .then( insertados =>{
-            console.log(insertados)
-        });
-        
-        
-        //console.log(ingresoDatos);
-        
-        //console.log(`Resultado => ${dato_bio.resultado}  #Bin => ${dato_bio.bin}   #Lote => ${dato_bio.lote}   #Orden => ${dato_bio.orden}     #DatoGuia => ${dato_bio.guia}   #SKU => ${dato_bio.sku}   #Secuencia => ${dato_bio.secuencia}`  )
-        //Aqui se envia a guardar en SQL
-    });
-    //console.log(datos_limpios);
-} */
+
 //------------------------------------------
 //Obtiene los Datos de la cabecera Payroll y PayLips
 //------------------------------------------
@@ -36,7 +18,7 @@ const datosCabecera = async(tipo,apertura)=>{
     }
 }
 //------------------------------------------
-//Obtiene los Datos de la cabecera Payroll y PayLips
+//Obtiene los Datos de la cabecera Payroll y PayLips ademas de realizar la actualizacion del estado
 //------------------------------------------
 const datosDetallePaLips = async(tipo,apertura)=>{
     try{
@@ -70,12 +52,13 @@ const mapaCabPayRoll = async(datoscab)=>{
 //Recibe los Datos de Paylips , los convierte en Mapa y Retorna Paylips
 //------------------------------------------
 const mapaDetPayLips = async(filenamecsv,pathcsv,datosdet)=>{
-    let filenamecsvpl = filenamecsv;
+    let filenamecsvpl = '\'' + filenamecsv.trimEnd() + '\'';
     let content = await fileBase64(pathcsv);
     //let datosdet =[];
     
+
     const result = datosdet.map(datosdeta => ({ 
-        filename: datosdeta.FileNamePdf, 
+        filename: '\'' + datosdeta.FileNamePdf.trimEnd() + '\'',
         content: fs.readFileSync(datosdeta.PathPdf, {encoding: 'base64'})
     }));
     
@@ -84,13 +67,13 @@ const mapaDetPayLips = async(filenamecsv,pathcsv,datosdet)=>{
     map.set(NaN, 123);
     map.get(NaN) */
     /* console.log('Datos de Mapa ',result); */
-
+    
     return {
         csv : {
-            filename:filenamecsv,
-            content:pathcsv
+            filename: filenamecsvpl,
+            content: content
         },
-        payslips:result
+        payslips: result
     };
 }
 
