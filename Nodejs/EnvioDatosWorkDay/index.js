@@ -85,13 +85,13 @@ const main = async()=>{
         //--------------------------------------------
         //Paso 9 : Actualizar Tabla de Envios.
         //--------------------------------------------
-       /*  console.log('Paso 9 - Actualizacion de Estado Paylips y PayRolls....');
+        console.log('Paso 9 - Actualizacion de Estado Paylips y PayRolls....');
         //Actualizacion Cabecera
         const datosactualizadoscab = await datosDetallePaLips('AC',numapertura);
         console.log(datosactualizadoscab);
         //Actualizacion Detalle
         const datosactualizadosdet = await datosDetallePaLips('AC',apertura);
-        console.log(datosactualizadosdet); */
+        console.log(datosactualizadosdet);
     }else{
         console.log('Revisar por Favor , No Devolvio Datos el EndPoint de Mule !!')
     }
