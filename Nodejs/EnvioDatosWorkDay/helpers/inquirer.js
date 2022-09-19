@@ -52,13 +52,13 @@ const mapaCabPayRoll = async(datoscab)=>{
 //Recibe los Datos de Paylips , los convierte en Mapa y Retorna Paylips
 //------------------------------------------
 const mapaDetPayLips = async(filenamecsv,pathcsv,datosdet)=>{
-    let filenamecsvpl = '\'' + filenamecsv.trimEnd() + '\'';
+    let filenamecsvpl =  filenamecsv.trimEnd() ;
     let content = await fileBase64(pathcsv);
     //let datosdet =[];
     
 
     const result = datosdet.map(datosdeta => ({ 
-        filename: '\'' + datosdeta.FileNamePdf.trimEnd() + '\'',
+        filename:  datosdeta.FileNamePdf.trimEnd() ,
         content: fs.readFileSync(datosdeta.PathPdf, {encoding: 'base64'})
     }));
     
