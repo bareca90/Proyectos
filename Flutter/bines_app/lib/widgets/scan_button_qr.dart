@@ -42,6 +42,8 @@ class ScanButtonQR extends StatelessWidget {
             0);
         listaGuiasBinAsignadas
             .cargarBinAsignadas(listaGuiasAsignadas.guiaSeleccionada.nroguia);
+        /* listaGuiasAsignadas.guiaSeleccionada =
+                      listaGuiasAsignadas.asignados[indice].copy(); */
         listaGuiasBinAsignadas.catidadBinesEscaneados(
             listaGuiasAsignadas.guiaSeleccionada.nroguia);
         /* print('Guia estado : ${listaGuiasAsignadas.guiaSeleccionada.activo}'); */

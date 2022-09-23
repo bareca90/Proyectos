@@ -21,37 +21,7 @@ class AssigmentScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Bin - Guìa'),
           actions: [
-            IconButton(
-                onPressed: () {
-                  //aqui se debe controlar quitar la
-                  //authServices.logout();
-                  //Navigator.pushReplacementNamed(context, 'login');
-                  /* final now = DateTime.now();
-                  final berlinWallFell = DateTime.utc(1989, 11, 9); */
-                  /* final moonLanding = DateTime.utc(2022, 08, 09); */
-                  /* final insertVarios = listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G59558', '2022-08-01', 20, 's145', 10, 1, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G59578', '2022-08-01', 5, 'PIS14', 8, 0, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G59528', '2022-08-01', 10, 'C120', 12, 0, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G59598', '2022-08-01', 4, 'S45', 4, 1, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'S59558', '2022-08-01', 8, 'G5', 3, 1, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'G58558', '2022-10-01', 8, 'G5', 3, 1, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'Y59558', '2022-05-01', 8, 'G5', 3, 0, 1);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'Z59574', '2022-05-01', 8, 'G5', 3, 1, 0);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'Z79574', '2022-05-01', 8, 'G5', 3, 1, 0);
-                  listaGuiasAsignadas.nuevaGuiaPesca(
-                      'Z4584', '2022-05-01', 8, 'G5', 3, 1, 0);
-                  listaGuiasAsignadas.cargarGrAsignadas(); */
-                },
-                icon: const Icon(Icons.search))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search))
           ],
         ),
         body: ListView.builder(

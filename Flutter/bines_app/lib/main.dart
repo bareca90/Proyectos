@@ -17,7 +17,8 @@ class AppsState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AssiggrListProvider()),
         ChangeNotifierProvider(create: (_) => BinGrAsignado()),
-        ChangeNotifierProvider(create: (_) => DataGuiasDayServices())
+        ChangeNotifierProvider(create: (_) => DataGuiasDayServices()),
+        ChangeNotifierProvider(create: (_) => DataGuiaBinServices())
       ],
       child: const MyApp(),
     );

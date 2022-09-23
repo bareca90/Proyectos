@@ -23,6 +23,7 @@ class BinGrAsignado extends ChangeNotifier {
   cargarBinAsignadas(String nroguia) async {
     final binAsignados = await DBProvider.db.consultaBinAsignadas(nroguia);
     this.binAsignados = [...?binAsignados];
+    catidadBinesEscaneados(nroguia);
     /* print(binAsignados); */
     notifyListeners();
   }

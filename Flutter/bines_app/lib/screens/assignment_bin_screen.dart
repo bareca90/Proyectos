@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/services/services.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:bines_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class AssigmentBinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
     final listaBinGuiaAsignada = Provider.of<BinGrAsignado>(context);
+    final listaGuiasServices = Provider.of<DataGuiaBinServices>(context);
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
@@ -23,6 +25,8 @@ class AssigmentBinScreen extends StatelessWidget {
               onPressed: () {
                 _showDialogDeleteAllBines(
                     context, listaGuiasAsignadas, listaBinGuiaAsignada);
+                listaBinGuiaAsignada.catidadBinesEscaneados(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia);
               },
               icon: const Icon(Icons.delete)),
           IconButton(
@@ -34,6 +38,14 @@ class AssigmentBinScreen extends StatelessWidget {
                 //Navigator.pushReplacementNamed(context, 'login');
 
                 //Aqui va a ir el consumo de las apis de SIPE
+                _showDialogInsertBines(
+                  context,
+                  listaGuiasAsignadas,
+                  listaBinGuiaAsignada,
+                );
+
+                /* listaGuiasServices.insertBinGuias(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
               },
               icon: const Icon(Icons.cloud_upload_rounded)),
           IconButton(
@@ -73,6 +85,75 @@ class AssigmentBinScreen extends StatelessWidget {
                   'No se Puede Escanear Bines por que la guìa salio de Planta') */
       ,
     );
+  }
+
+  Future<dynamic> _showDialogInsertBines(
+      BuildContext context,
+      AssiggrListProvider listaGuiasAsignadas,
+      BinGrAsignado listaBinGuiaAsignada) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 5,
+            backgroundColor: Colors.grey.shade200,
+            title: const Text(
+              'Registro Bin en Guìa ',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.primary),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Desea Sincronizar los Bines Escaneados en la Guía # ${listaGuiasAsignadas.guiaSeleccionada.nroguia} ?',
+                  style: const TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ],
+            ),
+            //se agrega para hacer que presione un boton
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Provider.of<DataGuiaBinServices>(context, listen: false)
+                        .insertBinGuias(listaBinGuiaAsignada);
+                    /* listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);  */
+                    /*  Provider.of<BinGrAsignado>(context, listen: false)
+                        .borrarBinesGuia(
+                            listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                    listaBinGuiaAsignada.cargarBinAsignadas(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia);
+
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primary),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Cancelar',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.second),
+                  ))
+            ],
+          );
+        });
   }
 
   Future<dynamic> _showDialogDeleteAllBines(

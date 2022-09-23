@@ -1,6 +1,7 @@
-import 'package:bines_app/providers/assiggr_list_provider.dart';
+import 'package:bines_app/providers/providers.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AssignedCardHeader extends StatelessWidget {
   const AssignedCardHeader({Key? key, required this.listaGuiasAsignadas})
@@ -9,6 +10,8 @@ class AssignedCardHeader extends StatelessWidget {
   final double tamanio = 12.5;
   @override
   Widget build(BuildContext context) {
+    final listaGuiasBinAsignadas =
+        Provider.of<BinGrAsignado>(context, listen: false);
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
@@ -100,7 +103,8 @@ class AssignedCardHeader extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Text(
-                    listaGuiasAsignadas.guiaSeleccionada.cant.toString(),
+                    /* listaGuiasAsignadas.guiaSeleccionada.cant.toString(), */
+                    listaGuiasBinAsignadas.cantescaneados.toString(),
                     style: const TextStyle(
                         fontSize: 20,
                         color: AppTheme.upload,
