@@ -5,34 +5,6 @@ const sql = require('mssql/msnodesqlv8');
 const app = express();
 
 
-/*Funciones ue se conectan a los SP de SQL*/
-/* let datosConsulta = async(query) => {
-    try {
-        let pool = await sql.connect(config);
-        let clientes = await pool.request().query(query);
-        
-        return clientes.recordsets;
-        
-    } catch (error) {
-        console.log(error);
-    }
-} */
-/* let datosConsultaSp = async(query, id) => {
-    try {
-        let pool = await sql.connect(config);
-        let clientes = await pool.request()
-            .input('codigo', sql.Char, id)
-            .execute('Sp_Consulta');
-      
-        return clientes.recordsets;
-       
-    } catch (error) {
-        console.log(error);
-    }
-
-
-} */
-
 /*Conexion al SP para que devuelva datos del Combo de Operaciones */
 let datosComboOperacion = async(query, opcion,valor_operacion) => {
     try {
@@ -73,29 +45,34 @@ let datosCurva = async(query, opcion,anio,camaronera,piscina,ciclo,operacion) =>
 
 }
 
-/*Rutas en las cuales se invocan los SP y devuelven las API*/
-/* app.get('/consulta', function(req, respuesta) {
-    let query = 'select top 10 * from rhempl';
-    datosConsulta(query).then(datosclientes => {
-        respuesta.json({
-            ok: true,
-            datosclientes: datosclientes[0]
-        });
+/*Conexion al Sp para que devuleva los datos de los Usuarios */
+let datosUsr = async(query, usuario,clave) => {
+    try {
+        let pool = await sql.connect(config);
+        let clientes = await pool.request()
+            .input('usuario', sql.Char, usuario)
+            .input('clave',sql.Char,clave)
+            .execute(query);
+        /* console.log(clientes); */
+        return clientes.recordsets;
+        /* return clientes; */
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*Ruta para Obtener Datos del combo de Anios*/
+app.get('/validausr', function(req, respuesta) {
+    let usuario = req.query.usuario
+    let clave = req.query.clave
+    
+    let query = 'Sp_Valida_Usr_Curva_Ideal';
+    
+    datosUsr(query, usuario,clave).then(datosusr => {
+        respuesta.json(datosusr[0]);
     })
 
-}) */
-
-/* app.get('/consultaid', function(req, respuesta) {
-    let id = req.query.id;
-
-    let query = 'Sp_Consulta';
-
-    datosConsultaSp(query, id).then(datosclientes => {
-        
-        respuesta.json(datosclientes[0]);
-    })
-
-}) */
+})
 
 
 /*Ruta para Obtener datos del Combo Principal*/
