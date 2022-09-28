@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/screens/screens.dart';
 import 'package:bines_app/services/services.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:bines_app/widgets/widgets.dart';
@@ -13,6 +14,7 @@ class AssigmentBinScreen extends StatelessWidget {
     final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
     final listaBinGuiaAsignada = Provider.of<BinGrAsignado>(context);
     final listaGuiasServices = Provider.of<DataGuiaBinServices>(context);
+    //final listaGuiasServices = Provider.of<DataGuiaBinServices>(context);
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
@@ -44,8 +46,10 @@ class AssigmentBinScreen extends StatelessWidget {
                   listaBinGuiaAsignada,
                 );
 
-                /* listaGuiasServices.insertBinGuias(
-                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                listaBinGuiaAsignada.cargarBinAsignadas(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia);
+                listaGuiasServices.cargarBinAsignadasServ(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia);
               },
               icon: const Icon(Icons.cloud_upload_rounded)),
           IconButton(
@@ -124,12 +128,13 @@ class AssigmentBinScreen extends StatelessWidget {
                   onPressed: () {
                     Provider.of<DataGuiaBinServices>(context, listen: false)
                         .insertBinGuias(listaBinGuiaAsignada);
-                    /* listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);  */
-                    /*  Provider.of<BinGrAsignado>(context, listen: false)
-                        .borrarBinesGuia(
-                            listaGuiasAsignadas.guiaSeleccionada.nroguia); */
-                    listaBinGuiaAsignada.cargarBinAsignadas(
-                        listaGuiasAsignadas.guiaSeleccionada.nroguia);
+                    /*  if (listaGuiasServices.isLoading) {
+                      const LoadingScreen();
+                    } */
+                    /* listaBinGuiaAsignada.cargarBinAsignadas(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                    /* listaGuiasServices.cargarBinAsignadasServ(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
 
                     Navigator.pop(context);
                   },

@@ -96,7 +96,20 @@ class DBProvider {
   }
 
   //----------------------------------
-  //Bloque de Registro de la tabla que alamcena los registros de las guias
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actSincGr(String nroguia, int activo, int sincronizado) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    //'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT) ',
+    final actualizado = await db.update(
+        'Assiggr', {'sincronizado': sincronizado, 'activo': activo},
+        where: 'nroguia = ?', whereArgs: [nroguia]);
+    return sincronizado;
+  }
+
+  //----------------------------------
+  //Bloque de Registro de la tabla que alamcena los registros de las guias con los Bines
   //----------------------------------
   //----------------------------------
   //Registro de Guias de Pesca con los Bines Asignados
@@ -135,6 +148,19 @@ class DBProvider {
     final actualizado = await db.update('Assiggr', {'cant': bines},
         where: 'nroguia = ?', whereArgs: [nroguia]);
     return bines;
+  }
+
+  //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actSincGrBines(
+      String nroguia, int activo, int sincronizado, int nrobin) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update('BinesGrAsig',
+        {'sincronizado': sincronizado, 'activo': activo, 'nrobin': nrobin},
+        where: 'nroguia = ? and nrobin = ? ', whereArgs: [nroguia, nrobin]);
+    return actualizado;
   }
 
   //----------------------------------

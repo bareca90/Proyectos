@@ -1,3 +1,4 @@
+export 'package:bines_app/screens/loading_screen.dart';
 export 'package:bines_app/screens/assignment_bin_screen.dart';
 export 'package:bines_app/screens/exit_plant_list_screen.dart';
 export 'package:bines_app/screens/assignment_bin_screen.dart';

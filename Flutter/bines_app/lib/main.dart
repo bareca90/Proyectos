@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
         //'product': (_) => const ProductScreen(),
       },
       theme: AppTheme.lighthTheme,
+
       /* theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.grey[300],
           appBarTheme: const AppBarTheme(elevation: 0, color: Colors.indigo),
