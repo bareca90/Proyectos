@@ -363,7 +363,7 @@ app.post('/datatermination', function(req, respuesta) {
  *              vacadsf:
  *                  type : string
  *                  description : Fecha de la Vacacion Tomada
- *              dias:
+ *              dias: 
  *                  type: int
  *                  description : Dias de Vacaciones Tomadas
  *              MuleSoft_Id:
@@ -372,6 +372,47 @@ app.post('/datatermination', function(req, respuesta) {
  *              Fecha_WD:
  *                  type: string
  *                  description: Fecha de Ejecucion WorkDay
+ *              TIME_OFFS:
+ *                  type: object
+ *                  required: true
+ *                  properties: 
+ *                      ID_TIME_OFF: 
+ *                          type:   string
+ *                          description: Id Time Off
+ *                          required: true
+ *                      NOMBRE_TIME_OFF:
+ *                          type: string
+ *                          description: Nombre Time Off
+ *                          required: true
+ *                      TIPO_TIME_OFF:
+ *                          type: string
+ *                          description: Tipo Time Off
+ *                          required: true
+ *                      UNIDAD_DE_MEDIDA:
+ *                          type: string
+ *                          description: Unidad de Medida Time Off
+ *                          required: true
+ *                      FECHA_EFECTIVA: 
+ *                          type: string
+ *                          description: Fecha Efectiva
+ *                          required: true
+ *                      TIME_OFF_ENTRIES:
+ *                          type: object
+ *                          required: true
+ *                          properties: 
+ *                              CANTIDAD: 
+ *                                  type: string
+ *                                  description: Cantidad  
+ *                                  required: true
+ *                              INICIO:
+ *                                  type: string
+ *                                  description: Inicio del Time Off
+ *                                  required: true
+ *                              FIN:
+ *                                  type: string
+ *                                  description: Fin del Time Off
+ *                                  required: true
+ *                              
  *          required:
  *              -emplcod_wd
  *              -CnctFecReg
@@ -472,6 +513,17 @@ app.post('/datatermination', function(req, respuesta) {
  *              dias:  1
  *              MuleSoft_Id: Wdfttt122633
  *              Fecha_WD:   2022-06-08
+ *              TIME_OFFS:
+ *                  ID_TIME_OFF: Permiso_Latancia
+ *                  NOMBRE_TIME_OFF: Permiso_Lactancia
+ *                  TIPO_TIME_OFF: TOT_ESP_Horas lactancia
+ *                  UNIDAD_DE_MEDIDA: DAYS	    
+ *                  FECHA_EFECTIVA: 2022-09-26T00:00
+ *                  TIME_OFF_ENTRIES:
+ *                      CANTIDAD: 1
+ *                      INICIO: 12:00
+ *                      FIN: 13:00
+ *                   
  */
 /***
  * @swagger

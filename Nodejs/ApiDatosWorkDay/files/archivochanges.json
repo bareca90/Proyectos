@@ -28,7 +28,7 @@
         "emplTipLic"		: "ECU_CI"		,
         "rhcnct_grpgcod"	: "PG_ECU_1-QUI"		,
         "rhcnct1_bonocod"	: "MENSUAL"	,
-        "rhcnct1_cnctvbnwd"	: 1200,
+        "rhcnct1_cnctvbnwd"	: 1500,
         "rhCnct7_onetcodwd"	: "OTROS INCENTIVOS",
         "rhCnct7_onetdol"	: 1200.32	,	
         "rhcnct_tctacod"	: "CUENTA"	,
@@ -48,7 +48,30 @@
         "vacadsf"			: "2022-06-01"	,
         "dias"				: 1,
         "MuleSoft_Id"		:"Wdfttt122633",
-        "Fecha_WD"			: "2022-06-08" 
+        "Fecha_WD"			: "2022-06-08",
+        "TIME_OFFS": 
+		[
+			{
+				"ID_TIME_OFF"		: "Permiso_Lactancia",
+				"NOMBRE_TIME_OFF"	: "Permiso_Lactancia",
+				"TIPO_TIME_OFF"		: "TOT_ESP_Horas lactancia",
+				"UNIDAD_DE_MEDIDA"	: "DAYS",
+				"FECHA_EFECTIVA"	: "2022-09-26T00:00:00.000-07:00",
+				"TIME_OFF_ENTRIES"	:	[
+											{
+												"CANTIDAD": "isDeleted",
+												"INICIO": "12:00:00",
+												"FIN": "13:00:00"
+											},
+											{
+												"CANTIDAD": "3",
+												"INICIO": "12:00:00",
+												"FIN": "15:00:00"
+											}
+										]
+			}
+		]
+        
     },
     {
         "emplcod_wd" 		:	"WRKeCU00006"	,
@@ -99,7 +122,29 @@
         "vacadsf"			: "2022-06-01"	,
         "dias"				: 1,
         "MuleSoft_Id"		:"Wdfttt122633",
-        "Fecha_WD"			: "2022-06-08" 
+        "Fecha_WD"			: "2022-06-08" ,
+        "TIME_OFFS": 
+		[
+			{
+				"ID_TIME_OFF"		: "Permiso_Lactancia",
+				"NOMBRE_TIME_OFF"	: "Permiso_Lactancia",
+				"TIPO_TIME_OFF"		: "TOT_ESP_Horas lactancia",
+				"UNIDAD_DE_MEDIDA"	: "DAYS",
+				"FECHA_EFECTIVA"	: "2022-09-26T00:00:00.000-07:00",
+				"TIME_OFF_ENTRIES"	:	[
+											{
+												"CANTIDAD": "isDeleted",
+												"INICIO": "12:00:00",
+												"FIN": "13:00:00"
+											},
+											{
+												"CANTIDAD": "3",
+												"INICIO": "12:00:00",
+												"FIN": "15:00:00"
+											}
+										]
+			}
+		]
     },
     {
         "emplcod_wd" 		:	"WRKeCU00009"	,
@@ -130,7 +175,7 @@
         "emplTipLic"		: "ECU_CI"		,
         "rhcnct_grpgcod"	: "PG_ECU_1_QUI"		,
         "rhcnct1_bonocod"	: "MENSUAL"	,
-        "rhcnct1_cnctvbnwd"	: 1600,
+        "rhcnct1_cnctvbnwd"	: 1500,
         "rhCnct7_onetcodwd"	: "OTROS INCENTIVOS",
         "rhCnct7_onetdol"	: 1200.32	,	
         "rhcnct_tctacod"	: "CUENTA"	,
@@ -150,6 +195,28 @@
         "vacadsf"			: "2022-06-01"	,
         "dias"				: 1,
         "MuleSoft_Id"		:"Wdfttt122633",
-        "Fecha_WD"			: "2022-06-08" 
+        "Fecha_WD"			: "2022-06-08" ,
+        "TIME_OFFS": 
+		[
+			{
+				"ID_TIME_OFF"		: "Permiso_Lactancia",
+				"NOMBRE_TIME_OFF"	: "Permiso_Lactancia",
+				"TIPO_TIME_OFF"		: "TOT_ESP_Horas lactancia",
+				"UNIDAD_DE_MEDIDA"	: "DAYS",
+				"FECHA_EFECTIVA"	: "2022-09-26T00:00:00.000-07:00",
+				"TIME_OFF_ENTRIES"	:	[
+											{
+												"CANTIDAD": "isDeleted",
+												"INICIO": "12:00:00",
+												"FIN": "13:00:00"
+											},
+											{
+												"CANTIDAD": "3",
+												"INICIO": "12:00:00",
+												"FIN": "15:00:00"
+											}
+										]
+			}
+		]
     }
 ]
