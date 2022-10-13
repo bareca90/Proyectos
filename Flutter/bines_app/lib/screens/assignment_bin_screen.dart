@@ -8,13 +8,11 @@ import 'package:provider/provider.dart';
 
 class AssigmentBinScreen extends StatelessWidget {
   const AssigmentBinScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
     final listaBinGuiaAsignada = Provider.of<BinGrAsignado>(context);
-    final listaGuiasServices = Provider.of<DataGuiaBinServices>(context);
-    //final listaGuiasServices = Provider.of<DataGuiaBinServices>(context);
+
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
@@ -45,11 +43,16 @@ class AssigmentBinScreen extends StatelessWidget {
                   listaGuiasAsignadas,
                   listaBinGuiaAsignada,
                 );
-
                 listaBinGuiaAsignada.cargarBinAsignadas(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia);
-                listaGuiasServices.cargarBinAsignadasServ(
+                listaBinGuiaAsignada.catidadBinesEscaneados(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia);
+                /* listaGuiasServices.cargarBinAsignadasServ(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                /* listaBinGuiaAsignada.cargarBinAsignadas(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                /* listaGuiasServices.cargarBinAsignadasServ(
+                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
               },
               icon: const Icon(Icons.cloud_upload_rounded)),
           IconButton(
@@ -75,7 +78,8 @@ class AssigmentBinScreen extends StatelessWidget {
           ),
           /* AssignedListBin(
                 nroguia: listaGuiasAsignadas.guiaSeleccionada.nroguia) */
-          _listaBinesGuiasAsignados(listaBinGuiaAsignada, context)
+          /* _listaBinesGuiasAsignados(listaBinGuiaAsignada, context) */
+          AssignedListBin(listaGuiasBinAsignadas: listaBinGuiaAsignada)
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
@@ -95,6 +99,8 @@ class AssigmentBinScreen extends StatelessWidget {
       BuildContext context,
       AssiggrListProvider listaGuiasAsignadas,
       BinGrAsignado listaBinGuiaAsignada) {
+    /* final listaGuiasServices =
+        Provider.of<DataGuiaBinServices>(context, listen: false); */
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -128,9 +134,13 @@ class AssigmentBinScreen extends StatelessWidget {
                   onPressed: () {
                     Provider.of<DataGuiaBinServices>(context, listen: false)
                         .insertBinGuias(listaBinGuiaAsignada);
-                    /*  if (listaGuiasServices.isLoading) {
+                    /*  listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);
+                    if (listaGuiasServices.isLoading) {
                       const LoadingScreen();
-                    } */
+                    }
+                    listaBinGuiaAsignada.cargarBinAsignadas(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+
                     /* listaBinGuiaAsignada.cargarBinAsignadas(
                         listaGuiasAsignadas.guiaSeleccionada.nroguia); */
                     /* listaGuiasServices.cargarBinAsignadasServ(

@@ -1,60 +1,65 @@
 // To parse this JSON data, do
 //
-//     final binesGuiaAssigned = binesGuiaAssignedFromJson(jsonString);
+//     final registeredGuias = registeredGuiasFromJson(jsonString);
 
 import 'dart:convert';
 
-BinesGuiaAssigned binesGuiaAssignedFromJson(String str) =>
-    BinesGuiaAssigned.fromJson(json.decode(str));
+RegisteredGuias registeredGuiasFromJson(String str) =>
+    RegisteredGuias.fromJson(json.decode(str));
 
-String binesGuiaAssignedToJson(BinesGuiaAssigned data) =>
+String registeredGuiasToJson(RegisteredGuias data) =>
     json.encode(data.toJson());
 
-class BinesGuiaAssigned {
-  BinesGuiaAssigned({
+class RegisteredGuias {
+  RegisteredGuias({
     required this.tipoproceso,
     required this.nroguia,
+    required this.fechaguia,
     required this.kg,
     required this.piscina,
-    required this.fechaguia,
     required this.cantescaneada,
-    required this.nrobin,
-    required this.fechahoraesc,
+    required this.activo,
     required this.sincronizado,
   });
 
   String tipoproceso;
   String nroguia;
+  String fechaguia;
   double kg;
   String piscina;
-  String fechaguia;
   int cantescaneada;
-  int nrobin;
-  String fechahoraesc;
+  int activo;
   int sincronizado;
 
-  factory BinesGuiaAssigned.fromJson(Map<String, dynamic> json) =>
-      BinesGuiaAssigned(
+  factory RegisteredGuias.fromJson(Map<String, dynamic> json) =>
+      RegisteredGuias(
         tipoproceso: json["tipoproceso"],
         nroguia: json["nroguia"],
+        fechaguia: json["fechaguia"],
         kg: json["kg"].toDouble(),
         piscina: json["piscina"],
-        fechaguia: json["fechaguia"],
         cantescaneada: json["cantescaneada"],
-        nrobin: json["nrobin"],
-        fechahoraesc: json["fechahoraesc"],
+        activo: json["activo"],
         sincronizado: json["sincronizado"],
       );
 
   Map<String, dynamic> toJson() => {
         "tipoproceso": tipoproceso,
         "nroguia": nroguia,
+        "fechaguia": fechaguia,
         "kg": kg,
         "piscina": piscina,
-        "fechaguia": fechaguia,
         "cantescaneada": cantescaneada,
-        "nrobin": nrobin,
-        "fechahoraesc": fechahoraesc,
+        "activo": activo,
         "sincronizado": sincronizado,
       };
+  RegisteredGuias copy() => RegisteredGuias(
+      tipoproceso: tipoproceso,
+      nroguia: nroguia,
+      fechaguia: fechaguia,
+      kg: kg,
+      piscina: piscina,
+      cantescaneada: cantescaneada,
+      activo: activo,
+      sincronizado: sincronizado);
 }

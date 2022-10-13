@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:bines_app/providers/providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:bines_app/models/models.dart';
 
 class DataGuiaBinServices extends ChangeNotifier {
   List<BinesGrAsigModel> binAsignadosGuias = [];
@@ -12,11 +13,8 @@ class DataGuiaBinServices extends ChangeNotifier {
   DataGuiaBinServices();
 
   //listaBinGuiaAsignada.cargarBinAsignadas(nroguia);
-  Future<String> insertBinGuias(BinGrAsignado listaBinGuiaAsignada) async {
-    //final listaBinGuiaAsignada = BinGrAsignado().cargarBinAsignadas(nroguia);
-    /* final listaBinGuiaAsignada =
-        await DBProvider.db.consultaBinAsignadas(nroguia); */
-
+  Future<List<BinesGrAsigModel>> insertBinGuias(
+      BinGrAsignado listaBinGuiaAsignada) async {
     //TODO : Validar que exista conexion con el api
     const String opcion = 'RBG'; //Registro Bin GUia
     for (int index = 0;
@@ -27,6 +25,7 @@ class DataGuiaBinServices extends ChangeNotifier {
       final String nroguia = listaBinGuiaAsignada.binAsignados[index].nroguia;
       final int sincronizo =
           listaBinGuiaAsignada.binAsignados[index].sincronizado;
+
       if (sincronizo == 0) {
         //si fue sincronizado no lo considero
         final response = await http.post(
@@ -44,9 +43,10 @@ class DataGuiaBinServices extends ChangeNotifier {
         final List<dynamic> decodedResp = json.decode(response.body);
         final dynamic cod = decodedResp[0]['codmsg'];
         if (cod == 200) {
-          final actualizado =
-              await DBProvider.db.actSincGrBines(nroguia, 0, 1, nrobin);
-          print('Cod Ok');
+          final binesAct = await BinGrAsignado()
+              .updateBinesSincronizados(nroguia, 0, 1, nrobin);
+          print('Realizo el Error');
+          notifyListeners();
         } else {
           print('Cod Error ');
         }
@@ -55,13 +55,13 @@ class DataGuiaBinServices extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
-    return opcion;
+    return binAsignadosGuias;
   }
 
-  cargarBinAsignadasServ(String nroguia) async {
+  /* cargarBinAsignadasServ(String nroguia) async {
     final binAsignadosGuias = await DBProvider.db.consultaBinAsignadas(nroguia);
     this.binAsignadosGuias = [...?binAsignadosGuias];
     /* catidadBinesEscaneados(nroguia); */
     notifyListeners();
-  }
+  } */
 }

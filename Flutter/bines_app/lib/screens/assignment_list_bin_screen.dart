@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/screens/search_guias_delegate.dart';
 import 'package:bines_app/services/services.dart';
 import 'package:bines_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,14 @@ class AssigmentScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Bin - Guìa'),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+            IconButton(
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: SearchGuiasDelegate(
+                          listaGuiasAsignadas: listaGuiasAsignadas));
+                },
+                icon: const Icon(Icons.search))
           ],
         ),
         body: ListView.builder(

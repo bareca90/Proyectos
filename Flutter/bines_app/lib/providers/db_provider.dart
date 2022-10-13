@@ -14,17 +14,21 @@ class DBProvider {
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
 
-      join(await getDatabasesPath(), 'BinesAppDB1.db'),
+      join(await getDatabasesPath(), 'ControlTiemposDB.db'),
       // When the database is first created, create a table to store dogs.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         db.execute(
           'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT) ',
-          //'CREATE TABLE Scans(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo TEXT, valor TEXT)',
+        );
+        db.execute(
+          'CREATE TABLE GuiasRegistradas(tipoproceso TEXT,nroguia TEXT, fechaguia TEXT, kg REAL,piscina TEXT,cantescaneada INT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia)) ',
+        );
+        db.execute(
+          'CREATE TABLE BinesRegistrados(tipoproceso TEXT,nroguia TEXT,nrobin INT, fechahoraesc TEXT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia,nrobin)) ',
         );
         return db.execute(
           'CREATE TABLE BinesGrAsig(nroguia TEXT,nrobin INT,fechahora TEXT,sincronizado INT,activo INT,PRIMARY KEY (nroguia, nrobin) ) ',
-          //'CREATE TABLE Scans(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tipo TEXT, valor TEXT)',
         );
       },
       // Set the version. This executes the onCreate function and provides a
@@ -62,6 +66,27 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Registro de Guias de Pesca que Vienen desde el API
+  //----------------------------------
+  Future insertGuiasReg(RegisteredGuias registradas) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    //
+    // In this case, replace any previous data.
+    final resp = await db.insert(
+      'GuiasRegistradas',
+      registradas.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    //print('Respuesta de la Insercion $resp');
+
+    return registradas.nroguia;
+  }
+
+  //----------------------------------
   //Consulta de Guìas de Pesca que vinieron desde el API
   //----------------------------------
   // A method that retrieves all the dogs from the dogs table.
@@ -73,6 +98,22 @@ class DBProvider {
 
     return res.isNotEmpty
         ? res.map((e) => AssiggrModel.fromJson(e)).toList()
+        : [];
+  }
+
+  //----------------------------------
+  //Consulta de Guìas de Pesca que vinieron desde el API
+  //----------------------------------
+  // A method that retrieves all the dogs from the dogs table.
+  Future<List<RegisteredGuias>?> consultaGrReg(String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    final res = await db.query('GuiasRegistradas',
+        where: 'tipoproceso = ? ', whereArgs: [tipoproceso]);
+
+    return res.isNotEmpty
+        ? res.map((e) => RegisteredGuias.fromJson(e)).toList()
         : [];
   }
 
@@ -90,6 +131,25 @@ class DBProvider {
       /* where: 'nroguia = ? and sincronizado = 0 ', */
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       /* whereArgs: [nroguia], */
+    );
+
+    return res;
+  }
+
+  //----------------------------------
+  //Eliminacion de las guias q no estan sincronizadas que vinieron desde el API
+  //----------------------------------
+  Future borrarGuiasReg(String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    //TODO : APlicar COndicion para q borre las que no han sido sincronizadas
+    final res = await db.delete(
+      'GuiasRegistradas',
+      // Ensure that the Dog has a matching id.
+      where: 'tipoproceso = ? ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [tipoproceso],
     );
 
     return res;
@@ -209,6 +269,25 @@ class DBProvider {
       'BinesGrAsig',
       // Ensure that the Dog has a matching id.
       where: 'nroguia = ? and sincronizado = 0 ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
+  //Borrar Todas las Guia  Sincronizadas
+  //----------------------------------
+  Future borrarBinesGuiasSinc(String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinesGrAsig',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and sincronizado = 1 ',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [nroguia],
     );

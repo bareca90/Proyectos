@@ -1,3 +1,4 @@
+export 'package:bines_app/widgets/list_search_guias.dart';
 export 'package:bines_app/widgets/snackbarnotifications.dart';
 export 'package:bines_app/widgets/alert.dart';
 export 'package:bines_app/widgets/save_button.dart';
