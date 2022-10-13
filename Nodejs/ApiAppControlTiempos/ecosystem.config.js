@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: "apiworkday",
+    name: "apicontroltimes",
     script: 'servidor.js',
     watch: '.'
   }, ],

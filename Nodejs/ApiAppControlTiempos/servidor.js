@@ -14,8 +14,8 @@ const swaggerSpec = {
     definition : {
         openapi : "3.0.0",
         info : {
-            title : "Work Day API Integration ",
-            description:"Permitira Recibir los Datos enviados por Mulesoft, esto se lo realizarà mediante Post & Get en base a cada una de las necesidades ",
+            title : "Api COntrol Bines ",
+            description:"Permitirò obtener datos de las guìas de remisiòn que se van a pescar el dìa ",
             version : "1.0.0"
         },
         servers: [
