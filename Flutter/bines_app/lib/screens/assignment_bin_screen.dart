@@ -59,6 +59,11 @@ class AssigmentBinScreen extends StatelessWidget {
               onPressed: () {
                 //TODO: Se procdera a Inactivar la guia
 
+                _showDialogProcesaGuia(
+                  context,
+                  listaGuiasAsignadas,
+                  listaBinGuiaAsignada,
+                );
                 //aqui se debe controlar quitar la
                 //authServices.logout();
                 //Navigator.pushReplacementNamed(context, 'login');
@@ -93,6 +98,84 @@ class AssigmentBinScreen extends StatelessWidget {
                   'No se Puede Escanear Bines por que la guìa salio de Planta') */
       ,
     );
+  }
+
+  Future<dynamic> _showDialogProcesaGuia(
+      BuildContext context,
+      AssiggrListProvider listaGuiasAsignadas,
+      BinGrAsignado listaBinGuiaAsignada) {
+    /* final listaGuiasServices =
+        Provider.of<DataGuiaBinServices>(context, listen: false); */
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 5,
+            backgroundColor: Colors.grey.shade200,
+            title: const Text(
+              'Registro Bin en Guìa ',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.primary),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Desea Procesar la Guía # ${listaGuiasAsignadas.guiaSeleccionada.nroguia} ?',
+                  style: const TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+              ],
+            ),
+            //se agrega para hacer que presione un boton
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Provider.of<DataGuiaBinServices>(context, listen: false)
+                        .insertGuiaProcesada(
+                            listaGuiasAsignadas.guiaSeleccionada.nroguia,
+                            'PBG');
+                    /*  listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);
+                    if (listaGuiasServices.isLoading) {
+                      const LoadingScreen();
+                    }
+                    listaBinGuiaAsignada.cargarBinAsignadas(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+
+                    /* listaBinGuiaAsignada.cargarBinAsignadas(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+                    /* listaGuiasServices.cargarBinAsignadasServ(
+                        listaGuiasAsignadas.guiaSeleccionada.nroguia); */
+
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Ok',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primary),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Cancelar',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.second),
+                  ))
+            ],
+          );
+        });
   }
 
   Future<dynamic> _showDialogInsertBines(

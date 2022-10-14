@@ -13,8 +13,7 @@ class DataGuiaBinServices extends ChangeNotifier {
   DataGuiaBinServices();
 
   //listaBinGuiaAsignada.cargarBinAsignadas(nroguia);
-  Future<List<BinesGrAsigModel>> insertBinGuias(
-      BinGrAsignado listaBinGuiaAsignada) async {
+  Future insertBinGuias(BinGrAsignado listaBinGuiaAsignada) async {
     //TODO : Validar que exista conexion con el api
     const String opcion = 'RBG'; //Registro Bin GUia
     for (int index = 0;
@@ -53,6 +52,37 @@ class DataGuiaBinServices extends ChangeNotifier {
       }
       /* print('Datos de la Respuesta ${response.body} '); */
     }
+    isLoading = false;
+    notifyListeners();
+    return binAsignadosGuias;
+  }
+
+  //listaBinGuiaAsignada.cargarBinAsignadas(nroguia);
+  Future insertGuiaProcesada(String nroguia, String opcion) async {
+    //TODO : Validar que exista conexion con el api
+    final response = await http.post(
+        Uri.parse('http://10.20.4.38:8077/api-app-control-time/binesguia'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "opcion": opcion,
+          "nroguia": nroguia,
+          "nrobin": 0,
+          "fechahra": ''
+        }));
+
+    final List<dynamic> decodedResp = json.decode(response.body);
+    final dynamic cod = decodedResp[0]['codmsg'];
+    if (cod == 200) {
+      //TODO Revisar que se produzca
+      final binesAct = await BinGrAsignado().updateEstadoGuia(nroguia, 0);
+      print('Realizo el Ingreso en la Tabla');
+      notifyListeners();
+    } else {
+      print('Cod Error ');
+    }
+
     isLoading = false;
     notifyListeners();
     return binAsignadosGuias;

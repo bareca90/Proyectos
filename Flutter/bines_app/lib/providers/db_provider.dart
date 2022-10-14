@@ -224,6 +224,17 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actGrEstado(String nroguia, int activo) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update('Assiggr', {'activo': activo},
+        where: 'nroguia = ? ', whereArgs: [nroguia]);
+    return actualizado;
+  }
+
+  //----------------------------------
   //Consulta de Guias Asinadas con los bines
   //----------------------------------
   Future<List<BinesGrAsigModel>?> consultaBinAsignadas(String nroguia) async {

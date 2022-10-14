@@ -18,7 +18,9 @@ class AppsState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AssiggrListProvider()),
         ChangeNotifierProvider(create: (_) => BinGrAsignado()),
         ChangeNotifierProvider(create: (_) => DataGuiasDayServices()),
-        ChangeNotifierProvider(create: (_) => DataGuiaBinServices())
+        ChangeNotifierProvider(create: (_) => DataGuiaBinServices()),
+        ChangeNotifierProvider(create: (_) => RegisteredGuiasProvider()),
+        ChangeNotifierProvider(create: (_) => DataGuiasRegServices()),
       ],
       child: const MyApp(),
     );
@@ -35,11 +37,13 @@ class MyApp extends StatelessWidget {
       title: 'Grupo NP BinesApp',
       initialRoute: 'login',
       routes: {
-        'login': (_) => const LoginScreen(),
-        'register': (_) => const RegisterScreen(),
-        'home': (_) => const HomeScreen(),
-        'registerbin': (_) => const AssigmentScreen(),
-        'exitplant': (_) => const ExitPlantListScreen(),
+        'login': (_) => const LoginScreen(), //Pantalla de Logueo
+        'register': (_) => const RegisterScreen(), //Registro de Nuevo Uuario
+        'home': (_) => const HomeScreen(), //Pagina Principal lista de Opciones
+        'registerbin': (_) =>
+            const AssigmentScreen(), //Registro de Bines Paso 1
+        'exitplant': (_) =>
+            const ExitPlantListScreen(), //Lista de Guias -  Registro Salida de Planta
         'exitplantscreen': (_) => const ExitPlantScreen(),
         'arrivefarm': (_) => const ArriveFarmScreen(),
         'closebin': (_) => const CloseBinScreen(),
@@ -47,7 +51,8 @@ class MyApp extends StatelessWidget {
         'arriveplant': (_) => const ArrivePlantScreen(),
         'receptionbin': (_) => const ReceptionScreen(),
         'receivebin': (_) => const SupllyHopperScreen(),
-        'asigbin': (_) => const AssigmentBinScreen(),
+        'asigbin': (_) =>
+            const AssigmentBinScreen(), //Listado de Bines Asignados a las guias Paso 1
 
         //'product': (_) => const ProductScreen(),
       },
