@@ -1,7 +1,9 @@
 /* import 'package:bines_app/providers/providers.dart'; */
+import 'package:bines_app/providers/providers.dart';
 import 'package:bines_app/routes/app_routes.dart';
 import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 /* import 'package:provider/provider.dart'; */
 
 class HomeScreen extends StatelessWidget {
@@ -43,6 +45,24 @@ class HomeScreen extends StatelessWidget {
                 builder: (context) => const ListView1Screen());
             Navigator.push(context, route);
             */
+            final listaGuiasServices =
+                Provider.of<ServicesProvider>(context, listen: false);
+            final listadoGR =
+                Provider.of<RegisteredGuiasProvider>(context, listen: false);
+            switch (index) {
+              case 0:
+
+              case 1:
+                listaGuiasServices
+                    .llamarApiGuiasRegistradas('OGCE'); //Obtiene Guias Cerradas
+                listadoGR.cargarGrRegistradas('RSP'); //Regitro Salida Planta
+                break;
+              case 2:
+              case 3:
+              case 4:
+              case 5:
+              case 6:
+            }
             Navigator.pushNamed(context, menuOptions[index].route);
           },
           trailing: const Icon(

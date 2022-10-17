@@ -14,7 +14,7 @@ class DBProvider {
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
 
-      join(await getDatabasesPath(), 'ControlTiemposDB.db'),
+      join(await getDatabasesPath(), 'AppBinGuia.db'),
       // When the database is first created, create a table to store dogs.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
@@ -22,10 +22,10 @@ class DBProvider {
           'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT) ',
         );
         db.execute(
-          'CREATE TABLE GuiasRegistradas(tipoproceso TEXT,nroguia TEXT, fechaguia TEXT, kg REAL,piscina TEXT,cantescaneada INT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia)) ',
+          'CREATE TABLE GuiasReg(tipoproceso TEXT,nroguia TEXT, fechaguia TEXT, kg REAL,piscina TEXT,cantescaneada INT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia)) ',
         );
         db.execute(
-          'CREATE TABLE BinesRegistrados(tipoproceso TEXT,nroguia TEXT,nrobin INT, fechahoraesc TEXT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia,nrobin)) ',
+          'CREATE TABLE BinReg(tipoproceso TEXT,nroguia TEXT,nrobin INT, fechahoraesc TEXT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia,nrobin)) ',
         );
         return db.execute(
           'CREATE TABLE BinesGrAsig(nroguia TEXT,nrobin INT,fechahora TEXT,sincronizado INT,activo INT,PRIMARY KEY (nroguia, nrobin) ) ',
@@ -77,13 +77,58 @@ class DBProvider {
     //
     // In this case, replace any previous data.
     final resp = await db.insert(
-      'GuiasRegistradas',
+      'GuiasReg',
       registradas.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    print(resp);
     //print('Respuesta de la Insercion $resp');
 
     return registradas.nroguia;
+  }
+
+  //----------------------------------
+  //Registro de Guias de Pesca que Vienen desde el API
+  //----------------------------------
+  Future insertGuiasRegMan(
+      String tipoproceso,
+      String nroguia,
+      String fechaguia,
+      double kg,
+      String piscina,
+      int cantescaneada,
+      int sincronizado,
+      int activo) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    //
+    // In this case, replace any previous data.
+    final resp = await db.rawInsert(
+        'INSERT INTO GuiasReg(tipoproceso, nroguia,fechaguia,kg,piscina,cantescaneada,activo,sincronizado) VALUES(?, ?,?,?,?,?,?,?)',
+        [
+          tipoproceso,
+          nroguia,
+          fechaguia,
+          kg,
+          piscina,
+          cantescaneada,
+          activo,
+          sincronizado
+        ]);
+
+    /* final resp = await db.insert(
+      'GuiasReg',
+      registradas.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    print(resp); */
+    //print('Respuesta de la Insercion $resp');
+    print('Registros Manuales');
+    print(resp);
+    return nroguia;
   }
 
   //----------------------------------
@@ -109,9 +154,8 @@ class DBProvider {
     // Get a reference to the database.
     final db = await databaseRead;
 
-    final res = await db.query('GuiasRegistradas',
-        where: 'tipoproceso = ? ', whereArgs: [tipoproceso]);
-
+    final res = await db
+        .query('GuiasReg', where: 'tipoproceso = ? ', whereArgs: [tipoproceso]);
     return res.isNotEmpty
         ? res.map((e) => RegisteredGuias.fromJson(e)).toList()
         : [];
@@ -145,7 +189,7 @@ class DBProvider {
 
     //TODO : APlicar COndicion para q borre las que no han sido sincronizadas
     final res = await db.delete(
-      'GuiasRegistradas',
+      'GuiasReg',
       // Ensure that the Dog has a matching id.
       where: 'tipoproceso = ? ',
       // Pass the Dog's id as a whereArg to prevent SQL injection.

@@ -20,7 +20,7 @@ class AppsState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DataGuiasDayServices()),
         ChangeNotifierProvider(create: (_) => DataGuiaBinServices()),
         ChangeNotifierProvider(create: (_) => RegisteredGuiasProvider()),
-        ChangeNotifierProvider(create: (_) => DataGuiasRegServices()),
+        ChangeNotifierProvider(create: (_) => ServicesProvider()),
       ],
       child: const MyApp(),
     );
@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
         'receivebin': (_) => const SupllyHopperScreen(),
         'asigbin': (_) =>
             const AssigmentBinScreen(), //Listado de Bines Asignados a las guias Paso 1
+        'binsalplan': (_) =>
+            const ExitPlantBinGuia(), //Bines Salidos de Planta con Guias
 
         //'product': (_) => const ProductScreen(),
       },

@@ -1,9 +1,10 @@
-import 'package:bines_app/screens/search_guias_delegate.dart';
+export 'package:bines_app/screens/exit_plant_bin_guia.dart';
+export 'package:bines_app/screens/search_guias_delegate.dart';
+export 'package:bines_app/widgets/registered_guias_list.dart';
 
 export 'package:bines_app/screens/loading_screen.dart';
 export 'package:bines_app/screens/assignment_bin_screen.dart';
 export 'package:bines_app/screens/exit_plant_list_screen.dart';
-export 'package:bines_app/screens/assignment_bin_screen.dart';
 export 'package:bines_app/screens/register_screen.dart';
 export 'package:bines_app/screens/supply_hopper_screen.dart';
 export 'package:bines_app/screens/reception_screen.dart';

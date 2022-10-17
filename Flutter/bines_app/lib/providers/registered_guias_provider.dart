@@ -6,7 +6,7 @@ class RegisteredGuiasProvider extends ChangeNotifier {
   List<RegisteredGuias> registrados = [];
   /* List<BinesGrAsigModel> binAsignados = []; */
 
-  late RegisteredGuias guiaSeleccionada;
+  late RegisteredGuias guiaSeleccionadaReg;
   Future<RegisteredGuias> nuevaGuiaRegistrada(
       String tipoproceso,
       String nroguia,
@@ -33,7 +33,6 @@ class RegisteredGuiasProvider extends ChangeNotifier {
 
   cargarGrRegistradas(String tipoproceso) async {
     final registrados = await DBProvider.db.consultaGrReg(tipoproceso);
-    /* print(asignados); */
     this.registrados = [...?registrados];
     notifyListeners();
   }
@@ -41,5 +40,21 @@ class RegisteredGuiasProvider extends ChangeNotifier {
   borrarGuiasRegistradas(String tipoproceso) async {
     await DBProvider.db.borrarGuiasReg(tipoproceso);
     cargarGrRegistradas(tipoproceso);
+  }
+
+  insertDatManual(
+      String tipoproceso,
+      String noguia,
+      String fechaguia,
+      double kg,
+      String piscina,
+      int cantescaneada,
+      int sincronizado,
+      int activo) {
+    final respuesta = DBProvider.db.insertGuiasRegMan(tipoproceso, noguia,
+        fechaguia, kg, piscina, cantescaneada, sincronizado, activo);
+    cargarGrRegistradas(tipoproceso);
+    notifyListeners();
+    return noguia;
   }
 }

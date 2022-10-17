@@ -44,7 +44,7 @@ class DataGuiaBinServices extends ChangeNotifier {
         if (cod == 200) {
           final binesAct = await BinGrAsignado()
               .updateBinesSincronizados(nroguia, 0, 1, nrobin);
-          print('Realizo el Error');
+
           notifyListeners();
         } else {
           print('Cod Error ');
