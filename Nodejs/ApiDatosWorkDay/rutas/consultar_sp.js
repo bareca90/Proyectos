@@ -14,9 +14,11 @@ const app = express();
  *          type: object
  *          properties:
  *              emplcod_wd:
+ *                  required: true
  *                  type: string
  *                  description: Codigo Empleado Work Day
  *              CnctFecReg:
+ *                  required: true
  *                  type : string
  *                  description: Fecha de Registro del Empleado
  *              EmplValSue:
@@ -29,6 +31,7 @@ const app = express();
  *                  type: string
  *                  description: Estado del Contrato 
  *              emplfecant:
+ *                  required: true
  *                  type: string
  *                  description: Fecha del contrato
  *              cnctclscnt:
@@ -41,18 +44,21 @@ const app = express();
  *                  type: string
  *                  description: Org id de WorkDay
  *              emplfecing:
+ *                  required: true
  *                  type: string
  *                  description: Fecha Ingreso del empleado
  *              empldir:
  *                  type: string
  *                  description: Direccion Domicilio del empleado
  *              emplnompri:
+ *                  required: true
  *                  type: string
  *                  description: Primer Nombre del Empleado
  *              emplnomseg:
  *                  type: string
  *                  description: Segundo Nombre del Empleado
  *              emplapepat:
+ *                  required: true
  *                  type: string
  *                  description: Apellido Paterno del empleado
  *              emplapemat:
@@ -70,26 +76,6 @@ const app = express();
  *              Fecha_WD:
  *                  type: string
  *                  description: Fecha de Ejecucion WorkDay
- *          required:
- *              -emplcod_wd
- *              -CnctFecReg
- *              -EmplValSue
- *              -tconcod
- *              -CnctCodSta
- *              -emplfecant
- *              -cnctclscnt
- *              -job_cod
- *              -org_id
- *              -emplfecing
- *              -empldir
- *              -emplnompri
- *              -emplnomseg
- *              -emplapepat
- *              -emplapemat
- *              -emplfecnac
- *              -EmplNumCed
- *              -MuleSoft_Id
- *              -Fecha_WD
  *          example:
  *              emplcod_wd:	WRKeCU00004
  *              CnctFecReg:	2018-04-01
@@ -148,12 +134,15 @@ app.post('/dataemployees', function(req, respuesta) {
  *          type: object
  *          properties:
  *              emplcod_wd:
+ *                  required: true
  *                  type: string
  *                  description: Codigo Empleado Work Day
  *              CnctFecReg:
+ *                  required: true
  *                  type : string
  *                  description: Fecha de Registro del Empleado
  *              mobjcod:
+ *                  required: true
  *                  type: string
  *                  description: Motivo de baja del empleado
  *              CnctCodSta:
@@ -168,14 +157,6 @@ app.post('/dataemployees', function(req, respuesta) {
  *              Fecha_WD:
  *                  type: string
  *                  description: Fecha de Ejecucion WorkDay
- *          required:
- *              -emplcod_wd
- *              -CnctFecReg
- *              -mobjcod
- *              -CnctCodSta
- *              -CnctFecLiq
- *              -MuleSoft_Id
- *              -Fecha_WD
  *          example:
  *              emplcod_wd:	WRKeCU00004
  *              CnctFecReg:	2018-04-01
@@ -226,9 +207,11 @@ app.post('/datatermination', function(req, respuesta) {
  *          type: object
  *          properties:
  *              emplcod_wd:
+ *                  required: true
  *                  type: string
  *                  description: Codigo Empleado Work Day
  *              CnctFecReg:
+ *                  required: true
  *                  type : string
  *                  description: Fecha de Registro del Empleado
  *              EmplValSue:
@@ -259,12 +242,14 @@ app.post('/datatermination', function(req, respuesta) {
  *                  type: string
  *                  description: Direccion Domicilio del empleado
  *              emplnompri:
+ *                  required: true
  *                  type: string
  *                  description: Primer Nombre del Empleado
  *              emplnomseg:
  *                  type: string
  *                  description: Segundo Nombre del Empleado
  *              emplapepat:
+ *                  required: true
  *                  type: string
  *                  description: Apellido Paterno del empleado
  *              emplapemat:
@@ -374,7 +359,6 @@ app.post('/datatermination', function(req, respuesta) {
  *                  description: Fecha de Ejecucion WorkDay
  *              TIME_OFFS:
  *                  type: object
- *                  required: true
  *                  properties: 
  *                      ID_TIME_OFF: 
  *                          type:   string
@@ -391,14 +375,11 @@ app.post('/datatermination', function(req, respuesta) {
  *                      UNIDAD_DE_MEDIDA:
  *                          type: string
  *                          description: Unidad de Medida Time Off
- *                          required: true
  *                      FECHA_EFECTIVA: 
  *                          type: string
  *                          description: Fecha Efectiva
- *                          required: true
  *                      TIME_OFF_ENTRIES:
  *                          type: object
- *                          required: true
  *                          properties: 
  *                              CANTIDAD: 
  *                                  type: string
@@ -411,58 +392,7 @@ app.post('/datatermination', function(req, respuesta) {
  *                              FIN:
  *                                  type: string
  *                                  description: Fin del Time Off
- *                                  required: true
  *                              
- *          required:
- *              -emplcod_wd
- *              -CnctFecReg
- *              -EmplValSue
- *              -tconcod
- *              -CnctCodSta
- *              -emplfecant
- *              -cnctclscnt
- *              -job_cod
- *              -org_id
- *              -emplfecing
- *              -empldir
- *              -emplnompri
- *              -emplnomseg
- *              -emplapepat
- *              -emplapemat
- *              -emplfecnac
- *              -EmplNumCed
- *              -mobjcod
- *              -CnctFecLiq
- *              -cnctno
- *              -emplconcon
- *              -Emplfecifp
- *              -emplcodcco
- *              -cnctfeccds
- *              -emplsuenew
- *              -emplTipLic
- *              -rhcnct_grpgcod
- *              -rhcnct1_bonocod
- *              -rhcnct1_cnctvbnwd
- *              -rhCnct7_onetcodwd
- *              -rhCnct7_onetdol
- *              -rhcnct_tctacod
- *              -rhcnct_TpagCod
- *              -rhcnct_banccod
- *              -rhcnct_EmplNumCta
- *              -rhempl_EmplDesNac
- *              -rhempl_ecivcod
- *              -rhempl_sexocod
- *              -rhempl_emplcnsxds
- *              -rhempl_emplgrdmrl
- *              -rhcnct_cnctfinent
- *              -PermFini
- *              -PermFfin
- *              -PermSta01
- *              -vacastawd
- *              -vacadsf
- *              -dias
- *              -MuleSoft_Id
- *              -Fecha_WD
  *          example:
  *              emplcod_wd:	WRKeCU00004
  *              CnctFecReg:	2018-04-01
