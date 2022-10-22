@@ -10,8 +10,8 @@ class ExitPlantBinGuia extends StatelessWidget {
   const ExitPlantBinGuia({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final listaGuiasAsignadas = Provider.of<AssiggrListProvider>(context);
-    final listaBinGuiaAsignada = Provider.of<BinGrAsignado>(context);
+    final listaGuiasReg = Provider.of<RegisteredGuiasProvider>(context);
+    final listaBinGuiaReg = Provider.of<RegisteredBinGuiasProvider>(context);
 
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
@@ -21,18 +21,16 @@ class ExitPlantBinGuia extends StatelessWidget {
         title: const Text('Bin Salida Planta'),
         //agregar boton para logout
         actions: [
-          IconButton(
+          /* IconButton(
               onPressed: () {
                 _showDialogDeleteAllBines(
                     context, listaGuiasAsignadas, listaBinGuiaAsignada);
                 listaBinGuiaAsignada.catidadBinesEscaneados(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia);
               },
-              icon: const Icon(Icons.delete)),
+              icon: const Icon(Icons.delete)), */
           IconButton(
               onPressed: () {
-                //TODO: Se procdera a ejecutar el WebServices para subir los escaneados
-
                 //aqui se debe controlar quitar la
                 //authServices.logout();
                 //Navigator.pushReplacementNamed(context, 'login');
@@ -40,37 +38,31 @@ class ExitPlantBinGuia extends StatelessWidget {
                 //Aqui va a ir el consumo de las apis de SIPE
                 _showDialogInsertBines(
                   context,
-                  listaGuiasAsignadas,
-                  listaBinGuiaAsignada,
+                  listaGuiasReg,
+                  listaBinGuiaReg,
                 );
-                listaBinGuiaAsignada.cargarBinAsignadas(
+                /*  listaBinGuiaAsignada.cargarBinAsignadas(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia);
                 listaBinGuiaAsignada.catidadBinesEscaneados(
-                    listaGuiasAsignadas.guiaSeleccionada.nroguia);
-                /* listaGuiasServices.cargarBinAsignadasServ(
-                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
-                /* listaBinGuiaAsignada.cargarBinAsignadas(
-                    listaGuiasAsignadas.guiaSeleccionada.nroguia); */
-                /* listaGuiasServices.cargarBinAsignadasServ(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia); */
               },
               icon: const Icon(Icons.cloud_upload_rounded)),
-          IconButton(
+          /*  IconButton(
               onPressed: () {
                 //TODO: Se procdera a Inactivar la guia
 
-                _showDialogProcesaGuia(
+                /*  _showDialogProcesaGuia(
                   context,
                   listaGuiasAsignadas,
                   listaBinGuiaAsignada,
-                );
+                ); */
                 //aqui se debe controlar quitar la
                 //authServices.logout();
                 //Navigator.pushReplacementNamed(context, 'login');
 
                 //Aqui va a ir el consumo de las apis de SIPE
               },
-              icon: const Icon(Icons.lock))
+              icon: const Icon(Icons.lock)) */
         ],
       ),
       body: Column(
@@ -79,24 +71,22 @@ class ExitPlantBinGuia extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             color: AppTheme.primary,
             height: 120,
-            child: AssignedCardHeader(listaGuiasAsignadas: listaGuiasAsignadas),
+            child: RegisteredCardHeader(
+                listaGuiasAsignadas: listaGuiasReg,
+                cantescaneada: listaGuiasReg.guiaSeleccionadaReg.cantescaneada),
           ),
           /* AssignedListBin(
                 nroguia: listaGuiasAsignadas.guiaSeleccionada.nroguia) */
           /* _listaBinesGuiasAsignados(listaBinGuiaAsignada, context) */
-          AssignedListBin(listaGuiasBinAsignadas: listaBinGuiaAsignada)
+
+          //Este Vale
+          RegisteredListBin(listaGuiasBinAsignadas: listaBinGuiaReg)
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
-      floatingActionButton: listaGuiasAsignadas.guiaSeleccionada.activo == 1
+      /* floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      floatingActionButton: listaGuiasReg.guiaSeleccionadaReg.activo == 1
           ? ScanButtonQR(listaGuiasAsignadas: listaGuiasAsignadas)
-          : Container() /* Text(SnackBarNotifications.showSnackBar(
-              'Esta Guìa ya Salìo de Planta ')) */
-      /* const Alert(
-              titulo: 'Registo Bin - Guìa',
-              texto:
-                  'No se Puede Escanear Bines por que la guìa salio de Planta') */
-      ,
+          : Container()  */
     );
   }
 
@@ -180,8 +170,8 @@ class ExitPlantBinGuia extends StatelessWidget {
 
   Future<dynamic> _showDialogInsertBines(
       BuildContext context,
-      AssiggrListProvider listaGuiasAsignadas,
-      BinGrAsignado listaBinGuiaAsignada) {
+      RegisteredGuiasProvider listaGuiasAsignadas,
+      RegisteredBinGuiasProvider listaBinGuiaAsignada) {
     /* final listaGuiasServices =
         Provider.of<DataGuiaBinServices>(context, listen: false); */
     return showDialog(
@@ -192,7 +182,7 @@ class ExitPlantBinGuia extends StatelessWidget {
             elevation: 5,
             backgroundColor: Colors.grey.shade200,
             title: const Text(
-              'Registro Bin en Guìa ',
+              'Bin Salida Planta',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -204,7 +194,7 @@ class ExitPlantBinGuia extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Desea Sincronizar los Bines Escaneados en la Guía # ${listaGuiasAsignadas.guiaSeleccionada.nroguia} ?',
+                  'Desea Sincronizar los Bines Registrados en la Guía # ${listaGuiasAsignadas.guiaSeleccionadaReg.nroguia} ?',
                   style: const TextStyle(
                     fontSize: 17,
                   ),
@@ -215,8 +205,9 @@ class ExitPlantBinGuia extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () {
-                    Provider.of<DataGuiaBinServices>(context, listen: false)
-                        .insertBinGuias(listaBinGuiaAsignada);
+                    Provider.of<RegisteredBinGuiasProvider>(context,
+                            listen: false)
+                        .updateGuiaBinReg(listaBinGuiaAsignada);
                     /*  listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);
                     if (listaGuiasServices.isLoading) {
                       const LoadingScreen();

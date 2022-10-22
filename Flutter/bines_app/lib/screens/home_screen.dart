@@ -52,9 +52,9 @@ class HomeScreen extends StatelessWidget {
             switch (index) {
               case 0:
 
-              case 1:
-                listaGuiasServices
-                    .llamarApiGuiasRegistradas('OGCE'); //Obtiene Guias Cerradas
+              case 1: //Opcion de Registro Salida de Planta
+                listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
+                    'RSP'); //Obtiene Guias Cerradas en base a el parametro que se le envia
                 listadoGR.cargarGrRegistradas('RSP'); //Regitro Salida Planta
                 break;
               case 2:

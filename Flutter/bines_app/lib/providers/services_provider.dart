@@ -6,8 +6,9 @@ import 'package:bines_app/models/models.dart';
 
 class ServicesProvider extends ChangeNotifier {
   final services = DataGuiasRegServices();
-  llamarApiGuiasRegistradas(String tipo) async {
-    final registrados = await services.loadGuiasRegistradas(tipo);
+  llamarApiGuiasRegistradas(String tipo, String opcion) async {
+    print('Datos');
+    final registrados = await services.loadGuiasRegistradas(tipo, opcion);
     notifyListeners();
   }
 }

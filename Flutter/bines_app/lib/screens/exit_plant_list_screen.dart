@@ -55,18 +55,18 @@ class ExitPlantListScreen extends StatelessWidget {
                           /* productsServices.selectedProduct =
                       productsServices.productos[indice].copy();
                   Navigator.pushNamed(context, 'product'); */
-
-                          listadoGR.guiaSeleccionadaReg =
-                              listadoGR.registrados[indice].copy();
+                          final listaBinGuiaReg =
+                              Provider.of<RegisteredBinGuiasProvider>(context,
+                                  listen: false);
 
                           final nroguia = listadoGR.registrados[indice].nroguia;
                           final tipoproceso =
                               listadoGR.registrados[indice].tipoproceso;
+                          listaBinGuiaReg.cargarBinAsignadasReg(
+                              nroguia, tipoproceso);
 
-                          /* final listaBinGuiaAsignada =
-                      Provider.of<BinGrAsignado>(context, listen: false);
-                  listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
-
+                          listadoGR.guiaSeleccionadaReg =
+                              listadoGR.registrados[indice].copy();
                           Navigator.pushNamed(context, 'binsalplan');
                         },
                         child: GuiasListReg(

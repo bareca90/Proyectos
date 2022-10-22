@@ -88,7 +88,7 @@ class DBProvider {
   }
 
   //----------------------------------
-  //Registro de Guias de Pesca que Vienen desde el API
+  //Registro de Guias de Pesca que Vienen desde el API de manera Manual
   //----------------------------------
   Future insertGuiasRegMan(
       String tipoproceso,
@@ -213,6 +213,21 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actSincGrReg(
+      String nroguia, int activo, int sincronizado, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    //'CREATE TABLE Assiggr(nroguia TEXT PRIMARY KEY, fecha TEXT, kg REAL,piscina TEXT,cant INT,sincronizado INT,activo INT) ',
+    final actualizado = await db.update(
+        'GuiasReg', {'sincronizado': sincronizado, 'activo': activo},
+        where: 'nroguia = ? And tipoproceso = ?',
+        whereArgs: [nroguia, tipoproceso]);
+    return sincronizado;
+  }
+
+  //----------------------------------
   //Bloque de Registro de la tabla que alamcena los registros de las guias con los Bines
   //----------------------------------
   //----------------------------------
@@ -228,6 +243,27 @@ class DBProvider {
     // In this case, replace any previous data.
     final resp = await db.insert(
       'BinesGrAsig',
+      binasignadas.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    //print('Respuesta de la Insercion $resp');
+
+    return binasignadas.nrobin;
+  }
+
+  //----------------------------------
+  //Registro de Guias de Pesca con los Bines Asignados
+  //----------------------------------
+  Future insertBinGrReg(RegisteredBinGuias binasignadas) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    //
+    // In this case, replace any previous data.
+    final resp = await db.insert(
+      'BinReg',
       binasignadas.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -255,6 +291,26 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Cantidad de Bines Escaneados
+  //----------------------------------
+  Future cantidadBinesEscaneadosReg(String nroguia, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    final res = await db.query('BinReg',
+        where: 'nroguia = ? And tipoproceso = ?',
+        whereArgs: [nroguia, tipoproceso]);
+    int bines = res.length;
+    if (res.isEmpty) {
+      bines = 0;
+    }
+    final actualizado = await db.update('GuiasReg', {'cantescaneada': bines},
+        where: 'nroguia = ? And tipoproceso = ? ',
+        whereArgs: [nroguia, tipoproceso]);
+    return bines;
+  }
+
+  //----------------------------------
   //Actualizar Tabla Asiggr para saber que esta sincronizada
   //----------------------------------
   Future actSincGrBines(
@@ -270,11 +326,37 @@ class DBProvider {
   //----------------------------------
   //Actualizar Tabla Asiggr para saber que esta sincronizada
   //----------------------------------
+  Future actSincGrBinesReg(String nroguia, int activo, int sincronizado,
+      int nrobin, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update('BinReg',
+        {'sincronizado': sincronizado, 'activo': activo, 'nrobin': nrobin},
+        where: 'nroguia = ? and nrobin = ? And tipoproceso = ?',
+        whereArgs: [nroguia, nrobin, tipoproceso]);
+    return actualizado;
+  }
+
+  //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
   Future actGrEstado(String nroguia, int activo) async {
     // Get a reference to the database.
     final db = await databaseRead;
     final actualizado = await db.update('Assiggr', {'activo': activo},
         where: 'nroguia = ? ', whereArgs: [nroguia]);
+    return actualizado;
+  }
+
+  //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actGrEstadoReg(String nroguia, int activo, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update('GuiasReg', {'activo': activo},
+        where: 'nroguia = ? and tipoproceso = ? ',
+        whereArgs: [nroguia, tipoproceso]);
     return actualizado;
   }
 
@@ -294,6 +376,24 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Consulta de Guias Asinadas con los bines
+  //----------------------------------
+  Future<List<RegisteredBinGuias>?> consultaBinAsignadasReg(
+      String nroguia, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    final res = await db.query('BinReg',
+        where: 'nroguia = ? and tipoproceso = ? ',
+        whereArgs: [nroguia, tipoproceso]);
+    /* print('Respuesta $res'); */
+
+    return res.isNotEmpty
+        ? res.map((e) => RegisteredBinGuias.fromJson(e)).toList()
+        : [];
+  }
+
+  //----------------------------------
   //Borra de la tabla los bines escaneados de manera equivocada
   //----------------------------------
   Future borrarBinEscanead(String nroguia, int nrobin) async {
@@ -307,6 +407,26 @@ class DBProvider {
       where: 'nroguia = ? and nrobin = ?',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [nroguia, nrobin],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
+  //Borra de la tabla los bines escaneados de manera equivocada
+  //----------------------------------
+  Future borrarBinEscaneadReg(
+      String nroguia, int nrobin, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinReg',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and nrobin = ? and tipoproceso = ? ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia, nrobin, tipoproceso],
     );
 
     return res;
@@ -332,6 +452,25 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Borrar Todas las Guia  no sincronizadas
+  //----------------------------------
+  Future borrarBinesGuiasReg(String nroguia, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinReg',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and sincronizado = 0 and tipoproceso = ? ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia, tipoproceso],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
   //Borrar Todas las Guia  Sincronizadas
   //----------------------------------
   Future borrarBinesGuiasSinc(String nroguia) async {
@@ -345,6 +484,25 @@ class DBProvider {
       where: 'nroguia = ? and sincronizado = 1 ',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [nroguia],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
+  //Borrar Todas las Guia  Sincronizadas
+  //----------------------------------
+  Future borrarBinesGuiasSincReg(String nroguia, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    // Update the given Dog.
+    final res = await db.delete(
+      'BinReg',
+      // Ensure that the Dog has a matching id.
+      where: 'nroguia = ? and sincronizado = 1 and tipoproceso = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [nroguia, tipoproceso],
     );
 
     return res;

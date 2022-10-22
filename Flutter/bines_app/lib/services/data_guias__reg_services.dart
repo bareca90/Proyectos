@@ -6,22 +6,15 @@ import 'package:http/http.dart' as http;
 //class DataGuiasRegServices extends ChangeNotifier {
 class DataGuiasRegServices {
   List<RegisteredGuias> listadoGrReg = [];
-  /* bool isLoading = true; */
+  final serverport = '10.20.4.38:8077';
   bool insertados = false;
   DataGuiasRegServices();
-  /* DataGuiasRegServices() {
-    loadGuiasRegistradas();
-  } */
-  /* final String _baseUrl =
-      'http://10.20.4.38:8077/api-app-control-time/obtenerbinesguia'; */
-  Future loadGuiasRegistradas(String tipo) async {
-    /* isLoading = true; */
-    //notificamos  a otro cualquier otro widget que se desea
+
+  Future loadGuiasRegistradas(String tipo, String opcion) async {
     bool flag = false;
     final parametros = {"nroguia": "", "opcion": tipo};
-    final uri = Uri.http('10.20.4.38:8077',
-        '/api-app-control-time/obtenerbinesguia', parametros);
-    //final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+    final uri = Uri.http(serverport,
+        '/api-app-control-time/obtenerguiasregistradas', parametros);
     final responseGuiasReg = await http.get(
       uri,
       headers: <String, String>{
@@ -29,6 +22,8 @@ class DataGuiasRegServices {
       },
     );
 
+    print('Server');
+    print(serverport);
     final List<dynamic> listguiasMap =
         convert.jsonDecode(responseGuiasReg.body);
     if (listguiasMap.isNotEmpty) {
@@ -36,7 +31,7 @@ class DataGuiasRegServices {
       for (Map<String, dynamic> guias in listguiasMap) {
         /*
           --------------------------------------------
-          Obtiene las guias del dìa 
+          Obtiene las guias del dìa
           --------------------------------------------
         */
         final double kg = double.parse(guias['can_kg'].toString());
@@ -64,6 +59,58 @@ class DataGuiasRegServices {
             cantescaneada,
             sincronizado,
             activo);
+
+        /*
+          --------------------------------------------
+            Obtiene e Inserta los bines y sus guias
+          --------------------------------------------
+        */
+        /*
+          --------------------------------------------
+            Consumimos el Api 
+          --------------------------------------------
+        */
+        final queryParameters = {
+          "nroguia": guias['nro_guia'],
+          "opcion": opcion
+        };
+        final uri = Uri.http(serverport,
+            '/api-app-control-time/obtenerbinesguia', queryParameters);
+        //final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+        final responseBin = await http.get(
+          uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        );
+        final List<dynamic> listGuiasBinMap =
+            convert.jsonDecode(responseBin.body);
+        /*
+          --------------------------------------------
+          Borrar los datos de las guias 
+          --------------------------------------------
+        */
+        await DBProvider.db.borrarBinesGuiasSincReg(nroguia, tipoproceso);
+        /*
+          --------------------------------------------
+          Recorre el json que viene desde el Api de Bines
+          --------------------------------------------
+        */
+        for (Map<String, dynamic> guiasBin in listGuiasBinMap) {
+          /* final nuevoBinGuia = BinesGrAsigModel(
+              nroguia: guiasBin['nroguia'],
+              nrobin: guiasBin['nrobin'],
+              fechahora: guiasBin['fechahora'],
+              sincronizado: guiasBin['sincronizado'],
+              activo: guiasBin['activo']); */
+          int bin = guiasBin['nrobin'];
+          String fechahoraing = guiasBin['fechahora'];
+          int sincbin = guiasBin['sincronizado'];
+          int actbin = guiasBin['activo'];
+          final guiasBinReg = await RegisteredBinGuiasProvider()
+              .nuevaGuiaBinAsignadoReg(
+                  tipoproceso, nroguia, bin, fechahoraing, sincbin, actbin);
+        }
       }
     }
     return listadoGrReg;
