@@ -207,7 +207,12 @@ class ExitPlantBinGuia extends StatelessWidget {
                   onPressed: () {
                     Provider.of<RegisteredBinGuiasProvider>(context,
                             listen: false)
-                        .updateGuiaBinReg(listaBinGuiaAsignada);
+                        .updateGuiaBinReg(
+                            listaBinGuiaAsignada,
+                            'PSP', //procesar salida de planta
+                            listaGuiasAsignadas.guiaSeleccionadaReg.nroguia,
+                            listaGuiasAsignadas
+                                .guiaSeleccionadaReg.tipoproceso);
                     /*  listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);
                     if (listaGuiasServices.isLoading) {
                       const LoadingScreen();

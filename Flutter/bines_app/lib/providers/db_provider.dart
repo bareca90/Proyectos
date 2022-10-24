@@ -317,8 +317,8 @@ class DBProvider {
       String nroguia, int activo, int sincronizado, int nrobin) async {
     // Get a reference to the database.
     final db = await databaseRead;
-    final actualizado = await db.update('BinesGrAsig',
-        {'sincronizado': sincronizado, 'activo': activo, 'nrobin': nrobin},
+    final actualizado = await db.update(
+        'BinesGrAsig', {'sincronizado': sincronizado, 'activo': activo},
         where: 'nroguia = ? and nrobin = ? ', whereArgs: [nroguia, nrobin]);
     return actualizado;
   }
@@ -330,11 +330,39 @@ class DBProvider {
       int nrobin, String tipoproceso) async {
     // Get a reference to the database.
     final db = await databaseRead;
-    final actualizado = await db.update('BinReg',
-        {'sincronizado': sincronizado, 'activo': activo, 'nrobin': nrobin},
+    final actualizado = await db.update(
+        'BinReg', {'sincronizado': sincronizado, 'activo': activo},
         where: 'nroguia = ? and nrobin = ? And tipoproceso = ?',
         whereArgs: [nroguia, nrobin, tipoproceso]);
     return actualizado;
+  }
+
+  //----------------------------------
+  //Actualizar estados de los bines `pr tipo de proceso
+  //----------------------------------
+  Future actEstadoBinesReg(
+      String nroguia, int activo, int sincronizado, String tipoproceso) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update(
+        'BinReg', {'sincronizado': sincronizado, 'activo': activo},
+        where: 'nroguia = ? And tipoproceso = ?',
+        whereArgs: [nroguia, tipoproceso]);
+    return actualizado;
+  }
+
+  //----------------------------------
+  //Actualizar Tabla Asiggr para saber que esta sincronizada
+  //----------------------------------
+  Future actBinReg(
+      String nroguia, int nrobin, String tipoproceso, String fecha) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+    final actualizado = await db.update('BinReg', {'fechahoraesc': fecha},
+        where: 'nroguia = ? and nrobin = ? And tipoproceso = ?',
+        whereArgs: [nroguia, nrobin, tipoproceso]);
+    return actualizado;
+    /* BinReg(tipoproceso TEXT,nroguia TEXT,nrobin INT, fechahoraesc TEXT,activo INT,sincronizado INT,PRIMARY KEY (tipoproceso, nroguia,nrobin)) ', */
   }
 
   //----------------------------------

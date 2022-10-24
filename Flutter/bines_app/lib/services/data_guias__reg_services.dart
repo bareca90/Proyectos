@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+
 //import 'dart:convert';
 import 'package:bines_app/providers/providers.dart';
 import 'package:http/http.dart' as http;
@@ -114,5 +115,37 @@ class DataGuiasRegServices {
       }
     }
     return listadoGrReg;
+  }
+
+  //Consumira APi q enviarà a guardar los datos a la tabla codesp
+  Future updateRegGuiasBD(
+      String opcion, String nroguia, String fecha, String tipoproceso) async {
+    const int actualizado = 1;
+    final response = await http.post(
+        Uri.parse('http://$serverport/api-app-control-time/binesguia'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: convert.jsonEncode(<String, dynamic>{
+          "opcion": opcion,
+          "nroguia": nroguia,
+          "nrobin": 0,
+          "fechahra": fecha
+        }));
+
+    final List<dynamic> decodedResp = convert.json.decode(response.body);
+    final dynamic cod = decodedResp[0]['codmsg'];
+    if (cod == 200) {
+      print('Se Inserto los Registros Normalmente');
+      final binesAct = await RegisteredBinGuiasProvider()
+          .actualizarEstadosRegBin(nroguia, tipoproceso, 0, 1);
+
+      /* BinGrAsignado()
+              .updateBinesSincronizados(nroguia, 0, 1, nrobin); */
+
+    } else {
+      print('Cod Error No se Inserto Registros');
+    }
+    return actualizado;
   }
 }

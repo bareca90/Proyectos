@@ -1,6 +1,8 @@
 import 'package:bines_app/models/models.dart';
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class RegisteredBinGuiasProvider extends ChangeNotifier {
   List<RegisteredBinGuias> binAsignadosReg = [];
@@ -62,10 +64,39 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateGuiaBinReg(RegisteredBinGuiasProvider datosGuiasReg) {
-    for (int index = 0;
-        index < datosGuiasReg.binAsignadosReg.length;
-        index++) {}
+  //Recibo los datos y los envio uno por uno
+  updateGuiaBinReg(RegisteredBinGuiasProvider datosGuiasReg, String opcion,
+      String numGuia, String tipoProceso) {
+    DateTime now = DateTime.now();
+    final String fecha = now.toString();
+    for (int index = 0; index < datosGuiasReg.binAsignadosReg.length; index++) {
+      final String nroguia = datosGuiasReg.binAsignadosReg[index].nroguia;
+      final int nrobin = datosGuiasReg.binAsignadosReg[index].nrobin;
+      final String tipoproceso =
+          datosGuiasReg.binAsignadosReg[index].tipoproceso;
+      updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha);
+    }
+    consumeApiReg(opcion, numGuia, fecha, tipoProceso);
+  }
+
+  consumeApiReg(
+      String opcion, String nroguia, String fecha, String tipoProceso) async {
+    final services = DataGuiasRegServices();
+    final actualizado =
+        await services.updateRegGuiasBD(opcion, nroguia, fecha, tipoProceso);
+
+    this.actualizado = actualizado;
+    cargarBinAsignadasReg(nroguia, tipoProceso);
+    notifyListeners();
+  }
+
+  actualizarEstadosRegBin(
+      String nroguia, String tipoproceso, int activo, int sincronizado) async {
+    final actualizado = await DBProvider.db
+        .actEstadoBinesReg(nroguia, activo, sincronizado, tipoproceso);
+    this.actualizado = actualizado;
+    cargarBinAsignadasReg(nroguia, tipoproceso);
+    notifyListeners();
   }
 
   updateFechaBinReg(
