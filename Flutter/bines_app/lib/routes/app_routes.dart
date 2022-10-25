@@ -44,7 +44,7 @@ class AppRoutes {
     MenuOptions(
         route: 'arrivefarm',
         name: 'Registrar Llegada a Granja',
-        screen: const ArriveFarmScreen(),
+        screen: const ArriveFarmListScreen(),
         icon: Icons.fast_forward_rounded),
     MenuOptions(
         route: 'closebin',

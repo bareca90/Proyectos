@@ -5,27 +5,25 @@ import 'package:bines_app/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 //import 'package:productos_app/models/models.dart';
 
-class GuiasListReg extends StatelessWidget {
-  const GuiasListReg({Key? key, required this.registradas}) : super(key: key);
-  final RegisteredGuias registradas;
+class ListSearchGuiasReg extends StatelessWidget {
+  const ListSearchGuiasReg({Key? key, required this.asignados})
+      : super(key: key);
+  final RegisteredGuias asignados;
 
-  //const AssigmentBinCard({Key? key}) : super(key: key);
-  //final Product product;
-  //final bool sincronizado = true;
-  final double tamanio = 12;
+  final double tamanio = 15;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
-        margin: const EdgeInsets.only(top: 10, bottom: 15),
+        margin: const EdgeInsets.only(top: 5, bottom: 5),
         width: double.infinity,
-        height: 80,
+        height: 56,
         decoration: _cardBorders(),
         child: Row(
           children: [
             const Padding(padding: EdgeInsets.only(left: 10)),
-            const Icon(Icons.fire_truck_sharp,
+            const Icon(Icons.list_alt_rounded,
                 size: 25, color: AppTheme.primary),
             Expanded(
               //flex: 0,
@@ -42,30 +40,23 @@ class GuiasListReg extends StatelessWidget {
                           color: AppTheme.second,
                           fontWeight: FontWeight.bold),
                     ),
-                    /* Text(
-                      'Prov. :',
-                      style: TextStyle(
-                          fontSize: tamanio,
-                          color: AppTheme.second,
-                          fontWeight: FontWeight.bold),
-                    ), */
-                    const Divider(
+                    /* const Divider(
                       height: 5,
                       color: Colors.white,
-                    ),
-                    Text(
+                    ), */
+                    /* Text(
                       'KG',
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.second,
                           fontWeight: FontWeight.bold),
-                    ),
-                    const Divider(
+                    ), */
+                    /* const Divider(
                       height: 5,
                       color: Colors.white,
-                    ),
+                    ), */
                     Text(
-                      'Cant. :',
+                      'Fecha :',
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.second,
@@ -85,36 +76,29 @@ class GuiasListReg extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      registradas.nroguia,
+                      asignados.nroguia,
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
                           fontWeight: FontWeight.bold),
                     ),
+                    /* const Divider(
+                      height: 5,
+                      color: Colors.white,
+                    ), */
                     /* Text(
-                      'NIRSA DEL ECU',
+                      asignados.kg.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
                           fontWeight: FontWeight.bold),
                     ), */
-                    const Divider(
+                    /* const Divider(
                       height: 5,
                       color: Colors.white,
-                    ),
+                    ), */
                     Text(
-                      registradas.kg.toString(),
-                      style: TextStyle(
-                          fontSize: tamanio,
-                          color: AppTheme.primary,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const Divider(
-                      height: 5,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      registradas.cantescaneada.toString(),
+                      asignados.fechaguia.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -124,7 +108,7 @@ class GuiasListReg extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
+            /*  Expanded(
               //flex: 0,
               child: Container(
                 padding:
@@ -143,18 +127,18 @@ class GuiasListReg extends StatelessWidget {
                       height: 5,
                       color: Colors.white,
                     ),
-                    Text(
+                    /* Text(
                       '# Pisc :',
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.second,
                           fontWeight: FontWeight.bold),
-                    ),
+                    ), */
                   ],
                 ),
               ),
-            ),
-            Expanded(
+            ), */
+            /*  Expanded(
               //flex: 2,
               child: Container(
                 padding:
@@ -163,7 +147,7 @@ class GuiasListReg extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      registradas.fechaguia.toString(),
+                      asignados.fecha.toString(),
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
@@ -173,28 +157,23 @@ class GuiasListReg extends StatelessWidget {
                       height: 5,
                       color: Colors.white,
                     ),
-                    Text(
-                      registradas.piscina,
+                    /* Text(
+                      asignados.piscina,
                       style: TextStyle(
                           fontSize: tamanio,
                           color: AppTheme.primary,
                           fontWeight: FontWeight.bold),
-                    ),
+                    ), */
                   ],
                 ),
               ),
-            ),
-            if (registradas.sincronizado == 1)
-              const Icon(Icons.cloud_done, size: 25, color: AppTheme.upload),
-            if (registradas.sincronizado == 0)
-              const Icon(Icons.cloud_upload, size: 25, color: AppTheme.second),
-            const Padding(padding: EdgeInsets.only(right: 10)),
-            if (registradas.activo == 1) //activo
-              const Icon(Icons.edit_calendar_rounded,
-                  size: 25, color: AppTheme.grisoscuro),
-            if (registradas.activo == 0) //inactivo
-              const Icon(Icons.visibility,
-                  size: 25, color: AppTheme.grisoscuro),
+            ), */
+            const Icon(Icons.arrow_forward_ios_outlined,
+                size: 20, color: AppTheme.second),
+            /* if (asignados.sincronizado == 1)
+              const Icon(Icons.cloud_done, size: 30, color: AppTheme.upload),
+            if (asignados.sincronizado == 0)
+              const Icon(Icons.cloud_upload, size: 30, color: AppTheme.second), */
             const Padding(padding: EdgeInsets.only(right: 10)),
             /* _ProductsDetails(
                 tittle: 'tittle', subtittle: 'subtittle', price: 12.0) */
@@ -206,37 +185,15 @@ class GuiasListReg extends StatelessWidget {
             ) */
           ],
         ),
-        /* child: Stack(alignment: Alignment.bottomLeft, children: [
-          //_BackgroundImage(product.picture),
-          // const _BackgroundImage(null),
-          const _ProductsDetails(
-            //tittle: product.name,
-            tittle: 'HC4525',
-            //subtittle: product.id.toString(),
-            subtittle: 'Subtitulo',
-            //price: product.price,
-            price: 0.00,
-          ),
-          const Positioned(
-              top: 0,
-              right: 0,
-              child: _PriceTab(
-                //price: product.price,
-                price: 1.20,
-              )),
-          //Este se Mostrara de Manera Condicional
-          //if (!product.available) //si no esta disponible
-          if (variable) //si no esta disponible
-            const Positioned(top: 0, left: 0, child: _Disponible())
-        ]), */
       ),
     );
   }
 
   BoxDecoration _cardBorders() => BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
-          boxShadow: const [
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        /* boxShadow: const [
             BoxShadow(color: Colors.black, offset: Offset(0, 5), blurRadius: 10)
-          ]);
+          ] */
+      );
 }

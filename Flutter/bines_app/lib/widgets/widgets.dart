@@ -1,3 +1,4 @@
+export 'package:bines_app/widgets/list_search_reg_guias.dart';
 export 'package:bines_app/widgets/registered_bin_list.dart';
 export 'package:bines_app/widgets/registered_card_header.dart';
 export 'package:bines_app/widgets/registered_guias_list.dart';

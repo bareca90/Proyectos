@@ -1,4 +1,5 @@
 import 'package:bines_app/providers/providers.dart';
+import 'package:bines_app/screens/screens.dart';
 
 /* import 'package:bines_app/screens/search_guias_delegate.dart';
 import 'package:bines_app/services/services.dart'; */
@@ -34,10 +35,10 @@ class ExitPlantListScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () async {
-                  /* showSearch(
+                  showSearch(
                       context: context,
-                      delegate: SearchGuiasDelegate(
-                          listaGuiasAsignadas: listaGuiasAsignadas)); */
+                      delegate: SearchGuiasRegDelegate(
+                          listaGuiasAsignadas: listadoGR));
                 },
                 icon: const Icon(Icons.search))
           ],

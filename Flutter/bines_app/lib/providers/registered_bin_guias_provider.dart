@@ -66,17 +66,79 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
 
   //Recibo los datos y los envio uno por uno
   updateGuiaBinReg(RegisteredBinGuiasProvider datosGuiasReg, String opcion,
-      String numGuia, String tipoProceso) {
+      String numGuia, String tipoProceso, RegisteredGuiasProvider guiasReg) {
     DateTime now = DateTime.now();
     final String fecha = now.toString();
+    String sigProceso = '';
+
     for (int index = 0; index < datosGuiasReg.binAsignadosReg.length; index++) {
       final String nroguia = datosGuiasReg.binAsignadosReg[index].nroguia;
-      final int nrobin = datosGuiasReg.binAsignadosReg[index].nrobin;
-      final String tipoproceso =
+      final String procesoEnv =
           datosGuiasReg.binAsignadosReg[index].tipoproceso;
-      updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha);
+      if (nroguia == numGuia && tipoProceso == procesoEnv) {
+        final int nrobin = datosGuiasReg.binAsignadosReg[index].nrobin;
+        final String tipoproceso =
+            datosGuiasReg.binAsignadosReg[index].tipoproceso;
+        updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha);
+      }
     }
+    //Invocacion de funcion que consume el api para insertar
     consumeApiReg(opcion, numGuia, fecha, tipoProceso);
+    //--------------------
+    //Invocacion de Funcion para insertar el siguiente proceso
+    //--------------------
+    switch (tipoProceso) {
+      case 'RSP':
+        sigProceso = 'RLG';
+        insertaNuevoProc(
+            guiasReg, datosGuiasReg, sigProceso, numGuia, tipoProceso);
+        break;
+      //Funcion para el siguiente proceso
+      case 'RLG':
+        sigProceso = 'RCB';
+        break;
+      case 'RCB':
+        sigProceso = 'RSG';
+    }
+  }
+
+  insertaNuevoProc(
+      RegisteredGuiasProvider guiasReg,
+      RegisteredBinGuiasProvider datosGuiasReg,
+      String sigProceso,
+      String numGuia,
+      String tipoProcesoEnv) async {
+    //--------------------
+    //Recorro el modelo de datos de la cabecera
+    //--------------------
+    for (int index = 0; index < guiasReg.registrados.length; index++) {
+      final String nroguia = guiasReg.registrados[index].nroguia;
+      final String procesoEnv = guiasReg.registrados[index].tipoproceso;
+      if (nroguia == numGuia && tipoProcesoEnv == procesoEnv) {
+        final fechaguia = guiasReg.registrados[index].fechaguia;
+        final double kg = guiasReg.registrados[index].kg;
+        final String piscina = guiasReg.registrados[index].piscina;
+        final int cantescaneada = guiasReg.registrados[index].cantescaneada;
+        final guiasRec = await RegisteredGuiasProvider().nuevaGuiaRegistrada(
+            sigProceso, nroguia, fechaguia, kg, piscina, cantescaneada, 0, 1);
+        //Leera e Insertara el detalle de los bines
+        for (int index = 0;
+            index < datosGuiasReg.binAsignadosReg.length;
+            index++) {
+          final int nrobin = datosGuiasReg.binAsignadosReg[index].nrobin;
+          final String guia = datosGuiasReg.binAsignadosReg[index].nroguia;
+          final String tproces =
+              datosGuiasReg.binAsignadosReg[index].tipoproceso;
+          if (numGuia == guia && tproces == tipoProcesoEnv) {
+            final guiasBinReg =
+                nuevaGuiaBinAsignadoReg(sigProceso, nroguia, nrobin, '', 0, 1);
+          }
+        }
+      }
+    }
+    RegisteredGuiasProvider().cargarGrRegistradas(tipoProcesoEnv);
+    cargarBinAsignadasReg(numGuia, tipoProcesoEnv);
+    notifyListeners();
   }
 
   consumeApiReg(
@@ -95,6 +157,17 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
     final actualizado = await DBProvider.db
         .actEstadoBinesReg(nroguia, activo, sincronizado, tipoproceso);
     this.actualizado = actualizado;
+    cargarBinAsignadasReg(nroguia, tipoproceso);
+    notifyListeners();
+  }
+
+  //Actualiza el estado de la tabla de guias registradas
+  updateGuiasReg(
+      String nroguia, String tipoproceso, int activo, int sincronizado) async {
+    final actualizado = await DBProvider.db
+        .actSincGrReg(nroguia, activo, sincronizado, tipoproceso);
+    this.actualizado = actualizado;
+    RegisteredGuiasProvider().cargarGrRegistradas(tipoproceso);
     cargarBinAsignadasReg(nroguia, tipoproceso);
     notifyListeners();
   }

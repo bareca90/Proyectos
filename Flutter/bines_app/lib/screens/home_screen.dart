@@ -58,6 +58,10 @@ class HomeScreen extends StatelessWidget {
                 listadoGR.cargarGrRegistradas('RSP'); //Regitro Salida Planta
                 break;
               case 2:
+                /* listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
+                    'RLG'); */ //Obtiene Guias Cerradas en base a el parametro que se le envia
+                listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
+                break;
               case 3:
               case 4:
               case 5:

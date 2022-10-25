@@ -12,13 +12,14 @@ class ExitPlantBinGuia extends StatelessWidget {
   Widget build(BuildContext context) {
     final listaGuiasReg = Provider.of<RegisteredGuiasProvider>(context);
     final listaBinGuiaReg = Provider.of<RegisteredBinGuiasProvider>(context);
+    final tipoProcesoRecibido = listaGuiasReg.guiaSeleccionadaReg.tipoproceso;
 
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bin Salida Planta'),
+        title: const Text('Bin Registrado'),
         //agregar boton para logout
         actions: [
           /* IconButton(
@@ -182,7 +183,7 @@ class ExitPlantBinGuia extends StatelessWidget {
             elevation: 5,
             backgroundColor: Colors.grey.shade200,
             title: const Text(
-              'Bin Salida Planta',
+              'Bines Registrados ',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -205,14 +206,24 @@ class ExitPlantBinGuia extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () {
+                    String opcionPro = '';
+                    switch (
+                        listaGuiasAsignadas.guiaSeleccionadaReg.tipoproceso) {
+                      case 'RSP':
+                        opcionPro = 'PSP';
+                        break;
+                      case 'RLG':
+                        opcionPro = 'PLG';
+                    }
+
                     Provider.of<RegisteredBinGuiasProvider>(context,
                             listen: false)
                         .updateGuiaBinReg(
                             listaBinGuiaAsignada,
-                            'PSP', //procesar salida de planta
+                            opcionPro, //procesar salida de planta
                             listaGuiasAsignadas.guiaSeleccionadaReg.nroguia,
-                            listaGuiasAsignadas
-                                .guiaSeleccionadaReg.tipoproceso);
+                            listaGuiasAsignadas.guiaSeleccionadaReg.tipoproceso,
+                            listaGuiasAsignadas);
                     /*  listaGuiasServices.insertBinGuias(listaBinGuiaAsignada);
                     if (listaGuiasServices.isLoading) {
                       const LoadingScreen();
