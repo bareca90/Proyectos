@@ -47,11 +47,16 @@ class MyApp extends StatelessWidget {
             const ExitPlantListScreen(), //Lista de Guias -  Registro Salida de Planta
         'arrivefarm': (_) =>
             const ArriveFarmListScreen(), // Lista de Guias - Registro Llegada a Granja
-        'closebin': (_) => const CloseBinScreen(),
-        'exitfarm': (_) => const ExitFarmScreen(),
-        'arriveplant': (_) => const ArrivePlantScreen(),
-        'receptionbin': (_) => const ReceptionScreen(),
-        'receivebin': (_) => const SupllyHopperScreen(),
+        'closebin': (_) =>
+            const CloseBinListScreen(), // Lista de Guias - Cierre de Bines
+        'exitfarm': (_) =>
+            const ExitFarmListScreen(), //Lista Guia Salida de Granja
+        'arriveplant': (_) =>
+            const ArrivePlantListScreen(), //Lista Guia  - Llegada a planta
+        'receptionbin': (_) =>
+            const ReceptionListScreen(), //Lista Guias Llegada Recepcion
+        'receivebin': (_) =>
+            const SupllyHopperListScreen(), //Lista Guias - Recibido Recepcion
         'asigbin': (_) =>
             const AssigmentBinScreen(), //Listado de Bines Asignados a las guias Paso 1
         'binsalplan': (_) =>

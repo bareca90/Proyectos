@@ -22,6 +22,12 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 //aqui se debe controlar quitar la
                 //authServices.logout();
+              },
+              icon: const Icon(Icons.cloud_sync)),
+          IconButton(
+              onPressed: () {
+                //aqui se debe controlar quitar la
+                //authServices.logout();
                 Navigator.pushReplacementNamed(context, 'login');
               },
               icon: const Icon(Icons.login_outlined))
@@ -62,10 +68,22 @@ class HomeScreen extends StatelessWidget {
                     'RLG'); */ //Obtiene Guias Cerradas en base a el parametro que se le envia
                 listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
                 break;
+
               case 3:
+                listadoGR.cargarGrRegistradas('RCB');
+                break; //Regitro Salida Planta
               case 4:
+                listadoGR.cargarGrRegistradas('RSG');
+                break; //Regitro Salida Planta
               case 5:
+                listadoGR.cargarGrRegistradas('RLP');
+                break; //Regitro Salida Planta
               case 6:
+                listadoGR.cargarGrRegistradas('RLR');
+                break; //Regitro Salida Planta
+              case 7:
+                listadoGR.cargarGrRegistradas('RRR');
+                break; //Regitro Salida Planta
             }
             Navigator.pushNamed(context, menuOptions[index].route);
           },

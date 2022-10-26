@@ -25,8 +25,23 @@ class GuiasListReg extends StatelessWidget {
         child: Row(
           children: [
             const Padding(padding: EdgeInsets.only(left: 10)),
-            const Icon(Icons.fire_truck_sharp,
-                size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RSP')
+              const Icon(Icons.gite_sharp, size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RLG')
+              const Icon(Icons.location_on_rounded,
+                  size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RCB')
+              const Icon(Icons.propane_tank, size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RSG')
+              const Icon(Icons.assignment_return_rounded,
+                  size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RLP')
+              const Icon(Icons.factory, size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RLR')
+              const Icon(Icons.precision_manufacturing_sharp,
+                  size: 25, color: AppTheme.primary),
+            if (registradas.tipoproceso == 'RRR')
+              const Icon(Icons.flip, size: 25, color: AppTheme.primary),
             Expanded(
               //flex: 0,
               child: Container(

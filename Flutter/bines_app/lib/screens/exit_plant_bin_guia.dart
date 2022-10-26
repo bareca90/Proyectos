@@ -13,13 +13,35 @@ class ExitPlantBinGuia extends StatelessWidget {
     final listaGuiasReg = Provider.of<RegisteredGuiasProvider>(context);
     final listaBinGuiaReg = Provider.of<RegisteredBinGuiasProvider>(context);
     final tipoProcesoRecibido = listaGuiasReg.guiaSeleccionadaReg.tipoproceso;
-
+    String titulo = '';
+    switch (tipoProcesoRecibido) {
+      case 'RSP':
+        titulo = 'Bin Salida Planta';
+        break;
+      case 'RLG':
+        titulo = 'Bin Llegada Granja';
+        break;
+      case 'RCB':
+        titulo = 'Bin Cerrado';
+        break;
+      case 'RSG':
+        titulo = 'Bin Salida Granja';
+        break;
+      case 'RLP':
+        titulo = 'Bin Llegada Planta';
+        break;
+      case 'RLR':
+        titulo = 'Bin Llegada Recepciòn';
+        break;
+      case 'RCR':
+        titulo = 'Bin Recibido Recepciòn';
+    }
     /* final nroguia = listaGuiasAsignadas.guiaSeleccionada.nroguia; */
     /* listaBinGuiaAsignada.cargarBinAsignadas(nroguia); */
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bin Registrado'),
+        title: Text(titulo),
         //agregar boton para logout
         actions: [
           /* IconButton(
@@ -38,10 +60,7 @@ class ExitPlantBinGuia extends StatelessWidget {
 
                 //Aqui va a ir el consumo de las apis de SIPE
                 _showDialogInsertBines(
-                  context,
-                  listaGuiasReg,
-                  listaBinGuiaReg,
-                );
+                    context, listaGuiasReg, listaBinGuiaReg, titulo);
                 /*  listaBinGuiaAsignada.cargarBinAsignadas(
                     listaGuiasAsignadas.guiaSeleccionada.nroguia);
                 listaBinGuiaAsignada.catidadBinesEscaneados(
@@ -84,6 +103,7 @@ class ExitPlantBinGuia extends StatelessWidget {
           RegisteredListBin(listaGuiasBinAsignadas: listaBinGuiaReg)
         ],
       ),
+
       /* floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       floatingActionButton: listaGuiasReg.guiaSeleccionadaReg.activo == 1
           ? ScanButtonQR(listaGuiasAsignadas: listaGuiasAsignadas)
@@ -172,7 +192,8 @@ class ExitPlantBinGuia extends StatelessWidget {
   Future<dynamic> _showDialogInsertBines(
       BuildContext context,
       RegisteredGuiasProvider listaGuiasAsignadas,
-      RegisteredBinGuiasProvider listaBinGuiaAsignada) {
+      RegisteredBinGuiasProvider listaBinGuiaAsignada,
+      String titulo) {
     /* final listaGuiasServices =
         Provider.of<DataGuiaBinServices>(context, listen: false); */
     return showDialog(
@@ -182,9 +203,9 @@ class ExitPlantBinGuia extends StatelessWidget {
           return AlertDialog(
             elevation: 5,
             backgroundColor: Colors.grey.shade200,
-            title: const Text(
-              'Bines Registrados ',
-              style: TextStyle(
+            title: Text(
+              titulo,
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: AppTheme.primary),
@@ -214,6 +235,21 @@ class ExitPlantBinGuia extends StatelessWidget {
                         break;
                       case 'RLG':
                         opcionPro = 'PLG';
+                        break;
+                      case 'RCB':
+                        opcionPro = 'PCB';
+                        break;
+                      case 'RSG':
+                        opcionPro = 'PSG';
+                        break;
+                      case 'RLP':
+                        opcionPro = 'PLP';
+                        break;
+                      case 'RLR':
+                        opcionPro = 'PLR';
+                        break;
+                      case 'RRR':
+                        opcionPro = 'PRR';
                     }
 
                     Provider.of<RegisteredBinGuiasProvider>(context,

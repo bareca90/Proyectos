@@ -80,26 +80,45 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
         final String tipoproceso =
             datosGuiasReg.binAsignadosReg[index].tipoproceso;
         updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha);
+
+        //Actualizo el estado a inactivo para q no se pueda modificar ya
+        updateBinesSincronizadosReg(nroguia, 0, 0, nrobin, tipoproceso);
       }
     }
-    //Invocacion de funcion que consume el api para insertar
-    consumeApiReg(opcion, numGuia, fecha, tipoProceso);
+    //--------------------
+    //Actualiza el estado de la cabecera
+    //--------------------
+    updateGuiasReg(numGuia, tipoProceso, 1, 0);
+
     //--------------------
     //Invocacion de Funcion para insertar el siguiente proceso
+    //Funcion para el siguiente proceso
     //--------------------
     switch (tipoProceso) {
       case 'RSP':
         sigProceso = 'RLG';
-        insertaNuevoProc(
-            guiasReg, datosGuiasReg, sigProceso, numGuia, tipoProceso);
         break;
-      //Funcion para el siguiente proceso
       case 'RLG':
         sigProceso = 'RCB';
         break;
       case 'RCB':
         sigProceso = 'RSG';
+        break;
+      case 'RSG':
+        sigProceso = 'RLP';
+        break;
+      case 'RLP':
+        sigProceso = 'RLR';
+        break;
+      case 'RLR':
+        sigProceso = 'RRR';
     }
+    insertaNuevoProc(guiasReg, datosGuiasReg, sigProceso, numGuia, tipoProceso);
+
+    //--------------------
+    //Invocacion de funcion que consume el api para insertar informaciòn
+    //--------------------
+    consumeApiReg(opcion, numGuia, fecha, tipoProceso);
   }
 
   insertaNuevoProc(
