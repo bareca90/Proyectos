@@ -200,6 +200,25 @@ class DBProvider {
   }
 
   //----------------------------------
+  //Eliminacion de las guias q no estan sincronizadas que vinieron desde el API
+  //----------------------------------
+  Future borrarRegGuiasDB(String tipoproceso, String nroguia) async {
+    // Get a reference to the database.
+    final db = await databaseRead;
+
+    //TODO : APlicar COndicion para q borre las que no han sido sincronizadas
+    final res = await db.delete(
+      'GuiasReg',
+      // Ensure that the Dog has a matching id.
+      where: 'tipoproceso = ?  and nroguia = ?  and sincronizado  = 1 ',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [tipoproceso, nroguia],
+    );
+
+    return res;
+  }
+
+  //----------------------------------
   //Actualizar Tabla Asiggr para saber que esta sincronizada
   //----------------------------------
   Future actSincGr(String nroguia, int activo, int sincronizado) async {

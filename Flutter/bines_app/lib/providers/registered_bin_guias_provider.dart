@@ -81,7 +81,9 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
             datosGuiasReg.binAsignadosReg[index].tipoproceso;
         updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha);
 
+        //-------------------------
         //Actualizo el estado a inactivo para q no se pueda modificar ya
+        //-------------------------
         updateBinesSincronizadosReg(nroguia, 0, 0, nrobin, tipoproceso);
       }
     }
@@ -165,7 +167,6 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
     final services = DataGuiasRegServices();
     final actualizado =
         await services.updateRegGuiasBD(opcion, nroguia, fecha, tipoProceso);
-
     this.actualizado = actualizado;
     cargarBinAsignadasReg(nroguia, tipoProceso);
     notifyListeners();

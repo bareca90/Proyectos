@@ -117,7 +117,9 @@ class DataGuiasRegServices {
     return listadoGrReg;
   }
 
+  //-------------------------------
   //Consumira APi q enviarà a guardar los datos a la tabla codesp
+  //-------------------------------
   Future updateRegGuiasBD(
       String opcion, String nroguia, String fecha, String tipoproceso) async {
     const int actualizado = 1;
@@ -139,6 +141,53 @@ class DataGuiasRegServices {
       print('Se Inserto los Registros Normalmente');
       final binesAct = await RegisteredBinGuiasProvider()
           .actualizarEstadosRegBin(nroguia, tipoproceso, 0, 1);
+
+      /* BinGrAsignado()
+              .updateBinesSincronizados(nroguia, 0, 1, nrobin); */
+
+    } else {
+      print('Cod Error No se Inserto Registros');
+    }
+    return actualizado;
+  }
+
+  //-------------------------------
+  //Consumira APi q enviarà a guardar los datos a la tabla codesp
+  //-------------------------------
+  Future sincronizaGuiasBinRegBD(String opcion, String nroguia, String fecha,
+      String tipoproceso, String relacionTabla, int nrobin) async {
+    const int actualizado = 1;
+    final response = await http.post(
+        Uri.parse('http://$serverport/api-app-control-time/binesguia'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: convert.jsonEncode(<String, dynamic>{
+          "opcion": opcion,
+          "nroguia": nroguia,
+          "nrobin": nrobin,
+          "fechahra": fecha
+        }));
+
+    final List<dynamic> decodedResp = convert.json.decode(response.body);
+    final dynamic cod = decodedResp[0]['codmsg'];
+    if (cod == 200) {
+      if (relacionTabla == 'CAB') {
+        // se Eliminara e Insertara los registros en la cabecera
+        //GuiasReg
+
+        final borradosCab = await RegisteredGuiasProvider()
+            .borrarRegGuiasxGuia(tipoproceso, nroguia);
+      }
+      if (relacionTabla == 'DET') {
+        // se Eliminara e Insertara los registros en el detalle
+        //BinReg
+      }
+
+      print('Se Inserto los Registros Normalmente');
+
+      /* final binesAct = await RegisteredBinGuiasProvider()
+          .actualizarEstadosRegBin(nroguia, tipoproceso, 0, 1); */
 
       /* BinGrAsignado()
               .updateBinesSincronizados(nroguia, 0, 1, nrobin); */

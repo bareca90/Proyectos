@@ -55,35 +55,76 @@ class HomeScreen extends StatelessWidget {
                 Provider.of<ServicesProvider>(context, listen: false);
             final listadoGR =
                 Provider.of<RegisteredGuiasProvider>(context, listen: false);
+            final listaBinGuiaReg =
+                Provider.of<RegisteredBinGuiasProvider>(context, listen: false);
             switch (index) {
+              //-------------------------
+              //Registro de Bines
+              //-------------------------
               case 0:
-
+              //-------------------------
+              //Registro Salida de Planta
+              //-------------------------
               case 1: //Opcion de Registro Salida de Planta
                 listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
                     'RSP'); //Obtiene Guias Cerradas en base a el parametro que se le envia
                 listadoGR.cargarGrRegistradas('RSP'); //Regitro Salida Planta
                 break;
+              //-------------------------
+              //Registro de Llegada Granaja
+              //-------------------------
               case 2:
-                /* listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
-                    'RLG'); */ //Obtiene Guias Cerradas en base a el parametro que se le envia
+                //-------------------------
+                //Envio Datos al APi
+                //-------------------------
+                listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
+
+                /* listaBinGuiaReg.updateGuiasReg(nroguia, tipoproceso, activo, sincronizado) */
+
+                /* final listaGuiasReg = Provider.of<RegisteredGuiasProvider>(context); */
+
+                //final listadoGR = Provider.of<RegisteredGuiasProvider>(context);
+
+                //-------------------------
+                //Consulto Datos del API
+                //-------------------------
+                listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
+                    'RSP'); //Obtiene Guias Cerradas en base a el parametro que se le envia
+                //-------------------------
+                //Cargo los datos
+                //-------------------------
                 listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
                 break;
-
+              //-------------------------
+              //Registro Cierre de Bin
+              //-------------------------
               case 3:
                 listadoGR.cargarGrRegistradas('RCB');
                 break; //Regitro Salida Planta
+              //-------------------------
+              //Registro Salida de Granja
+              //-------------------------
               case 4:
                 listadoGR.cargarGrRegistradas('RSG');
                 break; //Regitro Salida Planta
+              //-------------------------
+              //Registro Llegada Planta
+              //-------------------------
               case 5:
                 listadoGR.cargarGrRegistradas('RLP');
                 break; //Regitro Salida Planta
+              //-------------------------
+              //Registro Llegada Recepcion
+              //-------------------------
               case 6:
                 listadoGR.cargarGrRegistradas('RLR');
                 break; //Regitro Salida Planta
+              //-------------------------
+              //Registro Recibido Recepcion
+              //-------------------------
               case 7:
                 listadoGR.cargarGrRegistradas('RRR');
-                break; //Regitro Salida Planta
+                break; //Regitro SRecibido Recepcion(Volte Bines)
             }
             Navigator.pushNamed(context, menuOptions[index].route);
           },
