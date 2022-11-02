@@ -175,16 +175,16 @@ class DataGuiasRegServices {
       if (relacionTabla == 'CAB') {
         // se Eliminara e Insertara los registros en la cabecera
         //GuiasReg
+        /* final borradosCab = await RegisteredGuiasProvider()
+            .borrarRegGuiasxGuia(tipoproceso, nroguia); */
 
-        final borradosCab = await RegisteredGuiasProvider()
-            .borrarRegGuiasxGuia(tipoproceso, nroguia);
       }
       if (relacionTabla == 'DET') {
         // se Eliminara e Insertara los registros en el detalle
         //BinReg
-      }
 
-      print('Se Inserto los Registros Normalmente');
+      }
+      print(decodedResp[0]['descmsg']);
 
       /* final binesAct = await RegisteredBinGuiasProvider()
           .actualizarEstadosRegBin(nroguia, tipoproceso, 0, 1); */

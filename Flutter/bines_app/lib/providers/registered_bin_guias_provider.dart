@@ -162,6 +162,83 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //-----------------------------------
+  //Envio todo lo que esta en la bd a que a q sea insertado en la base de sipe
+  //-----------------------------------
+  envioDatosApi(RegisteredBinGuiasProvider datosGuiasReg, String opcion,
+      String tipoProceso, RegisteredGuiasProvider guiasReg) {
+    //------------------------------
+    //Recorro la matriz de las guia
+    //------------------------------
+    int flag = 0;
+    for (int indice = 0;
+        indice < datosGuiasReg.binAsignadosReg.length &&
+            tipoProceso == datosGuiasReg.binAsignadosReg[indice].tipoproceso &&
+            datosGuiasReg.binAsignadosReg[indice].sincronizado == 0 &&
+            flag == 0 &&
+            datosGuiasReg.binAsignadosReg[indice].fechahoraesc.isNotEmpty;
+        indice++) {
+      final String nroguia = datosGuiasReg.binAsignadosReg[indice].nroguia;
+      final String fecha = datosGuiasReg.binAsignadosReg[indice].fechahoraesc;
+      final String tipoproceso =
+          datosGuiasReg.binAsignadosReg[indice].tipoproceso;
+      const String relacionTabla = 'DET';
+      final int nrobin = datosGuiasReg.binAsignadosReg[indice].nrobin;
+      //envio cabeceras
+      if (tipoproceso == 'RSP' ||
+          tipoproceso == 'RLG' ||
+          tipoproceso == 'RSG' ||
+          tipoproceso == 'RLP' ||
+          tipoproceso == 'RLR') {
+        DataGuiasRegServices().sincronizaGuiasBinRegBD(
+            opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
+        flag = 1;
+      } else {
+        DataGuiasRegServices().sincronizaGuiasBinRegBD(
+            opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
+        flag = 0;
+      }
+
+      /* for (int index = 0; index < datosGuiasReg.binAsignadosReg.length; index++) {
+      final String nroguia = datosGuiasReg.binAsignadosReg[index].nroguia;
+      final String procesoEnv =
+          datosGuiasReg.binAsignadosReg[index].tipoproceso;
+
+      
+      
+      
+      if (nroguia == numGuia && tipoProceso == procesoEnv) {
+        final int nrobin = datosGuiasReg.binAsignadosReg[index].nrobin;
+
+        /* final String tipoproceso =
+            datosGuiasReg.binAsignadosReg[index].tipoproceso;
+        updateFechaBinReg(nroguia, nrobin, tipoproceso, fecha); */
+
+        //-------------------------
+        //Actualizo el estado a inactivo para q no se pueda modificar ya
+        //-------------------------
+        /* updateBinesSincronizadosReg(nroguia, 0, 0, nrobin, tipoproceso); */
+      }
+    } */
+    }
+  }
+
+  //---------------------------
+  //Envia los datos al api para la bd
+  //---------------------------
+  consumeAPiEnvReg(String opcion, String nroguia, String fecha,
+      String tipoProceso, String relacionTabla, int nrobin) async {
+    final services = DataGuiasRegServices();
+    final actualizado = await services.sincronizaGuiasBinRegBD(
+        opcion, nroguia, fecha, tipoProceso, relacionTabla, nrobin);
+    this.actualizado = actualizado;
+    cargarBinAsignadasReg(nroguia, tipoProceso);
+    notifyListeners();
+  }
+
+  //---------------------------
+  //Envia los datos al api para la bd
+  //---------------------------
   consumeApiReg(
       String opcion, String nroguia, String fecha, String tipoProceso) async {
     final services = DataGuiasRegServices();

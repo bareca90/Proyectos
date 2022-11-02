@@ -77,6 +77,19 @@ class HomeScreen extends StatelessWidget {
                 //-------------------------
                 //Envio Datos al APi
                 //-------------------------
+                //-------------------------
+                //1.- Cargo los datos dato que s eenviaran  hacia la bd mediante el api
+                //-------------------------
+                listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
+                //-------------------------
+                //2.-  Envio los datos para que sean insertados mediante el api
+                // Envio PLG como opcion para que se pueda sincronizar
+                //-------------------------
+                listaBinGuiaReg.envioDatosApi(
+                    listaBinGuiaReg, 'PLG', 'RLG', listadoGR);
+                //-------------------------
+                //3.- Obtengo los datos de los datos insertaddos
+                //-------------------------
                 listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
 
                 /* listaBinGuiaReg.updateGuiasReg(nroguia, tipoproceso, activo, sincronizado) */
@@ -105,18 +118,60 @@ class HomeScreen extends StatelessWidget {
               //Registro Salida de Granja
               //-------------------------
               case 4:
+                //-------------------------
+                //1.- Cargo los datos dato que s eenviaran  hacia la bd mediante el api
+                //-------------------------
+                listadoGR.cargarGrRegistradas('RSG'); //Regitro Salida Planta
+                //-------------------------
+                //2.-  Envio los datos para que sean insertados mediante el api
+                // Envio PLG como opcion para que se pueda sincronizar
+                //-------------------------
+                listaBinGuiaReg.envioDatosApi(
+                    listaBinGuiaReg, 'PSG', 'RSG', listadoGR);
+
+                //-------------------------
+                //3.- Obtengo los datos de los datos insertaddos
+                //-------------------------
                 listadoGR.cargarGrRegistradas('RSG');
                 break; //Regitro Salida Planta
               //-------------------------
               //Registro Llegada Planta
               //-------------------------
               case 5:
+                //-------------------------
+                //1.- Cargo los datos dato que s eenviaran  hacia la bd mediante el api
+                //-------------------------
+                listadoGR.cargarGrRegistradas('RLP'); //Regitro Salida Planta
+                //-------------------------
+                //2.-  Envio los datos para que sean insertados mediante el api
+                // Envio PLG como opcion para que se pueda sincronizar
+                //-------------------------
+                listaBinGuiaReg.envioDatosApi(
+                    listaBinGuiaReg, 'PLP', 'RLP', listadoGR);
+
+                //-------------------------
+                //3.- Obtengo los datos de los datos insertaddos
+                //-------------------------
                 listadoGR.cargarGrRegistradas('RLP');
                 break; //Regitro Salida Planta
               //-------------------------
               //Registro Llegada Recepcion
               //-------------------------
               case 6:
+                //-------------------------
+                //1.- Cargo los datos dato que s eenviaran  hacia la bd mediante el api
+                //-------------------------
+                listadoGR.cargarGrRegistradas('RLR'); //Regitro Salida Planta
+                //-------------------------
+                //2.-  Envio los datos para que sean insertados mediante el api
+                // Envio PLG como opcion para que se pueda sincronizar
+                //-------------------------
+                listaBinGuiaReg.envioDatosApi(
+                    listaBinGuiaReg, 'PLR', 'RLR', listadoGR);
+
+                //-------------------------
+                //3.- Obtengo los datos de los datos insertaddos
+                //-------------------------
                 listadoGR.cargarGrRegistradas('RLR');
                 break; //Regitro Salida Planta
               //-------------------------

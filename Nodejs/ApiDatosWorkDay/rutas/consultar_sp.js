@@ -392,7 +392,15 @@ app.post('/datatermination', function(req, respuesta) {
  *                              FIN:
  *                                  type: string
  *                                  description: Fin del Time Off
- *                              
+ *              EFECTIVE_MOMENT: 
+ *                  type: string
+ *                  description: Fecha efectiva Expatriado
+ *              END_DATE: 
+ *                  type: string
+ *                  description: fecha finalizacion
+ *              PRIMARY_JOB:
+ *                  type: string
+ *                  description: primer trabajo       
  *          example:
  *              emplcod_wd:	WRKeCU00004
  *              CnctFecReg:	2018-04-01
@@ -453,6 +461,9 @@ app.post('/datatermination', function(req, respuesta) {
  *                      CANTIDAD: 1
  *                      INICIO: 12:00
  *                      FIN: 13:00
+ *              EFECTIVE_MOMENT: "2022-09-27T17:41"
+ *              END_DATE: "2022-09-27T17:41"
+ *              PRIMARY_JOB: 42
  *                   
  */
 /***

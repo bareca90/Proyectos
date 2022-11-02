@@ -42,6 +42,11 @@ class RegisteredGuiasProvider extends ChangeNotifier {
     cargarGrRegistradas(tipoproceso);
   }
 
+  borrarRegGuiasxGuia(String tipoproceso, String nroguia) async {
+    await DBProvider.db.borrarRegGuiasDB(tipoproceso, nroguia);
+    cargarGrRegistradas(tipoproceso);
+  }
+
   insertDatManual(
       String tipoproceso,
       String noguia,
