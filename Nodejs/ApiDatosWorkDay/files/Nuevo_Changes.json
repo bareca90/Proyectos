@@ -1,0 +1,249 @@
+{
+  "DERIVED_EVENT_CODE": "DTA", 
+  "EFECTIVE_MOMENT": "2022-09-27T17: 41", 
+  "emplcod_wd": "WRKeCU00004",
+  "Contratos_Empleados": [  
+    {
+      "CnctFecReg": "2018-04-01",
+      "Estado_CnctFecReg": "",  
+      "tconcod": "QUINCENAL",
+      "Estado_tconcod": "",  
+      "cnctclscnt": "I",
+      "Estado_cnctclscnt": "",  
+      "cnctno": 1,
+      "Estado_cnctno": "",  
+      "emplconcon": "loremipsum loremipsum loremi", 
+      "Estado_emplconcon": ""  
+    },
+    {
+      "CnctFecReg": "2018-04-01",
+      "Estado_CnctFecReg": "",
+      "tconcod": "QUINCENAL",
+      "Estado_tconcod": "",
+      "cnctclscnt": "I",
+      "Estado_cnctclscnt": "",
+      "cnctno": 1,
+      "Estado_cnctno": "",
+      "emplconcon": "loremipsum loremipsum loremi",
+      "Estado_emplconcon": ""
+    }
+  ],
+  "Planes_Compensaciones": [  
+    {
+      "Salarios": [  
+        {
+          "EmplValSue": 800.5,
+          "Estado_EmplValSue": "",  
+          "cnctfeccds": "2018-04-01",
+          "Estado_cnctfeccds": "",  
+          "END_DATE": "2018-04-01",
+			    "Estado_END_DATE": ""  
+        }
+      ],
+      "Bonus": [  
+        {
+          "rhcnct1_bonocod": "MENSUAL",
+          "Estado_rhcnct1_bonocod": "",  
+          "rhcnct1_cnctvbnwd": 1200,
+          "Estado_rhcnct1_cnctvbnwd": ""  
+        }
+      ]
+    }
+  ],
+  "CnctCodSta": "ACTIVO",
+  "emplfecant": "2022-07-01",
+  "Posiciones": [  
+    {
+      "job_cod": "D000025",
+      "Estado_job_cod": "", 
+      "PRIMARY_JOB": 42,
+      "Estado_PRIMARY_JOB": "", 
+      "Organizaciones": [  
+        {
+          "org_id": "D000141",
+          "Estado_org_id": ""
+          
+        },
+        {
+          "org_id": "D000141",
+          "Estado_org_id": ""
+          
+        },
+        {
+          "org_id": "D000141",
+          "Estado_org_id": ""
+          
+        }
+      ],
+      "rhcnct_cnctfinent": "2022-01-01",
+      "Estado_rhcnct_cnctfinent": ""  
+    },
+    {
+      "job_cod": "D000026",
+      "Estado_job_cod": "", 
+      "PRIMARY_JOB": 42,
+      "Estado_PRIMARY_JOB": "", 
+      "Organizaciones": [  
+        {
+          "org_id": "D000141",
+          "Estado_org_id": "",  
+          "Organization_Type": "Supervisory",
+          "Estado_Organization_Type": ""
+        },
+        {
+          "org_id": "D742474",
+          "Estado_org_id": "",
+          "Organization_Type": "Cost Center",
+          "Estado_Organization_Type": ""
+        }
+      ],
+      "rhcnct_cnctfinent": "2022-01-01",
+      "Estado_rhcnct_cnctfinent": ""  
+    }
+  ],
+  "emplfecing": "2018-04-01",
+  "Direcciones": [  
+    {
+      "empldir": "Milagro, ciudadela bellavista av de las aguas",
+      "Estado_empldir": ""  
+    },
+    {
+      "empldir": "Milagro, ciudadela bellavista av de las aguas",
+      "Estado_empldir": ""
+    }
+  ],
+  "Nombres_Legales": [  
+    {
+      "emplnompri": "Antonio",
+      "Estado_emplnompri": "",  
+      "emplnomseg": "Jose",
+      "Estado_emplnomseg": "",  
+      "emplapepat": "Reyes",
+      "Estado_emplapepat": "",  
+      "emplapemat": "Campuzano",
+      "Estado_emplapemat": ""  
+    },
+    {
+      "emplnompri": "Antonio",
+      "Estado_emplnompri": "",
+      "emplnomseg": "Jose",
+      "Estado_emplnomseg": "",
+      "emplapepat": "Reyes",
+      "Estado_emplapepat": "",
+      "emplapemat": "Campuzano",
+      "Estado_emplapemat": ""
+    }
+  ],
+  "emplfecnac": "1990-08-06",
+  "Documentos": [  
+    {
+      "EmplNumCed": "120670217-5",
+      "Estado_EmplNumCed": "",  
+      "emplTipLic": "ECU_CI",
+      "Estado_emplTipLic": ""  
+    }
+  ],
+  "mobjcod": "D00123",
+  "CnctFecLiq": "2022-01-01",
+  "Emplfecifp": "2022-01-01",
+  "rhcnct_grpgcod": "PG_ECU_1_QUI",
+  "Pagos_Unicos_De_Compensaciones": [  
+    {
+      "rhCnct7_onetcodwd": "OTROS INCENTIVOS",
+      "Estado_rhCnct7_onetcodwd": "",  
+      "rhCnct7_onetdol": 1600.2,
+      "Estado_rhCnct7_onetdol": ""  
+    },
+    {
+      "rhCnct7_onetcodwd": "OTROS INCENTIVOS",
+      "Estado_rhCnct7_onetcodwd": "",
+      "rhCnct7_onetdol": 1600.2,
+      "Estado_rhCnct7_onetdol": ""
+    }
+  ],
+  "Elecciones_Pagos": [  
+    {
+      "rhcnct_tctacod": "CUENTA",
+      "Estado_rhcnct_tctacod": "",  
+      "rhcnct_TpagCod": "DEPOSITO BANCARIO",
+      "Estado_rhcnct_TpagCod": "",  
+      "rhcnct_banccod": "GUAYAQUIL",
+      "Estado_banccod": "",  
+      "rhcnct_EmplNumCta": "1025320-5",
+      "Estado_rhcnct_EmplNumCta": ""  
+    },
+    {
+      "rhcnct_tctacod": "CUENTA",
+      "Estado_rhcnct_tctacod": "",
+      "rhcnct_TpagCod": "DEPOSITO BANCARIO",
+      "Estado_rhcnct_TpagCod": "",
+      "rhcnct_banccod": "GUAYAQUIL",
+      "Estado_banccod": "",
+      "rhcnct_EmplNumCta": "1025320-5",
+      "Estado_rhcnct_EmplNumCta": ""
+    }
+  ],
+  "rhempl_EmplDesNac": "ECUATORIANA",
+  "rhempl_ecivcod": "SOLTERO",
+  "rhempl_sexocod": "MASCULINO",
+  "Estados_Discapacidad": [  
+    {
+      "rhempl_emplcnsxds": "NINGUNA",
+      "Estado_rhempl_emplcnsxds": "",  
+      "rhempl_emplgrdmrl": 25.6,
+      "Estado_rhempl_emplgrdmrl": ""  
+    },
+    {
+      "rhempl_emplcnsxds": "NINGUNA",
+      "Estado_rhempl_emplcnsxds": "",
+      "rhempl_emplgrdmrl": 25.6,
+      "Estado_rhempl_emplgrdmrl": ""
+    }
+  ],
+  "Excedencias": [  
+    {
+      "PermFini": "2022-02-02",
+      "Estado_PermFini": "",  
+      "PermFfin": "2022-02-02",
+      "Estado_PermFfin": "",  
+      "PermSta01": "LT_ECU_1",
+      "Estado_PermSta01": ""  
+    },
+    {
+      "PermFini": "2022-02-02",
+      "Estado_PermFini": "",
+      "PermFfin": "2022-02-02",
+      "Estado_PermFfin": "",
+      "PermSta01": "LT_ECU_1",
+      "Estado_PermSta01": ""
+    }
+  ],
+  "MuleSoft_Id": "Wdfttt122633",
+  "Fecha_WD": "2022-06-08",
+  "TIME_OFFS": [
+    {
+      "ID_TIME_OFF": "",
+      "ESTADO_ID_TIME_OFF": "",  
+      "NOMBRE_TIME_OFF": "",
+      "ESTADO_NOMBRE_TIME_OFF": "",  
+      "TIPO_TIME_OFF": "TOT_ESP_Salida particular no retribuida",
+      "ESTADO_TIPO_TIME_OFF": "",  
+      "UNIDAD_DE_MEDIDA": "HOURS",
+      "ESTADO_UNIDAD_DE_MEDIDA": "",  
+      "FECHA_EFECTIVA": "2022-11-15T00:00:00.000-08:00",
+      "TIME_OFF_ENTRIES": [
+        {
+          "CANTIDAD": 1.6,
+          "ESTADO_CANTIDAD": "isAdded",  
+          "INICIO": "09:03:00",
+          "ESTADO_INICIO": "isAdded",  
+          "FIN": "10:39:00",
+          "ESTADO_FIN": "isAdded"  
+        }
+      ]
+    }
+  ]
+}
+
+
+
