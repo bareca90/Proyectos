@@ -4,6 +4,12 @@ const express = require('express');
 const sql = require('mssql/msnodesqlv8');
 const app = express();
 //---------------------------------------------------------
+/*Middleware */
+//---------------------------------------------------------
+
+
+
+//---------------------------------------------------------
 /*Ruta para Post de los empleados que se reciben */
 //---------------------------------------------------------
 /**
@@ -678,20 +684,26 @@ app.post('/datatermination', function(req, respuesta) {
 //---------------------------------------------------------
 app.post('/datoschanges', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
+    let head   = JSON.stringify(req.headers);
+
+    /* console.log(JSON.stringify(req.headers)); */
+
     let query = 'SP_Insert_Changes';
+    console.log(head);
     //console.log(JSON.stringify(datos));
-    datosCliente(query, datos).then(datoscliente => {
+    datosCliente(query, datos,head).then(datoscliente => {
         respuesta.json(datoscliente[0]);
     })
     
 
 })
 /*Conexion a Sp que devuelve los datos de los clientes*/
-let datosCliente = async(query, pJson) => {
+let datosCliente = async(query, pJson,head) => {
     try {
         let pool = await sql.connect(config);
         let clientes = await pool.request()
             .input('pJson', sql.Char, pJson)
+            .input('headers', sql.Char, head)
             .execute(query);
         /* console.log(clientes); */
         return clientes.recordsets;
