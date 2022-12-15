@@ -2,7 +2,7 @@ var config = {
     user: 'sa',
     password: '84+-blaster32',
     server: '10.100.120.8',
-    database: 'sipeDes',
+    database: 'pSipe2',
     driver: 'msnodesqlv8',
     options: {
         enableArithAbort: true,

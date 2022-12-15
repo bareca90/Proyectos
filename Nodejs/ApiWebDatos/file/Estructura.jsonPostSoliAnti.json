@@ -1,0 +1,40 @@
+{
+    "prioridad":"Alta",
+    "tipSolPago":"Liquidacion",
+    "liquidacionElectronica":"Si",
+    "seccion":"00001",
+    "observacion":"Reprehenderit ad irure mollit consequat tempor consectetur irure duis anim proident. Sint enim cillum elit voluptate culpa est dolore adipisicing consectetur." ,
+    "codigoProveedor":"Ninguno",
+    "formaPago":"Contado",
+    "factura":"001-041-20252333",
+    "factExterior":"001002452330",
+    "fecha":"2022-08-08",
+    "detalleServicio":[
+        {
+            "codCuenta":"1020355558",
+            "codCentroC":"AC555582223",
+            "observaciondt":"Commodo commodo sit tempor tempor et nisi. Voluptate exercitation voluptate labore magna officia aliquip ad non id fugiat consectetur. Ipsum cillum enim minim ",
+            "nota":"Eu consectetur reprehenderit consectetur culpa anim. Irure quis officia sunt minim dolor voluptate non magna. Non dolore tempor minim eu ad aute non deserunt mollit. ",
+            "valor":1203.25,
+            "codTarifa":"00005"
+        },
+        {
+            "codCuenta":"1020355558",
+            "codCentroC":"AC555582223",
+            "observaciondt":"Commodo commodo sit tempor tempor et nisi. Voluptate exercitation voluptate labore magna officia aliquip ad non id fugiat consectetur. Ipsum cillum enim minim ",
+            "nota":"Eu consectetur reprehenderit consectetur culpa anim. Irure quis officia sunt minim dolor voluptate non magna. Non dolore tempor minim eu ad aute non deserunt mollit. ",
+            "valor":1203.25,
+            "codTarifa":"00005"
+        },
+        {
+            "codCuenta":"1020355558",
+            "codCentroC":"AC555582223",
+            "observaciondt":"Commodo commodo sit tempor tempor et nisi. Voluptate exercitation voluptate labore magna officia aliquip ad non id fugiat consectetur. Ipsum cillum enim minim ",
+            "nota":"Eu consectetur reprehenderit consectetur culpa anim. Irure quis officia sunt minim dolor voluptate non magna. Non dolore tempor minim eu ad aute non deserunt mollit. ",
+            "valor":1203.25,
+            "codTarifa":"00005"
+        }
+    ],
+    "condPago":"00001"
+    
+}
