@@ -18,7 +18,7 @@ let contador_pagos=0;
 let contador_elecciones;
 let contador_discapacidad=0;
 let contador_excedencias=0;
-let contador_timeoffs
+let contador_timeoffs=0;
 let fecha_actual;
 let pk_unidos;
 
@@ -733,6 +733,7 @@ app.post('/datoschanges', function(req, respuesta) {
     //-----------------------
     /*-- Llamada a la Funcion q invoca el sp principal*/
     //-----------------------
+    
     datosCliente(query2, datos,head).then(datoscliente => {
         respuesta.json(datoscliente[0]);
     })
@@ -740,7 +741,7 @@ app.post('/datoschanges', function(req, respuesta) {
 
 })
 function fnLeerJson (json){
-    let DERIVED_EVENT_CODE= '';
+    let DERIVED_EVENT_CODE= ''
     let emplcod_wd='';
     let EFFECTIVE_MOMENT='';
 
@@ -845,8 +846,9 @@ function fnLeerJson (json){
     let ESTADO_INICIO;
     let FIN;
     let ESTADO_FIN;
-    let query = 'SP_Insert_Changes_Pruebas';
+    let query = 'SP_Insert_Json_Tmp';
     //console.log(JSON.stringify(datos));
+    
     for(propiedad in json){
         //----------------------
         //--Base-Root
@@ -864,10 +866,18 @@ function fnLeerJson (json){
             contador_elecciones     =   0;
             contador_discapacidad   =   0;
             contador_excedencias    =   0;
+            contador_timeoffs       =   0;
             contador                =   contador+1; 
             fecha_actual            =   new Date();
-            fecha_actual            =   fecha_actual.getFullYear()+"-"+(fecha_actual.getMonth()+1)+"-"+fecha_actual.getDate()+'-'+fecha_actual.getHours()+'-'+fecha_actual.getMinutes()+'-'+fecha_actual.getMilliseconds()
-            pk_unidos               =   DERIVED_EVENT_CODE+'-'+fecha_actual.toString()+'-'+contador.toString();
+            //fecha_actual            =   fecha_actual.getFullYear()+"-"+(fecha_actual.getMonth()+1)+"-"+fecha_actual.getDate()+'-'+fecha_actual.getHours()+'-'+fecha_actual.getMinutes()+'-'+fecha_actual.getMilliseconds()
+            anio                    =   fecha_actual.getFullYear();
+            mes                     =   fecha_actual.getMonth()+1;
+            dia                     =   fecha_actual.getDate();
+            hora                    =   fecha_actual.getHours();
+            minutos                 =   fecha_actual.getMinutes();
+            segundos                =   fecha_actual.getMilliseconds();
+            datosFecha              =   anio.toString()+mes.toString().padStart(2,'0')+dia.toString().padStart(2,'0')+hora.toString()+minutos.toString()+segundos.toString();
+            pk_unidos               =   contador.toString().padStart(6,'0')+datosFecha+DERIVED_EVENT_CODE;
             
             datosTabla(query, pk_unidos,'DERIVED_EVENT_CODE',DERIVED_EVENT_CODE,'1-Principal',0).then(datostabla => {})
         }
@@ -1274,6 +1284,8 @@ function fnLeerJson (json){
         if(propiedad==="ID_TIME_OFF") {
             ID_TIME_OFF=json[propiedad]; 
             contador_timeoffs=contador_timeoffs+1;
+            console.log('Entro Time ',ID_TIME_OFF);
+            console.log('Contador  Time ',contador_timeoffs);
             datosTabla(query, pk_unidos,'ID_TIME_OFF',ID_TIME_OFF,'13-TimeOffs',contador_timeoffs).then(datostabla => {})
         }
         if(propiedad==="ESTADO_ID_TIME_OFF") {
@@ -1336,14 +1348,13 @@ function fnLeerJson (json){
             datosTabla(query, pk_unidos,'ESTADO_FIN',ESTADO_FIN,'13-TimeOffs',contador_timeoffs).then(datostabla => {})
         }
         
-
+       
         //----------------------
         //--nvocar funcion para los childs del json
         //----------------------
         if(typeof(json[propiedad]) != "string") {
-            /* console.log(datosmap); */
             fnLeerJson (json[propiedad])
-        }
+        } 
     }
 }
 /*Conexion a Sp que devuelve los datos de los clientes*/
@@ -1400,6 +1411,35 @@ let datosGetWordDay = async(query) => {
 
 
 }
+/*Conexion a Sp que actualiza datos para put*/
+let datosPutWordDay = async(query,pJson,headers) => {
+    try {
+        let pool = await sql.connect(config);
+        let clientes = await pool.request()
+            .input('pJson', sql.Char, pJson)
+            .input('headers', sql.Char, headers)
+            .execute(query);
+        /* console.log(clientes); */
+        return clientes.recordsets;
+        /* return clientes; */
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+//---------------------------------------------------------
+/*Ruta para devolver lista de empleados*/
+//---------------------------------------------------------
+app.get('/WorkersList', function(req, respuesta) {
+    let query = 'Sp_Devuleve_WorkerId';
+    //console.log(JSON.stringify(datos));
+    datosGetWordDay(query).then(datosgetworkday => {
+        respuesta.json(datosgetworkday[0]);
+    })
+    
+
+})
 
 //---------------------------------------------------------
 /*Ruta para Get para devolver los errores */
@@ -1408,6 +1448,22 @@ app.get('/errorviewer', function(req, respuesta) {
     let query = 'SP_Devolver_Errores';
     //console.log(JSON.stringify(datos));
     datosGetWordDay(query).then(datosgetworkday => {
+        respuesta.json(datosgetworkday[0]);
+    })
+    
+
+})
+//---------------------------------------------------------
+/*Ruta para Put ACTUALIZAR LOS ERRORES */
+//---------------------------------------------------------
+app.put('/errorupdate', function(req, respuesta) {
+    //let flag_Mulesoft       = req.body.flag_Mulesoft;
+    //let id_payrollSystem    = req.body.id_payrollSystem;
+    let datos               = JSON.stringify(req.body);
+    let headers             = JSON.stringify(req.headers);
+    let query               = 'SP_Actualiza_Error_WD';
+    //console.log(JSON.stringify(datos));
+    datosPutWordDay(query,datos,headers).then(datosgetworkday => {
         respuesta.json(datosgetworkday[0]);
     })
     
