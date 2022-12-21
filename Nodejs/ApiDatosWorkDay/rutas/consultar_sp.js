@@ -1,4 +1,6 @@
 const config = require('../configuraciones/configuracion_base');
+//const winston = require('winston');
+const logger = require('../utils/logger')
 /* const sql = require('mssql'); */
 const express = require('express');
 const sql = require('mssql/msnodesqlv8');
@@ -145,6 +147,12 @@ app.post('/dataemployees', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
     let head  = JSON.stringify(req.headers);
     let query = 'SP_Insert_Hire';
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`Hire-Headers => ${head}`);
+    logger.info(`Hire-Body    => ${datos}`);
+
     //console.log(JSON.stringify(datos));
     datosCliente(query, datos,head).then(datoscliente => {
         respuesta.json(datoscliente[0]);
@@ -217,6 +225,12 @@ app.post('/datatermination', function(req, respuesta) {
     let datos = JSON.stringify(req.body);
     let head  = JSON.stringify(req.headers);
     let query = 'SP_Insert_Termination';
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`Termination-Headers => ${head}`);
+    logger.info(`Termination-Body    => ${datos}`);
+
     //console.log(JSON.stringify(datos));
     datosCliente(query, datos,head).then(datoscliente => {
         respuesta.json(datoscliente[0]);
@@ -724,7 +738,21 @@ app.post('/datoschanges', function(req, respuesta) {
     let head    = JSON.stringify(req.headers);
     let query   = 'SP_Insert_Json_Tmp';
     let query2  = 'SP_Insert_Datos_Changes_Json';
+    let query3  = 'SP_Insert_Logs_WD';
     contador=0;
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`Changes-Headers => ${head}`);
+    logger.info(`Changes-Body    => ${datos}`);
+    
+    //-----------------------
+    /*--Insertar Datos de los Logs en la bd */
+    //-----------------------
+    console.log('Headers',head);
+    console.log('Datos',datos)
+    datosLogsWordDay(query3,datos,head ).then(datoslogsworkday => {})
+
     //-----------------------
     /*-- Llamada a la Funcion que descompone el Json*/
     //-----------------------
@@ -1412,6 +1440,23 @@ let datosGetWordDay = async(query) => {
 
 }
 /*Conexion a Sp que actualiza datos para put*/
+let datosLogsWordDay = async(query,pJson,headers) => {
+    try {
+        let pool = await sql.connect(config);
+        let clientes = await pool.request()
+            .input('pJson', sql.Char, pJson)
+            .input('headers', sql.Char, headers)
+            .execute(query);
+        /* console.log(clientes); */
+        return clientes.recordsets;
+        /* return clientes; */
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+/*Conexion a Sp que actualiza datos para put*/
 let datosPutWordDay = async(query,pJson,headers) => {
     try {
         let pool = await sql.connect(config);
@@ -1462,6 +1507,12 @@ app.put('/errorupdate', function(req, respuesta) {
     let datos               = JSON.stringify(req.body);
     let headers             = JSON.stringify(req.headers);
     let query               = 'SP_Actualiza_Error_WD';
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`UpdateError-Headers => ${head}`);
+    logger.info(`UpdateError-Body    => ${datos}`);
+
     //console.log(JSON.stringify(datos));
     datosPutWordDay(query,datos,headers).then(datosgetworkday => {
         respuesta.json(datosgetworkday[0]);

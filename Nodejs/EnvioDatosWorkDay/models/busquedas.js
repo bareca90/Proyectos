@@ -76,7 +76,9 @@ class Busquedas  {
             // Send a POST request
             const resp = await axios({
                 method: 'post',
-                url: `http://pscnv-e-payroll-results-dev.ir-e1.eu1.cloudhub.io/api/${tipocsv}/ECU`,
+                //url: `http://pscnv-e-payroll-results-dev.ir-e1.eu1.cloudhub.io/api/${tipocsv}/ECU`,
+                url:`https://pscnv-e-payroll-results-dev.ir-e1.eu1.cloudhub.io/api/${tipocsv}/ECU`,
+                
                 headers:{
                     'Authorization' : 'Basic dGVzdGluZy13ZDpINGNpM25kMCFUM3N0MW5n'
                 },

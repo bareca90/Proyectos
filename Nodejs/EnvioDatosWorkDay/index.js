@@ -68,13 +68,13 @@ const main = async()=>{
         //--------------------------------------------
         console.log('Paso 6 - Cargando Datos Detalle de los Payslips.........');
         const datosdetpaylips = await datosDetallePaLips('PL',apertura);
-        console.log(datosdetpaylips);
+        //console.log(datosdetpaylips);
         //--------------------------------------------
         //Paso 7 : Convertir los Datos en Mapa
         //--------------------------------------------
         console.log('Paso 7 - Convertir los Datos de Payslips en Mapa');
         const datosmapapaylips = await mapaDetPayLips(filename,path,datosdetpaylips);
-        console.log(datosmapapaylips);
+        //console.log(datosmapapaylips);
         //--------------------------------------------
         //Paso 8 : COnsumimos y Realizamos el Envio 
         //--------------------------------------------

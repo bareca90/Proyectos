@@ -1,15 +1,18 @@
 let express = require('express');
 let app = express();
 const sql = require('mssql/msnodesqlv8');
+const logger = require('./utils/logger')
 let config = require('./configuraciones/configuracion_base');
 const path = require('path');
 const bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json({limit: '50mb'}));
 // parse application/json
 //swagger
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
+const { Console } = require('console');
 const swaggerSpec = {
     definition : {
         openapi : "3.0.0",
@@ -36,12 +39,12 @@ app.use("/apiwd-doc",swaggerUI.serve,swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 sql.connect(config).then(pool => {
 
 }).then(result => {
-    console.log('Se conecto a la Base Correctamente');
+    logger.info('Se conecto a la Base Correctamente');
 }).catch(err => {
-    console.log(err);
+    logger.info(err);
 
 });
 
 let port = process.env.PORT || 8075;
 app.listen(port);
-console.log('Aplicacion Corriendo en el Puerto ' + port);
+logger.info('Aplicacion Corriendo en el Puerto ' + port);
