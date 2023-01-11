@@ -19,6 +19,18 @@ app.get('/dataguiasdia', function(req, respuesta) {
 
 })
 //---------------------------------------------------------
+/*Conexion al Sp que devuelve guias registradas y procesadas*/
+//---------------------------------------------------------
+app.get('/obtenerguiasregistradas', function(req, respuesta) {
+    let nroguia = req.query.nroguia;
+    let opcion = req.query.opcion
+    let query = 'Sp_Datos_App_Bines';
+    //console.log(JSON.stringify(datos));
+    datosGuiasDia(query,opcion,nroguia).then(datosguiadia => {
+        respuesta.json(datosguiadia[0]);
+    })
+})
+//---------------------------------------------------------
 /*Conexion al Sp que devuelve los Bines Registrados por guìa*/
 //---------------------------------------------------------
 app.get('/obtenerbinesguia', function(req, respuesta) {

@@ -1477,7 +1477,12 @@ let datosPutWordDay = async(query,pJson,headers) => {
 /*Ruta para devolver lista de empleados*/
 //---------------------------------------------------------
 app.get('/WorkersList', function(req, respuesta) {
-    let query = 'Sp_Devuleve_WorkerId';
+    let query   = 'Sp_Devuleve_WorkerId';
+    let headers = JSON.stringify(req.headers);
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`ListaWorkers-Headers => ${headers}`);
     //console.log(JSON.stringify(datos));
     datosGetWordDay(query).then(datosgetworkday => {
         respuesta.json(datosgetworkday[0]);
@@ -1490,7 +1495,13 @@ app.get('/WorkersList', function(req, respuesta) {
 /*Ruta para Get para devolver los errores */
 //---------------------------------------------------------
 app.get('/errorviewer', function(req, respuesta) {
-    let query = 'SP_Devolver_Errores';
+    let query   = 'SP_Devolver_Errores';
+    let headers = JSON.stringify(req.headers);
+    //-----------------------
+    /*--Insertar Datos de los Logs en el archivo */
+    //-----------------------
+    logger.info(`VerErrores-Headers => ${headers}`);
+    
     //console.log(JSON.stringify(datos));
     datosGetWordDay(query).then(datosgetworkday => {
         respuesta.json(datosgetworkday[0]);
@@ -1510,7 +1521,7 @@ app.put('/errorupdate', function(req, respuesta) {
     //-----------------------
     /*--Insertar Datos de los Logs en el archivo */
     //-----------------------
-    logger.info(`UpdateError-Headers => ${head}`);
+    logger.info(`UpdateError-Headers => ${headers}`);
     logger.info(`UpdateError-Body    => ${datos}`);
 
     //console.log(JSON.stringify(datos));

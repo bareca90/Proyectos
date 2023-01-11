@@ -170,34 +170,46 @@ class RegisteredBinGuiasProvider extends ChangeNotifier {
     //------------------------------
     //Recorro la matriz de las guia
     //------------------------------
+    var d = guiasReg.registrados.length;
+    print('Futoe de Envio $tipoProceso , $d');
     int flag = 0;
     for (int indice = 0;
-        indice < datosGuiasReg.binAsignadosReg.length &&
+        indice <
+            datosGuiasReg.binAsignadosReg
+                .length /* &&
+            flag ==
+                0 */ /* &&
             tipoProceso == datosGuiasReg.binAsignadosReg[indice].tipoproceso &&
             datosGuiasReg.binAsignadosReg[indice].sincronizado == 0 &&
-            flag == 0 &&
-            datosGuiasReg.binAsignadosReg[indice].fechahoraesc.isNotEmpty;
+            datosGuiasReg.binAsignadosReg[indice].fechahoraesc.isNotEmpty */
+        ;
         indice++) {
-      final String nroguia = datosGuiasReg.binAsignadosReg[indice].nroguia;
-      final String fecha = datosGuiasReg.binAsignadosReg[indice].fechahoraesc;
-      final String tipoproceso =
-          datosGuiasReg.binAsignadosReg[indice].tipoproceso;
-      const String relacionTabla = 'DET';
-      final int nrobin = datosGuiasReg.binAsignadosReg[indice].nrobin;
-      //envio cabeceras
-      if (tipoproceso == 'RSP' ||
-          tipoproceso == 'RLG' ||
-          tipoproceso == 'RSG' ||
-          tipoproceso == 'RLP' ||
-          tipoproceso == 'RLR') {
-        DataGuiasRegServices().sincronizaGuiasBinRegBD(
-            opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
-        flag = 1;
-      } else {
-        DataGuiasRegServices().sincronizaGuiasBinRegBD(
-            opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
-        flag = 0;
-      }
+      /* if (tipoProceso == datosGuiasReg.binAsignadosReg[indice].tipoproceso &&
+          datosGuiasReg.binAsignadosReg[indice].sincronizado == 0 &&
+          datosGuiasReg.binAsignadosReg[indice].fechahoraesc.isNotEmpty) {
+        final String nroguia = datosGuiasReg.binAsignadosReg[indice].nroguia;
+        final String fecha = datosGuiasReg.binAsignadosReg[indice].fechahoraesc;
+        final String tipoproceso =
+            datosGuiasReg.binAsignadosReg[indice].tipoproceso;
+        const String relacionTabla = 'DET';
+        final int nrobin = datosGuiasReg.binAsignadosReg[indice].nrobin;
+        print('Entro al Future Opcion $opcion , Tipo Proceso $tipoProceso');
+        //envio cabeceras
+
+        if (tipoproceso == 'RSP' ||
+            tipoproceso == 'RLG' ||
+            tipoproceso == 'RSG' ||
+            tipoproceso == 'RLP' ||
+            tipoproceso == 'RLR') {
+          DataGuiasRegServices().sincronizaGuiasBinRegBD(
+              opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
+          flag = 1;
+        } else {
+          DataGuiasRegServices().sincronizaGuiasBinRegBD(
+              opcion, nroguia, fecha, tipoproceso, relacionTabla, nrobin);
+          flag = 0;
+        }
+      } */
 
       /* for (int index = 0; index < datosGuiasReg.binAsignadosReg.length; index++) {
       final String nroguia = datosGuiasReg.binAsignadosReg[index].nroguia;

@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
               //-------------------------
               //Registro de Bines
               //-------------------------
-              case 0:
+              case 0: // Registro de Bines
               //-------------------------
               //Registro Salida de Planta
               //-------------------------
@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
               //-------------------------
               //Registro de Llegada Granaja
               //-------------------------
-              case 2:
+              case 2: //Opcion de  Registro Llegada Granja
                 //-------------------------
                 //Envio Datos al APi
                 //-------------------------
@@ -88,21 +88,13 @@ class HomeScreen extends StatelessWidget {
                 listaBinGuiaReg.envioDatosApi(
                     listaBinGuiaReg, 'PLG', 'RLG', listadoGR);
                 //-------------------------
-                //3.- Obtengo los datos de los datos insertaddos
+                //3.- Obtengo los datos de los registros insertaddos ya sincronizados
+                //-------------------------
+                listaGuiasServices.llamarApiGuiasRegistradas('ORLG', 'RLG');
+                //-------------------------
+                //4.- Consultar los datos insertados
                 //-------------------------
                 listadoGR.cargarGrRegistradas('RLG'); //Regitro Salida Planta
-
-                /* listaBinGuiaReg.updateGuiasReg(nroguia, tipoproceso, activo, sincronizado) */
-
-                /* final listaGuiasReg = Provider.of<RegisteredGuiasProvider>(context); */
-
-                //final listadoGR = Provider.of<RegisteredGuiasProvider>(context);
-
-                //-------------------------
-                //Consulto Datos del API
-                //-------------------------
-                listaGuiasServices.llamarApiGuiasRegistradas('OGCE',
-                    'RSP'); //Obtiene Guias Cerradas en base a el parametro que se le envia
                 //-------------------------
                 //Cargo los datos
                 //-------------------------

@@ -39,12 +39,12 @@ app.use("/apiwd-doc",swaggerUI.serve,swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 sql.connect(config).then(pool => {
 
 }).then(result => {
-    logger.info('Se conecto a la Base Correctamente');
+    console.log('Se conecto a la Base Correctamente');
 }).catch(err => {
-    logger.info(err);
+    console.log(err);
 
 });
 
 let port = process.env.PORT || 8075;
 app.listen(port);
-logger.info('Aplicacion Corriendo en el Puerto ' + port);
+console.log('Aplicacion Corriendo en el Puerto ' + port);

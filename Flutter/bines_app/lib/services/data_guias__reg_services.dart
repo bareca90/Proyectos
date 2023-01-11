@@ -23,8 +23,10 @@ class DataGuiasRegServices {
       },
     );
 
-    print('Server');
+    /* print('Server');
     print(serverport);
+    print(tipo);
+    print(opcion); */
     final List<dynamic> listguiasMap =
         convert.jsonDecode(responseGuiasReg.body);
     if (listguiasMap.isNotEmpty) {

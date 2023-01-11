@@ -152,7 +152,6 @@ app.put('/ingresasci', function(req, respuesta) {
 	let ltApFecCad	=	req.query.ltApFecCad ;    
 	let ltApCodSCI	=	req.query.ltApCodSCI ;
     let query       = 'SP_Actualiza_Reg_SCI';
-    
     datosIngresoSci(query, ltApNoRef,ltApStaRes,ltApFecCad,ltApCodSCI).then(datosingresosci => {
         respuesta.json(datosingresosci[0]);
     })
